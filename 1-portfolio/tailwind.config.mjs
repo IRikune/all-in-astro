@@ -4,6 +4,7 @@ export default {
 	theme: {
 		fontFamily: {
 			montserrat: ['Montserrat Variable', 'sans-serif'],
+			drawed: ['Amatic SC', 'sans-serif'],
 		}
 	},
 	plugins: [],
