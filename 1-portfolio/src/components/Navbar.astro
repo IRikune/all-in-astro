@@ -1,18 +1,22 @@
 ---
-
+import { Button } from "./Button";
 ---
 
-<nav>
-    <ul>
+<nav class="py-5 sticky top-0">
+    <ul class="flex justify-around items-center">
         <div>
             <li>
-                <img src="../assets/" alt="" />
+                <img src="../../public/logo.svg" alt="logo" class="w-22" />
             </li>
         </div>
         <div>
-            <li>How it works</li>
-            <li>Features</li>
-            <li>Pricing</li>
+            <Button type="underline">How it works</Button>
+            <Button type="underline">Features</Button>
+            <Button type="underline">Pricing</Button>
+        </div>
+        <div>
+            <Button type="outlined">Log in</Button>
+            <Button type="filled">Sign up</Button>
         </div>
     </ul>
 </nav>
