@@ -1,27 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Button } from "../components/Button.tsx";
+import { Decoration } from "../components/Decoration";
 ---
 
 <Layout>
-	<header class="flex justify-center items-center mx-32">
-		<section>
-			<h1 class="font-drawed text-6xl">
+	<header
+		class="flex justify-center items-center mx-32 mt-12 flex-wrap md:flex-nowrap"
+	>
+		<section class="w-[40%]">
+			<h1 class="font-drawed text-7xl uppercase text-nowrap">
 				A headline for your <span class="block">cool website</span>
 			</h1>
-			<p class="text-balance">
+			<Decoration type="underlined" variation={1} className="w-64" />
+			<p
+				class="text-balance text-sm mt-2 w-5/6 font-light font-montserrat"
+			>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
 				autem itaque reprehenderit voluptate optio totam distinctio
-				accusamus tempora nam natus, illum architecto placeat quia, eius
-				necessitatibus in sint sit. Totam?
+				accusamus tempora nam natus
 			</p>
-			<div>
+			<div class="mt-1">
 				<Button type="filled">Call to action</Button>
 				<Button type="outlined">Secondary Action</Button>
 			</div>
 		</section>
 		<section>
-			<img class="w-[900px]" src="../../public/header.png" alt="header" />
+			<img class="w-[32rem]" src="../../public/header.png" alt="header" />
 		</section>
+		<div class="absolute bottom-0 mb-10">
+			<Decoration type="underlined" variation={3} className="w-64" />
+		</div>
 	</header>
+
+	<section class="bg-black h-dvh mt-20">
+		<h2>How it works</h2>
+	</section>
 </Layout>
