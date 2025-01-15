@@ -32,8 +32,22 @@ import { Decoration } from "../components/Decoration";
 			<Decoration type="underlined" variation={3} className="w-64" />
 		</div>
 	</header>
-
-	<section class="bg-black h-dvh mt-20">
-		<h2>How it works</h2>
+	<section class="bg-black h-dvh mt-20 text-white">
+		<header class="pt-16 flex justify-center flex-col items-center">
+			<h2 class="text-center text-6xl font-drawed uppercase">
+				How it works
+			</h2>
+			<Decoration
+				type="underlined"
+				variation={3}
+				className="w-64 fill-white"
+			/>
+		</header>
 	</section>
 </Layout>
+
+<style>
+	.font-drawed {
+		font-family: "Drawed";
+	}
+</style>
