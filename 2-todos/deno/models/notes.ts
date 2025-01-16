@@ -8,3 +8,12 @@ export async function getNotes({ id = "public" }) {
   for await (const note of iter) notes.push(note.value);
   return notes;
 }
+type addNoteOptions = {
+  userID: string;
+  note: Note;
+};
+
+export async function addNote({ userID, note }: addNoteOptions) {
+  const key = ["notes", userID];
+  await kv.set(key, note);
+}
