@@ -1,3 +1,4 @@
+import { monotonicUlid } from "@std/ulid";
 import type { Note } from "../types/mod.ts";
 import { kv } from "../main.ts";
 
@@ -14,6 +15,7 @@ type addNoteOptions = {
 };
 
 export async function addNote({ userID, note }: addNoteOptions) {
-  const key = ["notes", userID];
-  await kv.set(key, note);
+  const noteID = monotonicUlid();
+  const key = ["notes", userID, noteID];
+  const res = await kv.set(key, note);
 }
