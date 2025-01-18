@@ -14,6 +14,19 @@ type addNoteOptions = {
   note: Note;
 };
 
+export async function createNote({ userID, note }: addNoteOptions) {
+  if (!note.title) return { ok: false };
+  if (!note.date) return { ok: false };
+  const noteID = monotonicUlid();
+  const newNote = { ...note, id: noteID };
+  const key = ["notes", userID, noteID];
+  const res = await kv.atomic()
+    .check({ key, versionstamp: null })
+    .set(key, newNote)
+    .commit();
+  return res;
+}
+
 export async function updateNote({ userID, note }: addNoteOptions) {
   if (!note.id) return { ok: false };
   const key = ["notes", userID, note.id];
