@@ -16,8 +16,8 @@ type updateNoteOptions = {
   newNote: Note;
 };
 
-export async function getNotes({ id = "public" }) {
-  const key = ["notes", id];
+export async function getNotes({ userID = "public" }) {
+  const key = ["notes", userID];
   const iter = kv.list<Note>({ prefix: key });
   const notes: Note[] = [];
   for await (const note of iter) notes.push(note.value);
