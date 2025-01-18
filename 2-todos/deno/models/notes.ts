@@ -13,6 +13,10 @@ type addNoteOptions = {
   userID: string;
   note: Note;
 };
+type getNoteOptions = {
+  userID: string;
+  noteID: string;
+};
 
 export async function createNote({ userID, note }: addNoteOptions) {
   if (!note.title) return { ok: false };
@@ -24,6 +28,13 @@ export async function createNote({ userID, note }: addNoteOptions) {
     .check({ key, versionstamp: null })
     .set(key, newNote)
     .commit();
+  return res;
+}
+
+export async function getNote({ userID, noteID }: getNoteOptions) {
+  if (!noteID) return { ok: false };
+  const key = ["notes", userID, noteID];
+  const res = await kv.get(key);
   return res;
 }
 
