@@ -23,7 +23,7 @@ type updateNoteOptions = {
   newNote: Note;
 };
 
-export async function createNote({ userID, note }: addNoteOptions) {
+export async function createNote({ userID, note }: createNoteOptions) {
   if (!note.title) return { ok: false };
   if (!note.date) return { ok: false };
   const noteID = monotonicUlid();
