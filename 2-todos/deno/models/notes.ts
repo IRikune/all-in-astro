@@ -1,20 +1,11 @@
 import { monotonicUlid } from "@std/ulid";
-import type { Note } from "../types/mod.ts";
+import type {
+  createNoteOptions,
+  getNoteOptions,
+  Note,
+  updateNoteOptions,
+} from "../types/mod.ts";
 import { kv } from "../main.ts";
-
-type createNoteOptions = {
-  userID: string;
-  note: Note;
-};
-type getNoteOptions = {
-  userID: string;
-  noteID: string;
-};
-type updateNoteOptions = {
-  userID: string;
-  noteID: string;
-  newNote: Note;
-};
 
 export async function getNotes({ userID = "public" }) {
   const key = ["notes", userID];
