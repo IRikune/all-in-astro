@@ -14,8 +14,9 @@ type addNoteOptions = {
   note: Note;
 };
 
-export async function addNote({ userID, note }: addNoteOptions) {
-  const noteID = monotonicUlid();
-  const key = ["notes", userID, noteID];
+export async function updateNote({ userID, note }: addNoteOptions) {
+  if (!note.id) return { ok: false };
+  const key = ["notes", userID, note.id];
   const res = await kv.set(key, note);
+  return res;
 }
