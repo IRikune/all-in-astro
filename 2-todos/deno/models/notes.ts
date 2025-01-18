@@ -2,13 +2,6 @@ import { monotonicUlid } from "@std/ulid";
 import type { Note } from "../types/mod.ts";
 import { kv } from "../main.ts";
 
-export async function getNotes({ id = "public" }) {
-  const key = ["notes", id];
-  const iter = kv.list<Note>({ prefix: key });
-  const notes: Note[] = [];
-  for await (const note of iter) notes.push(note.value);
-  return notes;
-}
 type createNoteOptions = {
   userID: string;
   note: Note;
@@ -23,6 +16,13 @@ type updateNoteOptions = {
   newNote: Note;
 };
 
+export async function getNotes({ id = "public" }) {
+  const key = ["notes", id];
+  const iter = kv.list<Note>({ prefix: key });
+  const notes: Note[] = [];
+  for await (const note of iter) notes.push(note.value);
+  return notes;
+}
 export async function createNote({ userID, note }: createNoteOptions) {
   if (!note.title) return { ok: false };
   if (!note.date) return { ok: false };
