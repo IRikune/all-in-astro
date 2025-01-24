@@ -2,7 +2,7 @@ import { Preview } from "./Preview"
 
 export function Note() {
     return (
-        <article>
+        <article  class="shadow p-">
             <header>
                 <Preview />
             </header>
