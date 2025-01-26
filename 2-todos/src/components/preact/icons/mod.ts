@@ -1,4 +1,4 @@
-interface Icon {
+export interface Icon {
     name: "bell" | "calendar" | "hash" | "inbox" | "plus" | "search" | "sidebar" | "sunrise"
     svg: string
 }
