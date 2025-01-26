@@ -6,10 +6,10 @@ interface IconProps {
     class?: string
 }
 export function Icon({ name, class: className }: IconProps) {
-    const icon = icons.find(i => i.name === name)
+    const displayIcon = icons.find(icon => icon.name === name)
     return (
         <svg
-            dangerouslySetInnerHTML={{ __html: icon?.svg || '' }}
+            dangerouslySetInnerHTML={{ __html: displayIcon?.svg || '' }}
             class={className}
             viewBox='0 0 24 24'
         >
