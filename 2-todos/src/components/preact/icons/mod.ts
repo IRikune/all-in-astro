@@ -7,7 +7,8 @@ export interface Icon {
 		| 'plus'
 		| 'search'
 		| 'sidebar'
-		| 'sunrise';
+		| 'sunrise'
+		| 'plus-circle';
 	svg: string;
 }
 
@@ -43,5 +44,9 @@ export const icons: Icon[] = [
 	{
 		name: 'sunrise',
 		svg: '<path d="M17 18a5 5 0 0 0-10 0"></path><line x1="12" y1="2" x2="12" y2="9"></line><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line><line x1="1" y1="18" x2="3" y2="18"></line><line x1="21" y1="18" x2="23" y2="18"></line><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line><line x1="23" y1="22" x2="1" y2="22"></line><polyline points="8 6 12 2 16 6"></polyline>',
+	},
+	{
+		name: 'plus-circle',
+		svg: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>',
 	},
 ];

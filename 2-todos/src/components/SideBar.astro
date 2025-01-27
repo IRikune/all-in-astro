@@ -1,15 +1,22 @@
 ---
 import { Icon } from "./preact/icons/Icon";
+import { Avatar } from "./preact/Avatar";
+import { Button } from "./preact/Button"
 ---
 
 <nav>
-    <section>
-        <div>
-            <Icon class="w-2" name="bell" />
+    <section class="flex items-center">
+        <div class="flex">
+            <Avatar client:load seed="HOLAAA" class="w-10 h-10 rounded-full" />
         </div>
-        <div></div>
+        <div class="flex">
+            <Icon class="w-4 fill-transparent stroke-neutral-500 stroke-2" name="bell" />
+            <Icon class="w-4 fill-transparent stroke-neutral-500 stroke-2" name="sidebar" />
+        </div>
     </section>
-    <section></section>
+    <section>
+        <Button to="/notes" icon="plus" class="text-black">Añadir tarea</Button>
+    </section>
     <section>
         <slot />
     </section>
