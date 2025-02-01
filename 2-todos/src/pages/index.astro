@@ -1,9 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Note } from "../components/preact/Note";
+import ProgressCircleForAvatar from "../components/Astro/ProgressCircleForAvatar.astro";
+import {Avatar} from "../components/preact/Avatar"
 ---
 
 <Layout>
 	<h1 class="font-thin">Todo App</h1>
 	<Note />
+	<ProgressCircleForAvatar tasks={5} progress={3} >
+		<Avatar class="w-8 h-8"/>
+	</ProgressCircleForAvatar>
 </Layout>
