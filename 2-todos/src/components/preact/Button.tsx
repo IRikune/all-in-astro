@@ -18,8 +18,8 @@ export function Button({ type = "underline", to, children = "Button", class: cla
         outlined: 'border-black border-2 rounded bg-transparent px-4 py-2 hover:bg-black transition-all duration-300 hover:text-white',
     }
     return (
-        <Tag href={to} className={`flex bg-orange-200 px-2 py-1 rounded w-fit items-center text-sm text-orange-700 ${className}`}>
-            <Icon class="w-6 fill-orange-600 stroke-orange-200 mr-4" name={icon} />
+        <Tag href={to} className={`flex px-2 py-1 rounded w-fit items-center text-sm text-orange-700 ${className}`}>
+            <Icon class="w-6 fill-orange-700 stroke-white mr-4" name={icon} />
             {children}
         </Tag>
     )
