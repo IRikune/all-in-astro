@@ -7,7 +7,11 @@ interface IconProps {
 }
 export function Icon({ name, class: className }: IconProps) {
     return (
-        <svg class={className} viewBox='0 0 24 24'>
+        <svg
+            class={className}
+            viewBox='0 0 24 24'
+            stroke-linecap="round"
+            stroke-linejoin="round">
             <title>{name}</title>
             {icons[name]?.svg}
         </svg>
