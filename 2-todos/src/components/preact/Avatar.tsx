@@ -16,5 +16,6 @@ export function Avatar({ size = 128, seed = "riku", class: className }: AvatarPr
         const avatarSrc = createAvatar(avatars, avatarOptions).toDataUri()
         return avatarSrc
     }, [seed, size])
+    
     return <img class={`${className}`} src={avatar} alt="Avatar" />
 } 
