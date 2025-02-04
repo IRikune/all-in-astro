@@ -16,5 +16,11 @@ export function Avatar({ size = 128, seed = "riku", class: className }: AvatarPr
         const avatarSrc = createAvatar(avatars, avatarOptions).toDataUri()
         return avatarSrc
     }, [seed, size])
+<<<<<<< HEAD
     return <img class={`${className}`} src={avatar} alt="Avatar" />
+=======
+
+    return <img class={`${className}`} src={avatar} alt="Avatar" />
+
+>>>>>>> feature/progressCircleForAvatar
 } 

@@ -1,0 +1,31 @@
+---
+interface Props{
+    tasks:number
+    progress:number
+    tasksCompleted?:boolean
+
+}
+const {tasks,progress , tasksCompleted} = Astro.props
+
+const grados = 360 * (progress / tasks)
+
+const taskAndCompleted = tasksCompleted?`orange 360deg`:`green ${progress==0?0:grados}deg`
+const cssVarStyles = `--completed: ${taskAndCompleted}`
+---
+
+<div class="circle w-10 h-10 rounded-full flex items-center justify-center bg-[conic-gradient(green,white)]" style={cssVarStyles}>
+    <div class={'w-8 h-8 bg-white rounded-full '} >
+        <slot/>
+    </div>
+</div>
+
+<style>
+   
+    .circle {
+    position: relative;
+    border-radius: 50%;
+    background: conic-gradient(
+       var(--completed), rgb(238, 238, 238) 0deg
+    );
+}
+</style>
