@@ -10,7 +10,8 @@ export interface Icon {
 	| 'search'
 	| 'sidebar'
 	| 'sunrise'
-	| 'plus-circle';
+	| 'plus-circle'
+	| 'grid';
 	svg: JSX.Element;
 }
 
@@ -94,5 +95,16 @@ export const icons: Record<Icon['name'], Icon> = {
 				<line x1="12" y1="8" x2="12" y2="16" />
 				<line x1="8" y1="12" x2="16" y2="12" />
 			</>),
+	},
+	grid: {
+		name: 'grid',
+		svg:(
+			<>
+			<rect x="3" y="3" width="7" height="7"></rect>
+			<rect x="14" y="3" width="7" height="7"></rect>
+			<rect x="14" y="14" width="7" height="7"></rect>
+			<rect x="3" y="14" width="7" height="7"></rect>
+			</>
+		)
 	},
 };
