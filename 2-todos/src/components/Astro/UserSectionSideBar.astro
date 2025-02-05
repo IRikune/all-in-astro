@@ -1,19 +1,19 @@
 ---
 import { Button } from "../preact/Button";
 import { Icon } from "../preact/icons/Icon";
-import ProgressCircleForAvatar from "./ProgressCircleForavatar.astro";
+import ProgressCircle from "./ProgressCircle.astro";
 import { Avatar } from "../preact/Avatar";
 ---
 
 <section class="flex flex-col w-64 bg-neutral-100/50 rounded-r-lg">
     <section class="flex items-center">
-        <ProgressCircleForAvatar
+        <ProgressCircle
             tasks={8}
             progress={7}
             class="overflow-hidden items-center"
         >
             <Avatar class="w-9 h-9 rounded-full -z-10" seed="HOLAAA" />
-        </ProgressCircleForAvatar>
+        </ProgressCircle>
         <span class="ml-1">nander</span>
         <select class="mr-16"></select>
         <Icon
