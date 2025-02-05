@@ -10,8 +10,8 @@ const { tasks, progress, tasksCompleted, class: className } = Astro.props;
 const grados = 360 * (progress / tasks);
 
 const taskAndCompleted = tasksCompleted
-    ? "orange 360deg"
-    : `green ${progress === 0 ? 0 : grados}deg`;
+    ? "green 360deg"
+    : `orange ${progress === 0 ? 0 : grados}deg`;
 const cssVarStyles = `--completed: ${taskAndCompleted}`;
 ---
 
