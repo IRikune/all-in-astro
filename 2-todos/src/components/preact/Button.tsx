@@ -2,7 +2,7 @@ import type { ComponentChildren } from "preact";
 import type { Icon as IconType } from "./icons/mod";
 import { Icon } from "./icons/Icon";
 interface Props {
-    type?: "underline" | "filled" | "outlined";
+    type?: "active" | "standard" | "outlined";
     icon: IconType["name"];
     to?: string;
     children?: ComponentChildren;
@@ -10,17 +10,23 @@ interface Props {
 }
 
 
-export function Button({ type = "underline", to, children = "Button", class: className, icon }: Props) {
+export function Button({ type = "standard", to, children = "Button", class: className, icon }: Props) {
     const Tag = to ? "a" : "button";
     const styles = {
-        standard: ["flex w-fit items-center text-sm", "w-6 fill-transparent stroke-white mr-2"],
-        filled: 'text-white border-transparent border-2 rounded bg-black px-4 py-2 hover:bg-transparent hover:border-black transition-all duration-300 hover:text-black',
-        outlined: 'border-black border-2 rounded bg-transparent px-4 py-2 hover:bg-black transition-all duration-300 hover:text-white',
+        standard: {
+            button: "flex w-fit items-center text-sm",
+            icon: "w-6 fill-transparent stroke-white mr-2",
+        },
     }
     return (
-        <Tag href={to} className={`flex px-2 py-1 rounded w-fit items-center text-sm text-orange-700 ${className}`}>
-            <Icon class="w-6 fill-orange-700 stroke-white mr-4" name={icon} />
+        <Tag href={to} className={`flex px-2 py-1 rounded w-full items-center text-sm -tracking-wide hover:bg-neutral-200 cursor-pointer transition duration-300 ${className}`}>
+            <Icon class="w-6 stroke-1 fill-transparent mr-2 stroke-neutral-700"
+                name={icon} />
             {children}
         </Tag>
     )
+}
+
+export function DropdownButton({ children, class: className }: Props) {
+
 }

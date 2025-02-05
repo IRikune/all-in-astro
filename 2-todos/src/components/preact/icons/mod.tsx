@@ -27,7 +27,11 @@ export const icons: Record<Icon['name'], Icon> = {
 		name: 'calendar',
 		svg: (
 			<>
-				<rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+				<g xmlns="http://www.w3.org/2000/svg">
+					<path stroke-linejoin="round" d="M4 6a1 1 0 011-1h14a1 1 0 011 1v4H4V6z" />
+					<path stroke-linecap="round" d="M8 6.5v-3M16 6.5v-3" />
+					<path stroke-linejoin="round" d="M4 10h16v9a1 1 0 01-1 1H5a1 1 0 01-1-1v-9z" />
+				</g>
 			</>),
 	},
 	hash: {

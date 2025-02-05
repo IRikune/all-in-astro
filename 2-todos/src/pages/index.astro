@@ -1,11 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { Note } from "../components/preact/Note";
-import { Avatar } from "../components/preact/Avatar";
+import Layout from '../layouts/Layout.astro';
+import { Note } from '../components/preact/Note';
+import { Avatar } from '../components/preact/Avatar';
+import ProgressCircleForAvatar from '../components/Astro/ProgressCircleForAvatar.astro';
 ---
 
 <Layout>
 	<h1 class="font-thin">Todo App</h1>
-	<div></div>
-	<Avatar class="w-16 h-16 rounded-full" />
+	<div>
+		<h1 class="text-4xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, nemo nobis molestiae corrupti perferendis totam? Sed ipsam iure voluptates, praesentium, dolorem error aperiam minima vero eveniet nulla voluptas fuga sequi?</h1>
+	</div>
+	<ProgressCircleForAvatar progress={3} tasks={6}>
+		<Avatar class="w-16 h-16 rounded-full" />
+	</ProgressCircleForAvatar>
 </Layout>
