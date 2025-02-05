@@ -10,12 +10,12 @@ const {tasks, progress, tasksCompleted, classs} = Astro.props
 
 const grados = 360 * (progress / tasks)
 
-const taskAndCompleted = tasksCompleted?`orange 360deg`:`green ${progress==0?0:grados}deg`
+const taskAndCompleted = grados==360?`orange 360deg`:`green ${progress==0?0:grados}deg`
 const cssVarStyles = `--completed: ${taskAndCompleted}`
 ---
 
-<div class={`circle w-10 h-10 rounded-full flex items-center justify-center bg-[conic-gradient(green,white)] ${classs}`} style={cssVarStyles}>
-    <div class={'w-9 h-9 bg-white rounded-full flex '} >
+<div class={`circle w-10 h-10 rounded-full flex items-center justify-center ${classs}`} style={cssVarStyles}>
+    <div class={'w-9 h-9 bg-white rounded-full flex items-center'} >
         <slot/>
     </div>
 </div>
