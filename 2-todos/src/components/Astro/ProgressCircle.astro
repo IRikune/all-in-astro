@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 interface Props{
     tasks:number
     progress:number
@@ -17,10 +18,35 @@ const cssVarStyles = `--completed: ${taskAndCompleted}`
 <div class={`circle w-10 h-10 rounded-full flex items-center justify-center ${classs}`} style={cssVarStyles}>
     <div class={'w-9 h-9 bg-white rounded-full flex items-center'} >
         <slot/>
+=======
+interface Props {
+    tasks: number;
+    progress: number;
+    tasksCompleted?: boolean;
+    class?: string;
+}
+const { tasks, progress, tasksCompleted, class: className } = Astro.props;
+
+const grados = 360 * (progress / tasks);
+
+const taskAndCompleted = tasksCompleted
+    ? "green 360deg"
+    : `orange ${progress === 0 ? 0 : grados}deg`;
+const cssVarStyles = `--completed: ${taskAndCompleted}`;
+---
+
+<div
+    class={`circle w-10 h-10 rounded-full flex items-center justify-center bg-[conic-gradient(green,white)] ${className}`}
+    style={cssVarStyles}
+>
+    <div class={"w-9 h-9 bg-white rounded-full "}>
+        <slot />
+>>>>>>> 257c2e8ac8bd941e951854766d704acbabaead6f
     </div>
 </div>
 
 <style>
+<<<<<<< HEAD
    
     .circle {
     position: relative;
@@ -30,3 +56,11 @@ const cssVarStyles = `--completed: ${taskAndCompleted}`
     );
 }
 </style>
+=======
+    .circle {
+        position: relative;
+        border-radius: 50%;
+        background: conic-gradient(var(--completed), rgb(238, 238, 238) 0deg);
+    }
+</style>
+>>>>>>> 257c2e8ac8bd941e951854766d704acbabaead6f

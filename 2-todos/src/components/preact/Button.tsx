@@ -10,19 +10,13 @@ interface Props {
 }
 
 
-export function Button({ type = "underline", to, children = "Button", class: className, icon }: Props) {
+export function Button({ type = "underline", to, children, class: className, icon }: Props) {
     const Tag = to ? "a" : "button";
-    const styles = {
-        standard: ["flex w-fit items-center text-sm", "w-6 fill-transparent stroke-white mr-2"],
-        filled: 'text-white border-transparent border-2 rounded bg-black px-4 py-2 hover:bg-transparent hover:border-black transition-all duration-300 hover:text-black',
-        outlined: 'border-black border-2 rounded bg-transparent px-4 py-2 hover:bg-black transition-all duration-300 hover:text-white',
-    }
     return (
-        <Tag href={to} className={`flex px-2 py-1 rounded w-fit items-center text-sm text-neutral-600 -tracking-wider ${className}`}>
+        <Tag href={to} className={`flex w-full px-2 py-1 transition-colors duration-200 rounded items-center text-sm text-neutral-600 -tracking-wider cursor-pointer hover:bg-neutral-200 ${className}`}>
             {
-                icon?
-                <Icon class="w-6 fill-transparent stroke-neutral-500 mr-4" name={icon} />
-                : null
+                icon &&
+                <Icon class="w-6 fill-transparent stroke-neutral-500 mr-2" name={icon} />
             }
             {children}
         </Tag>
