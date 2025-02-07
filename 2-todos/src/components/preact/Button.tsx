@@ -13,10 +13,10 @@ interface Props {
 export function Button({ type = "underline", to, children, class: className, icon }: Props) {
     const Tag = to ? "a" : "button";
     return (
-        <Tag href={to} className={`flex w-full px-2 py-1 transition-colors duration-200 rounded items-center text-sm text-neutral-600 -tracking-wider cursor-pointer hover:bg-neutral-200 ${className}`}>
+        <Tag href={to} className={`flex w-full px-2 py-2 transition-colors duration-200 rounded items-center text-sm text-neutral-700 tracking-tight cursor-pointer hover:bg-neutral-200 ${className}`}>
             {
                 icon &&
-                <Icon class="w-6 fill-transparent stroke-neutral-500 mr-2" name={icon} />
+                <Icon class="w-5 fill-transparent stroke-neutral-500 mr-2" name={icon} />
             }
             {children}
         </Tag>
