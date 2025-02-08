@@ -5,38 +5,48 @@ import ProgressCircle from "./ProgressCircle.astro";
 import { Avatar } from "../preact/Avatar";
 ---
 
-<nav class="w-64 bg-neutral-100/50 rounded-r-lg p-3">
-    <section class="flex items-center justify-between">
-        <div class="flex items-center">
-            <ProgressCircle
-                tasks={8}
-                progress={7}
-                class="overflow-hidden items-center"
-            >
-                <Avatar class="w-9 h-9 rounded-full -z-10" seed="HOLAAA" />
-            </ProgressCircle>
-            <span class="ml-1">Nander</span>
-        </div>
-        <div class="flex items-center">
-            <Button class="w-fit *:mr-0 *:px-0" icon="bell" />
-            <Button class="w-fit *:mr-0 *:px-0" icon="sidebar" />
-        </div>
-    </section>
-    <section class="my-2">
-        <Button
-            class="cursor-pointer flex rounded items-center w-full x-2 py-1 text-sm text-orange-700 hover:bg-orange-200 transition-all duration-300"
-        >
-            <div
-                class="mx-2 w-6 h-6 rounded-full bg-orange-700 flex items-center justify-center text-sm ml-0"
-            >
-                <Icon name="plus" class="w-6 stroke-white" />
+<nav
+    class="w-64 bg-neutral-100/50 rounded-r-lg p-3 flex flex-col justify-between"
+>
+    <div>
+        <section class="flex items-center justify-between">
+            <div class="flex items-center">
+                <ProgressCircle
+                    tasks={8}
+                    progress={7}
+                    class="overflow-hidden items-center"
+                >
+                    <Avatar class="w-8 h-8 rounded-full -z-10" seed="HOLAAA" />
+                </ProgressCircle>
+                <span class="ml-1">Nander</span>
             </div>
-            Add task
-        </Button>
-        <Button icon="search"> Search </Button>
-        <Button icon="inbox"> Inbox </Button>
-        <Button icon="calendar"> Today </Button>
-        <Button icon="sunrise"> Upcoming </Button>
-        <Button icon="grid"> Filters & labels</Button>
+            <div class="flex items-center">
+                <Button class="w-fit *:mr-0 *:px-0" icon="bell" />
+                <Button class="w-fit *:mr-0 *:px-0" icon="sidebar" />
+            </div>
+        </section>
+        <section class="my-2">
+            <Button
+                class="cursor-pointer flex rounded items-center w-full text-sm text-orange-700 hover:bg-orange-200 transition-all duration-300 my-1"
+            >
+                <div
+                    class="mx-2 w-5.5 h-5.5 rounded-full bg-orange-700 flex items-center justify-center text-sm ml-0"
+                >
+                    <Icon name="plus" class="w-6 stroke-white" />
+                </div>
+                Add task
+            </Button>
+            <Button icon="search"> Search </Button>
+            <Button to="/dashboard/inbox" icon="inbox"> Inbox </Button>
+            <Button to="/dashboard/today" icon="calendar"> Today </Button>
+            <Button to="/dashboard/upcoming" icon="sunrise"> Upcoming </Button>
+            <Button to="/dashboard/filters" icon="grid">
+                Filters & labels</Button
+            >
+        </section>
+    </div>
+
+    <section class="">
+        <Button icon="plus" to="/">Logout</Button>
     </section>
 </nav>
