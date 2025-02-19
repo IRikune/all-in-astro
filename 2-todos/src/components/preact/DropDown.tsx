@@ -1,22 +1,35 @@
+import { ProgressCircle } from "./ProgressCircle";
+import { Avatar } from "./Avatar";
 import { Button } from "./Button";
-import { Icon } from "./icons/Icon";
 interface Props {
     class: string;
 }
 export function DropDown({ class: className }: Props) {
-   
     return (
             <>
-                <Button class={` p-0 relative justify-between *:first: *:last:invisible focus:*:last:visible ${className}`}  >
-                    <Drops/>
-
+                <Button class={`peer p-1 h-9 w-fit relative justify-between  ${className}`}>
+                    <div class="flex items-center">
+                        <ProgressCircle
+                            tasks={8}
+                            progress={7}
+                            class="overflow-hidden items-center"
+                            >
+                            <Avatar class="w-7 h-7 rounded-full -z-10" seed="HOLAAA" />
+                        </ProgressCircle>
+                        <span class="ml-1">Nander</span>
+                    </div>
                 </Button>
+                <Drops class={"invisible peer-focus:visible"}/> 
+                
             </>
     )   
 } 
-function Drops(){
+interface Propss {
+    class?: string;
+}
+function Drops({class: className}: Propss) {
     return <>
-        <div  class={"absolute block p-1.5 top-10 z-10 w-96 h-96 overflow-ellipsis border-2 bg-white rounded-md "}>
+        <div  class={`absolute p-1.5 top-10 z-10 w-96 h-96 overflow-ellipsis border-2 bg-white rounded-md ${className}`}>
             <ul>
                 <li>hola       </li>
                 <li>adios      </li>
