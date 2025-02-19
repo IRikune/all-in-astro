@@ -29,13 +29,20 @@ interface Propss {
 }
 function Drops({class: className}: Propss) {
     return <>
-        <div  class={`absolute p-1.5 top-10 z-10 w-96 h-96 overflow-ellipsis border-2 bg-white rounded-md ${className}`}>
-            <ul>
-                <li>hola       </li>
-                <li>adios      </li>
-                <li>bienvenido </li>
-                <li>fuera      </li>
-            </ul>
+        <div  class={`absolute p-0 top-12 z-10 w-92 h-90 bg-white rounded-md shadow-2xl shadow-black ${className}`}>
+                    <Button class="h-9"/>
+                    <hr />
+                    <Button class="h-9"/>
+                    <Button class="h-9"/>
+                    <Button class="h-9"/>
+                    <hr />
+                    <Button class="h-9"/>
+                    <Button class="h-9"/>
+                    <Button class="h-9"/>
+                    <Button class="h-9"/>
+                    <Button class="h-9"/>
+                    <hr />
+                    <Button class="h-[34px]"/>
         </div>
     
     </> 
