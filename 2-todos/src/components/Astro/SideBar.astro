@@ -3,6 +3,8 @@ import { Button } from "../preact/Button";
 import { Icon } from "../preact/icons/Icon";
 import ProgressCircle from "./ProgressCircle.astro";
 import { Avatar } from "../preact/Avatar";
+
+const { pathname: currentPage } = Astro.url;
 ---
 
 <nav
@@ -27,7 +29,7 @@ import { Avatar } from "../preact/Avatar";
         </section>
         <section class="my-2">
             <Button
-                class="cursor-pointer flex rounded items-center w-full text-sm text-orange-700 hover:bg-orange-200 transition-all duration-300 my-1"
+                class="cursor-pointer flex rounded items-center w-full text-sm text-orange-700 hover:bg-orange-100 transition-all duration-300 my-1"
             >
                 <div
                     class="mx-2 w-5.5 h-5.5 rounded-full bg-orange-700 flex items-center justify-center text-sm ml-0"
@@ -37,12 +39,18 @@ import { Avatar } from "../preact/Avatar";
                 Add task
             </Button>
             <Button icon="search"> Search </Button>
-            <Button to="/dashboard/inbox" icon="inbox"> Inbox </Button>
-            <Button to="/dashboard/today" icon="calendar"> Today </Button>
-            <Button to="/dashboard/upcoming" icon="sunrise"> Upcoming </Button>
-            <Button to="/dashboard/filters" icon="grid">
-                Filters & labels</Button
-            >
+            <Button page={currentPage} to="/dashboard/inbox" icon="inbox">
+                Inbox
+            </Button>
+            <Button page={currentPage} to="/dashboard/today" icon="calendar">
+                Today
+            </Button>
+            <Button page={currentPage} to="/dashboard/upcoming" icon="sunrise">
+                Upcoming
+            </Button>
+            <Button page={currentPage} to="/dashboard/filters" icon="grid">
+                Filters & labels
+            </Button>
         </section>
     </div>
 
