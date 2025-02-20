@@ -2,8 +2,6 @@
 import "../assets/global.css";
 import "@fontsource-variable/montserrat";
 import SideBar from "../components/Astro/SideBar.astro";
-
-const { pathname } = Astro.url;
 ---
 
 <html lang="en">
@@ -16,10 +14,14 @@ const { pathname } = Astro.url;
 	</head>
 	<body class="w-dvw h-dvh grid grid-cols-[minmax(0,_250px)_1fr] grid-rows-1">
 		<SideBar />
-		<main class="overflow-scroll">
-			<h1>EL SITIO ACTUAL ES: {pathname}</h1>
-			<slot />
-		</main>
+		<section class="mx-20">
+			<header class="flex justify-end items-center h-16">
+				<slot name="header" />
+			</header>
+			<main class="overflow-scroll flex flex-col">
+				<slot />
+			</main>
+		</section>
 	</body>
 </html>
 
