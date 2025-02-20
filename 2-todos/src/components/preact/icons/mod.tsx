@@ -98,12 +98,12 @@ export const icons: Record<Icon['name'], Icon> = {
 	},
 	grid: {
 		name: 'grid',
-		svg:(
+		svg: (
 			<>
-			<rect x="3" y="3" width="7" height="7"></rect>
-			<rect x="14" y="3" width="7" height="7"></rect>
-			<rect x="14" y="14" width="7" height="7"></rect>
-			<rect x="3" y="14" width="7" height="7"></rect>
+				<rect x="3" y="3" width="7" height="7" />
+				<rect x="14" y="3" width="7" height="7" />
+				<rect x="14" y="14" width="7" height="7" />
+				<rect x="3" y="14" width="7" height="7" />
 			</>
 		)
 	},
