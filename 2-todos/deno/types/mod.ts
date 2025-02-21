@@ -13,7 +13,7 @@ export interface Task {
   priority: Priority;
 }
 
-enum Priority {
+export enum Priority {
   low = 4,
   medium = 3,
   high = 2,
