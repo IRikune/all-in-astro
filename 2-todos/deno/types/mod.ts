@@ -2,29 +2,41 @@ export interface Task {
   id?: string;
   title: string;
   content: string;
-  createdAt: number;
-  completedAt: number;
-  toCompleted: number,
-  completed: boolean,
+  completed: boolean;
   comments: Comment[];
+  subTasks: Task[];
+  date: {
+    created: number;
+    completed: number;
+    expected: number;
+  };
+  priority: Priority;
 }
-interface Comment{
+
+enum Priority {
+  low = 4,
+  medium = 3,
+  high = 2,
+  important = 1,
+}
+
+interface Comment {
   id?: string;
   userID: string;
   content: string;
   createdAt: number;
 }
 
-export type createNoteOptions = {
+export type createTaskOptions = {
   userID: string;
-  note: Task;
+  task: Task;
 };
-export type getNoteOptions = {
+export type getTaskOptions = {
   userID: string;
-  noteID: string;
+  taskID: string;
 };
-export type updateNoteOptions = {
+export type updateTaskOptions = {
   userID: string;
-  noteID: string;
-  newNote: Task;
+  taskID: string;
+  newTask: Task;
 };

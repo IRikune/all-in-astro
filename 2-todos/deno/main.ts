@@ -1,10 +1,10 @@
 import { Hono } from "hono";
-import { notes } from "./routes/notes.ts";
+import { tasks } from "./routes/tasks.ts";
 
 const app = new Hono();
 export const kv = await Deno.openKv();
 
-app.route("notes", notes);
+app.route("tasks", tasks);
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
