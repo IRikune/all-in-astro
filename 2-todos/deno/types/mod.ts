@@ -1,16 +1,20 @@
-export interface Task {
+export interface SubTask {
   id?: string;
   title: string;
+  creator: string;
   content: string;
   completed: boolean;
-  comments: Comment[];
-  subTasks: Task[];
+  comments?: Comment[];
   date: {
     created: number;
     completed: number;
     expected: number;
   };
   priority: Priority;
+}
+
+export interface Task extends SubTask {
+  subTasks?: Task[];
 }
 
 export enum Priority {

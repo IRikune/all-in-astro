@@ -2,7 +2,8 @@
   "version": "4",
   "specifiers": {
     "jsr:@hono/hono@^4.6.16": "4.6.16",
-    "jsr:@std/ulid@1": "1.0.0"
+    "jsr:@std/ulid@1": "1.0.0",
+    "npm:zod@^3.24.2": "3.24.2"
   },
   "jsr": {
     "@hono/hono@4.6.16": {
@@ -12,10 +13,16 @@
       "integrity": "d41c3d27a907714413649fee864b7cde8d42ee68437d22b79d5de4f81d808780"
     }
   },
+  "npm": {
+    "zod@3.24.2": {
+      "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
+    }
+  },
   "workspace": {
     "dependencies": [
       "jsr:@hono/hono@^4.6.16",
-      "jsr:@std/ulid@1"
+      "jsr:@std/ulid@1",
+      "npm:zod@^3.24.2"
     ]
   }
 }
