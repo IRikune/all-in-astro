@@ -33,6 +33,9 @@ tasks.post(
     const userID = c.req.valid("param");
     const task = c.req.valid("json");
     const result = await createTask({ userID, task });
+    if (!result.ok) {
+      throw new HTTPException(400, { message: "Task creation failed" });
+    }
     return c.json(result);
   },
 );

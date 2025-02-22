@@ -15,8 +15,8 @@ export async function getTasks({ userID = "public" }) {
   return tasks;
 }
 export async function createTask({ userID, task }: createTaskOptions) {
-  if (!task.title) return { ok: false };
-  if (!task.date) return { ok: false };
+  if (!task.title) return { ok: false, error: "Task title is required" };
+  if (!task.date) return { ok: false, error: "Task date is required" };
   const taskID = monotonicUlid();
   const newTask = { ...task, id: taskID };
   const key = ["tasks", userID, taskID];
