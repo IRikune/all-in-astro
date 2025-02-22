@@ -19,7 +19,7 @@ export async function createTask({ userID, task }: createTaskOptions) {
   if (!task.date) return { ok: false, error: "Task date is required" };
   const taskID = monotonicUlid();
   const newTask = { ...task, id: taskID };
-  const key = ["tasks", userID, taskID];
+  const key = [userID, "tasks", taskID];
   const res = await kv.atomic()
     .check({ key, versionstamp: null })
     .set(key, newTask)
