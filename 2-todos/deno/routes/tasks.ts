@@ -1,10 +1,15 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
 import { HTTPException } from "hono/http-exception";
-import { postTaskSchema, taskSchema, userIDSchema } from "../schemas/tasks.ts";
+import { postTaskSchema, userIDSchema } from "../schemas/tasks.ts";
 import { createTask, getTasks } from "../models/tasks.ts";
 
 export const tasks = new Hono();
+
+tasks.get("/", async (c) => {
+  const result = { ok: true, data: "Hello, world!" };
+  return c.json(result);
+});
 
 tasks.get("/tasks/:userID?", async (c) => {
   const userID = c.req.param("userID");
