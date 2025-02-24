@@ -1,18 +1,20 @@
-export interface Task {
+export interface Task extends SubTask {
+  subTasks?: SubTask[];
+}
+export interface SubTask {
   id?: string;
   title: string;
-  content: string;
+  creator: string;
+  content?: string;
   completed: boolean;
-  comments: Comment[];
-  subTasks: Task[];
+  comments?: Comment[];
   date: {
     created: number;
-    completed: number;
-    expected: number;
+    completed?: number;
+    expected?: number;
   };
   priority: Priority;
 }
-
 export enum Priority {
   low = 4,
   medium = 3,
@@ -22,14 +24,14 @@ export enum Priority {
 
 interface Comment {
   id?: string;
-  userID: string;
+  creator: string;
   content: string;
   createdAt: number;
 }
 
 export type createTaskOptions = {
   userID: string;
-  task: Task;
+  task: Omit<Task, "id">;
 };
 export type getTaskOptions = {
   userID: string;
