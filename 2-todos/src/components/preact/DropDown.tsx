@@ -14,7 +14,7 @@ export function DropDown({ class: className }: Props) {
             <button
                 type="button"
                 onClick={() => { isOpen.value = !isOpen.value }}
-                class={`peer hover:bg-rose-100 rounded px-2 p-1 cursor-pointer w-fit relative justify-between transition duration-300  ${className}`}>
+                class={`peer hover:bg-rose-100 z-1 rounded px-2 p-1 cursor-pointer w-fit relative justify-between transition duration-300  ${className}`}>
                 <div class="flex items-center">
                     <ProgressCircle
                         tasks={8}
