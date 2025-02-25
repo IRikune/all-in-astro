@@ -1,3 +1,4 @@
+//#region task
 export interface Task extends SubTask {
   subTasks?: SubTask[];
 }
@@ -42,3 +43,24 @@ export type updateTaskOptions = {
   taskID: string;
   newTask: Task;
 };
+
+//#region user
+
+export type createUserOptions = {
+  user: Omit<User, "id">;
+};
+export type getUserOptions = {
+  userID: string;
+};
+export type updateUserOptions = {
+  userID: string;
+  newUser: User;
+};
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+}

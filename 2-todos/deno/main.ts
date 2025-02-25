@@ -1,10 +1,12 @@
 import { Hono } from "hono";
+import { monotonicUlid } from "@std/ulid/monotonic-ulid";
 import { tasks } from "./routes/tasks.ts";
+import { user } from "./routes/user.ts";
 
-const app = new Hono();
+export const ulid = monotonicUlid;
+
+const app = new Hono().route("/tasks/", tasks).route("/users/", user);
 export const kv = await Deno.openKv();
-
-app.route("/tasks/", tasks);
 
 app.get("/", (c) => {
   return c.text("Hello Hono 2222!");
