@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { validator } from "hono/validator";
 import { HTTPException } from "hono/http-exception";
 import { postUserSchema } from "../schemas/user.ts";
+import { ulid } from "../main.ts";
 
 export const user = new Hono();
 
@@ -19,5 +20,10 @@ user.post(
   }),
   async (c) => {
     const user = c.req.valid("json");
+    const fullUser = {
+      id: ulid(),
+      ...user,
+    };
+    return c.json(fullUser);
   },
 );
