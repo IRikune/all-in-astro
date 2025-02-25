@@ -5,11 +5,11 @@ import { Checker } from "./Checker"
 
 
 interface Props {
-    task?: TaskType
+    task: TaskType
 }
 
-export function Task(task: TaskType) {
-
+export function Task({task}:Props) {
+   
     return (
         <article class="grid grid-cols-[25px_minmax(600px,1fr)_100px] gap-2 grid-rows-[25px_minmax(50px,100px)_20px]">
             <section>
@@ -21,7 +21,7 @@ export function Task(task: TaskType) {
 
                 <div class='flex flex-row gap-2 justify-between'>
                     <Button icon="hash">
-                        <span>{task.comments.length}</span>
+                        <span>{task.comments?.length}</span>
                     </Button>
                     <Button >
                         <span class='text-red-500'>{task.date.expected}</span>

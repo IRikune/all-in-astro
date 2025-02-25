@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { Task } from "../../components/preact/Task";
+import { tasks } from "../../utils/mocks";
 ---
 
 <Layout title="Today">
@@ -9,5 +11,6 @@ import Layout from "../../layouts/Layout.astro";
         >
             Today
         </h1>
+        <Task task={tasks[0]} client:load />
     </main>
 </Layout>
