@@ -12,7 +12,8 @@ export interface Icon {
 	| 'sidebar'
 	| 'sunrise'
 	| 'plus-circle'
-	| 'grid';
+	| 'grid'
+	| 'circleCheker'
 	svg: JSX.Element;
 }
 
@@ -138,4 +139,14 @@ export const icons: Record<Icon['name'], Icon> = {
 			</>
 		)
 	},
+	circleCheker: {
+		name:'circleCheker',
+		svg:(
+			<>
+			  
+			  <path fill="currentColor" fill-rule="evenodd" d="M8 14.001a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-1a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM5.146 8.147a.5.5 0 0 1 .708 0L7 9.294l3.146-3.147a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 0-.708Z" clip-rule="evenodd"></path>
+			
+			</>
+		  )
+	}
 };

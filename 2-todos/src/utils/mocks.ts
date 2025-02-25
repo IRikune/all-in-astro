@@ -11,7 +11,7 @@ export const tasks: Task[] = [
       comments: [
         {
           id: "c1",
-          userID: "u1",
+          creator: "u1",
           content: "No olvides incluir los datos de la última semana.",
           createdAt: 1633072800000, // 1 de octubre de 2021
         },
@@ -51,7 +51,7 @@ export const tasks: Task[] = [
         completed: 0,
         expected: 1633332000000,
       },
-      priority: Priority.low,
+      priority: Priority.high,
     },
     {
       id: "2",
@@ -106,7 +106,7 @@ export const tasks: Task[] = [
       comments: [
         {
           id: "c2",
-          userID: "u2",
+          creator: "u2",
           content: "Correo importante del cliente XYZ.",
           createdAt: 1633072800000,
         },
