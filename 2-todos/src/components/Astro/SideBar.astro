@@ -5,16 +5,13 @@ import { DropDown } from "../preact/DropDown";
 
 const { pathname: currentPage } = Astro.url;
 ---
-
 <nav
     class="w-64 bg-neutral-100/50 rounded-r-lg p-3 flex flex-col justify-between"
 >
     <div>
-        <section class="flex h-8 items-center justify-between">
+        <section class="flex  relative h-8 items-center justify-between">
             <DropDown client:load class="m-0" />
-            <div class="flex items-center">
-                <Button class="w-fit *:mr-0 *:px-0" icon="bell" />
-                <Button class="w-fit *:mr-0 *:px-0" icon="sidebar" />
+            <Button class="w-fit absolute *:mr-0 *:px-0 right-8" icon="bell" />
             </div>
         </section>
         <section class="my-2">
