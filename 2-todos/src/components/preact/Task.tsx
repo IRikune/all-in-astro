@@ -16,7 +16,7 @@ export function Task({task}:Props) {
             <section class='flex relative'>
                <Checker priority={task.priority} class="absolute"/>
             </section>
-            <section class='flex flex-col items-start gap-1'>
+            <button class='flex flex-col items-start gap-1' popoverTarget='althougth'>
                 <h2 class='font-bold text-[0.875rem]'>{task.title}</h2>
                 <p class='font-extralight text-[12px]'>{task.content}</p>
 
@@ -29,12 +29,14 @@ export function Task({task}:Props) {
                         <span class='text-red-500 '>{task.date.expected}</span>
                     </Button>
                 </div>
-            </section>
+            </button>
             <section>
                 <Button icon="hash" class='w-[40px]'/>
             </section>
 
-            
+            <section id='althougth' popover class='w-[65%] h-[85%] mx-auto my-auto rounded-2xl bg-white '>
+               
+            </section>
             
 
         </article>

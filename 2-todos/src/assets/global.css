@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+[popover]::backdrop {
+    background-color: #00000080;
+}
