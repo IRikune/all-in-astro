@@ -14,8 +14,8 @@ interface Props {
 export function Button({ to, page, children, class: className, icon }: Props) {
     const Tag = to ? "a" : "button";
     return (
-        <Tag href={to} className={`flex w-full px-2 py-2 transition-colors duration-200 rounded items-center text-sm text-neutral-700 tracking-tight cursor-pointer hover:bg-rose-100 bg-oran
-        ${to != null && to === page && "bg-rose-100"} ${className}`}>
+        <Tag href={to} className={` flex px-2 py-2 transition-colors duration-200 rounded items-center text-sm text-neutral-700 tracking-tight cursor-pointer hover:bg-rose-100 bg-oran
+        ${to != null && to === page && "bg-rose-100"} ${className} `}>
             {
                 icon &&
                 <Icon class="w-5 fill-transparent stroke-neutral-500 mr-2" name={icon} />

@@ -3,6 +3,7 @@ import type { JSX } from "preact/jsx-runtime";
 export interface Icon {
 	name:
 	| 'bell'
+	| 'check'
 	| 'calendar'
 	| 'hash'
 	| 'inbox'
@@ -11,7 +12,8 @@ export interface Icon {
 	| 'sidebar'
 	| 'sunrise'
 	| 'plus-circle'
-	| 'grid';
+	| 'grid'
+	| 'circleCheker'
 	svg: JSX.Element;
 }
 
@@ -23,6 +25,36 @@ export const icons: Record<Icon['name'], Icon> = {
 				<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
 				<path d="M13.73 21a2 2 0 0 1-3.46 0" />
 			</>),
+	},
+	check:{
+		name:'check',
+		svg:(
+			<>
+			  <svg width="24" height="24" viewBox="0 0 24 24">
+				<line
+				  x1="20"
+				  y1="6"
+				  x2="9"
+				  y2="17"
+				  stroke="currentColor"
+				  strokeWidth="2"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+				/>
+				<line
+				  x1="9"
+				  y1="17"
+				  x2="4"
+				  y2="12"
+				  stroke="currentColor"
+				  strokeWidth="2"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+				/>
+			  </svg>
+			</>
+		  )
+
 	},
 	calendar: {
 		name: 'calendar',
@@ -107,4 +139,14 @@ export const icons: Record<Icon['name'], Icon> = {
 			</>
 		)
 	},
+	circleCheker: {
+		name:'circleCheker',
+		svg:(
+			<>
+			  
+			  <path fill="currentColor" fill-rule="evenodd" d="M8 14.001a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-1a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM5.146 8.147a.5.5 0 0 1 .708 0L7 9.294l3.146-3.147a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 0-.708Z" clip-rule="evenodd"></path>
+			
+			</>
+		  )
+	}
 };
