@@ -16,7 +16,6 @@ export function Checker({priority,class:className}:Props){
     const varia = `background: ${bg[priority]}50;
                     border: 2px solid ${bg[priority]};
                     color:${bg[priority]}`
-    console.log(varia)
     
     return (
         <div class={`w-[18px] h-[18px] cursor-pointer rounded-full flex align-middle hover:*:visible items-center justify-center ${className}`} style={varia}>

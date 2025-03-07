@@ -14,6 +14,12 @@ export interface Icon {
 	| 'plus-circle'
 	| 'grid'
 	| 'circleCheker'
+	| 'chevron-up'
+	| 'chevron-down'
+	| 'more-horizontal'
+	| 'x'
+	| 'flag'
+	| 'lock'
 	svg: JSX.Element;
 }
 
@@ -146,6 +152,116 @@ export const icons: Record<Icon['name'], Icon> = {
 			  
 			  <path fill="currentColor" fill-rule="evenodd" d="M8 14.001a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-1a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM5.146 8.147a.5.5 0 0 1 .708 0L7 9.294l3.146-3.147a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 0-.708Z" clip-rule="evenodd"></path>
 			
+			</>
+		  )
+	},
+	'chevron-up':{
+		name:'chevron-up',
+		svg:(
+			<>
+			  <svg width="24" height="24" viewBox="0 0 24 24">
+				<polyline
+				  points="18 15 12 9 6 15"
+				  stroke="currentColor"
+				  strokeWidth="1"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+				/>
+			  </svg>
+			</>
+		  )
+	},
+	'chevron-down':{
+		name:'chevron-down',
+		svg:(
+			<>
+			  <svg width="24" height="24" viewBox="0 0 24 24">
+				<polyline
+				  points="6 9 12 15 18 9"
+				  stroke="currentColor"
+				  strokeWidth="1"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+				/>
+			  </svg>
+			</>
+		  )
+	},
+	'more-horizontal':{
+		name:'more-horizontal',
+		svg:(
+			<>
+			  <svg width="24" height="24" viewBox="0 0 24 24">
+				<circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none"/>
+				<circle cx="19" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none"/>
+				<circle cx="5" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none"/>
+			  </svg>
+			</>
+		  )
+	},
+	'x':{
+		name:'x',
+		svg:(
+			<>
+			  <svg width="24" height="24" viewBox="0 0 24 24">
+				<line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+				<line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+			  </svg>
+			</>
+		  )
+	},
+	'flag':{
+		name:'flag',
+		svg:(
+			<>
+			  <svg width="24" height="24" viewBox="0 0 24 24">
+				<path
+				  d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"
+				  stroke="currentColor"
+				  strokeWidth="1"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+				/>
+				<line
+				  x1="4"
+				  y1="22"
+				  x2="4"
+				  y2="15"
+				  stroke="currentColor"
+				  strokeWidth="1"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+				/>
+			  </svg>
+			</>
+		  )
+
+	},
+	'lock':{
+		name:'lock',
+		svg:(
+			<>
+			  <svg width="24" height="24" viewBox="0 0 24 24">
+				<rect
+				  x="3"
+				  y="11"
+				  width="18"
+				  height="11"
+				  rx="2"
+				  ry="2"
+				  stroke="currentColor"
+				  strokeWidth="1"
+				  fill="none"
+				/>
+				<path
+				  d="M7 11V7a5 5 0 0 1 10 0v4"
+				  stroke="currentColor"
+				  strokeWidth="1"
+				  strokeLinecap="round"
+				  strokeLinejoin="round"
+				
+				/>
+			  </svg>
 			</>
 		  )
 	}

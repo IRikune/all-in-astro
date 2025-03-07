@@ -6,8 +6,8 @@ import { Icon } from "../../components/preact/icons/Icon";
 import { Button } from "../../components/preact/Button";
 ---
 
-<Layout title="Today">
-    <main class="flex flex-col items-left h-dvh w-[80%] mx-auto">
+<Layout title="Today" client:load>
+    <main class="flex flex-col items-left overflow-hidden h-dvh w-[80%] mx-auto">
         <section class="relative text-grey-200">
             <h1
             class="h-[5rem] font-bold text-3xl text-transparent bg-clip-text bg-gradient-to-br from-rose-900 to-rose-700"

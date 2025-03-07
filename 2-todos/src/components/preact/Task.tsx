@@ -1,22 +1,31 @@
+import { signal } from "@preact/signals"
 import type { Task as TaskType } from "../../../deno/types/mod"
 import { Button } from "./Button"
 import { Checker } from "./Checker"
 import { Icon } from "./icons/Icon"
+import { DropDown } from "./DropDown"
 
 
 
 interface Props {
     task: TaskType
 }
+const showTaskDetails= signal(false);
+const selecPriority = signal(false);
+
+const buttonStyle= 'h-7 w-full *:w-4 *:mr-[1%] items-center';
+const hrStyle='opacity-10'
 
 export function Task({task}:Props) {
-   
+  
     return (
+        
         <article class="grid grid-cols-[18px_minmax(600px,1fr)_100px] h-20 gap-2">
-            <section class='flex relative'>
-               <Checker priority={task.priority} class="absolute"/>
+            <section class='flex relative opa'>
+               <Checker priority={task.priority} class="absolute ite"/>
             </section>
-            <button class='flex flex-col items-start gap-1' popoverTarget='althougth'>
+            
+            <section id='task' class='flex flex-col items-start gap-1' onClick={()=>{showTaskDetails.value= !showTaskDetails.value; console.log(showTaskDetails.value)}}>
                 <h2 class='font-bold text-[0.875rem]'>{task.title}</h2>
                 <p class='font-extralight text-[12px]'>{task.content}</p>
 
@@ -29,16 +38,66 @@ export function Task({task}:Props) {
                         <span class='text-red-500 '>{task.date.expected}</span>
                     </Button>
                 </div>
-            </button>
+            </section>
             <section>
-                <Button icon="hash" class='w-[40px]'/>
+    
             </section>
+            <dialog open={showTaskDetails.value} onClick={()=>showTaskDetails.value=false} class={"w-[100%] top-0 z-10 h-[100%] fixed bg-[#00000080]"}/>
+            <dialog open={showTaskDetails.value} class='w-[62%] h-[85%] z-20 top-[7.5%] left-[19%] fixed overflow-hidden rounded-2xl bg-white  '>
+                <div class={"grid grid-rows-[min(2.5rem)_1fr] grid-cols-[3fr_1.5fr] h-full p-2.5 w-full"}>
 
-            <section id='althougth' popover class='w-[65%] h-[85%] mx-auto my-auto rounded-2xl bg-white '>
-               
-            </section>
+                <Button icon="inbox" class='h-7 w-40 *:w-4 *:mr-[1%] items-center hover:bg-gray-200'>bandeja de entrada</Button>
+                    <div class='flex justify-end'>
+                     <Button  class={"w-10 h-10 active:bg-gray-300 justify-center"} icon="chevron-down"/>
+                     <Button  class={"w-10 h-10 active:bg-gray-300 justify-center"} icon="chevron-up"/>
+                     <Button  class={" w-10 h-10 active:bg-gray-300 justify-center"} icon="more-horizontal"/>
+                     <Button onclick={()=>showTaskDetails.value=false} class={" w-10 h-10 active:bg-gray-300 justify-center"}icon="x"/>
+                    </div>
+                    <div></div>
+                    <div class={"grid grid-rows-[1fr] gap *:w-full *:gap text-[12px] bg-neutral-100/50 py-2.5 px-4 "}>
+                        <div>
+
+                            <section  >
+                                <div class={`${buttonStyle}`}>proyecto</div>
+                                <Button icon="inbox" class={`${buttonStyle} hover:bg-rose-300`}>bandeja de entrada</Button>
+                            </section>
+                            <hr class={`${hrStyle}`}/>
+                            <section >
+                                <div class={`${buttonStyle}`}>Fecha</div>
+                                <Button icon="calendar" class={`${buttonStyle} hover:bg-rose-300`}>hoy</Button>
+                            </section>
+                            <hr class={`${hrStyle}`} />
+                            <Button icon="lock" class={`${buttonStyle} hover:bg-rose-300 *:order-2 justify-between`}>fecha limite</Button>
+                            <hr class={`${hrStyle} `}/>
+                            <section class={'relative'}>
+                                <div class={`${buttonStyle}`}>prioridad</div>
+                                <Button onclick={()=>selecPriority.value=!selecPriority.value} icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1{/*Prioridad VAR*/ }</Button>
+                                <dialog open={selecPriority.value} class={'w-30 h-28 left-[65%] fixed rounded-[10px] z-1 overflow-hidden shadow'} >
+                                    <div class={" w-30 h-28  bg-white"}>
+
+                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
+                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
+                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
+                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
+                                    </div>
+                                            
+
+                                </dialog>
+                            </section>
+                            <hr class={`${hrStyle}`}/>
+                            <Button class={`${buttonStyle} hover:bg-rose-300`}>etiquetas</Button>
+                            <hr class={`${hrStyle}`}/>
+                            <Button icon="plus" class={`${buttonStyle} hover:bg-rose-300 *:order-2 justify-between`}>recordatorios</Button>
+                            <hr class={`${hrStyle}`}/>
+                            <Button icon="plus" class={`${buttonStyle} hover:bg-rose-300 *:order-2 justify-between`}>ubicacion</Button>
+                            <hr class={`${hrStyle}`}/>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
             
-
+            
+        
         </article>
     )
 }
