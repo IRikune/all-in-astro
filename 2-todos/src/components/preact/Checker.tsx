@@ -1,27 +1,21 @@
-import { Priority } from "../../../deno/types/mod"
+import type { Priority } from "../../../deno/types/mod"
 import { Icon } from "./icons/Icon"
 
-interface Props{
+interface Props {
     priority: Priority
-    class:string
+    class: string
 }
-export function Checker({priority,class:className}:Props){
-    const bg = {
-        1 : '#c0392b',
-        2 : '#FF5733',
-        3 : '#2980b9',
-        4 : '#bdc3c7'
+export function Checker({ priority, class: className }: Props) {
+    const colors = {
+        1: 'bg-theme-red/50 border-theme-red text-theme-red',
+        3: 'bg-theme-yellow/50 border-theme-yellow text-theme-yellow',
+        2: 'bg-theme-orange/50 border-theme-orange text-theme-orange',
+        4: 'bg-theme-green/50 border-theme-green text-theme-green'
     }
-  
-    const varia = `background: ${bg[priority]}50;
-                    border: 2px solid ${bg[priority]};
-                    color:${bg[priority]}`
-    
     return (
-        <div class={`w-[18px] h-[18px] cursor-pointer rounded-full flex align-middle hover:*:visible items-center justify-center ${className}`} style={varia}>
-            <Icon name="check" class="invisible w-3.5 left-0.5 "></Icon>
+        <div class={`size-4.5 cursor-pointer rounded-full flex align-middle hover:*:opacity-100 items-center justify-center border-2
+        ${colors[priority]} ${className}`}>
+            <Icon name="check" class="opacity-0 w-3.5 left-0.5 transition duration-300" />
         </div>
     )
-} 
-
-
+}

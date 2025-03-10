@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
-[popover]::backdrop {
-    background-color: #00000080;
+@theme {
+    --color-theme-red: #c0392b;
+    --color-theme-orange: #FF5733;
+    --color-theme-yellow: #2980b9;
+    --color-theme-green: #bdc3c7;
 }
