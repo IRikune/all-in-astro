@@ -3,7 +3,6 @@ import type { Task as TaskType } from "../../../deno/types/mod"
 import { Button } from "./Button"
 import { Checker } from "./Checker"
 import { Icon } from "./icons/Icon"
-import { DropDown } from "./DropDown"
 
 
 
@@ -15,7 +14,8 @@ const selecPriority = signal(false);
 
 const buttonStyle= 'h-7 w-full *:w-4 *:mr-[1%] items-center';
 const hrStyle='opacity-10'
-
+const selectColor= signal('white');
+const priority= signal('P4');
 export function Task({task}:Props) {
   
     return (
@@ -30,7 +30,7 @@ export function Task({task}:Props) {
                 <p class='font-extralight text-[12px]'>{task.content}</p>
 
                 <div class='flex flex-row gap-2 justify-between'>
-                    <Button class="flex w-[2rem] text-[2px] p-0 h-[1rem]">
+                    <Button class="flex w-fit text-[2px] p-0 h-[1rem]">
                         <Icon name="bell" class={"w-4"} />
                         <span>{task.comments?.length}</span>
                     </Button>
@@ -42,7 +42,7 @@ export function Task({task}:Props) {
             <section>
     
             </section>
-            <dialog open={showTaskDetails.value} onClick={()=>showTaskDetails.value=false} class={"w-[100%] top-0 z-10 h-[100%] fixed bg-[#00000080]"}/>
+            <dialog open={showTaskDetails.value} onClick={()=>{showTaskDetails.value=false;selecPriority.value=false}} class={"w-[100%] top-0 z-10 h-[100%] fixed bg-[#00000080]"}/>
             <dialog open={showTaskDetails.value} class='w-[62%] h-[85%] z-20 top-[7.5%] left-[19%] fixed overflow-hidden rounded-2xl bg-white  '>
                 <div class={"grid grid-rows-[min(2.5rem)_1fr] grid-cols-[3fr_1.5fr] h-full p-2.5 w-full"}>
 
@@ -51,7 +51,7 @@ export function Task({task}:Props) {
                      <Button  class={"w-10 h-10 active:bg-gray-300 justify-center"} icon="chevron-down"/>
                      <Button  class={"w-10 h-10 active:bg-gray-300 justify-center"} icon="chevron-up"/>
                      <Button  class={" w-10 h-10 active:bg-gray-300 justify-center"} icon="more-horizontal"/>
-                     <Button onclick={()=>showTaskDetails.value=false} class={" w-10 h-10 active:bg-gray-300 justify-center"}icon="x"/>
+                     <Button onclick={()=>{showTaskDetails.value=false;selecPriority.value=false}} class={" w-10 h-10 active:bg-gray-300 justify-center"}icon="x"/>
                     </div>
                     <div></div>
                     <div class={"grid grid-rows-[1fr] gap *:w-full *:gap text-[12px] bg-neutral-100/50 py-2.5 px-4 "}>
@@ -71,14 +71,30 @@ export function Task({task}:Props) {
                             <hr class={`${hrStyle} `}/>
                             <section class={'relative'}>
                                 <div class={`${buttonStyle}`}>prioridad</div>
-                                <Button onclick={()=>selecPriority.value=!selecPriority.value} icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1{/*Prioridad VAR*/ }</Button>
-                                <dialog open={selecPriority.value} class={'w-30 h-28 left-[65%] fixed rounded-[10px] z-1 overflow-hidden shadow'} >
+                                <Button onclick={()=>selecPriority.value=!selecPriority.value}class={`${buttonStyle} hover:bg-rose-300 hover:*:visible relative `}>
+                                    <Icon name="flag" color={`${selectColor.value==="#737373"?"white":selectColor}`} styles={`color: ${ selectColor.value==="white"?"#737373":selectColor}`}/>
+                                    {priority}
+                                    <Icon name="chevron-down" class=" invisible absolute right-0" color="transparent"/>
+                                    </Button>
+                                <dialog open={selecPriority.value} class={'w-30 h-28 las last:self-end left-[65%] fixed rounded-[10px] z-1 overflow-hidden shadow'} >
                                     <div class={" w-30 h-28  bg-white"}>
 
-                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
-                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
-                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
-                                        <Button icon="flag" class={`${buttonStyle} hover:bg-rose-300`}>P1</Button>
+                                            <Button onclick={()=>{selectColor.value="oklch(0.505 0.213 27.518)";priority.value='P1'}} class={`${buttonStyle} hover:bg-rose-300 *:text-red-700`} >
+                                            <Icon name="flag" class={"w-7"} color="oklch(0.505 0.213 27.518)" />
+                                            P1
+                                        </Button>
+                                        <Button onclick={()=>{selectColor.value="oklch(0.75 0.183 55.934)";priority.value='P2'}} class={`${buttonStyle} hover:bg-rose-300 *:text-orange-400`}>
+                                            <Icon name="flag" class= {"w-7"} color="oklch(0.75 0.183 55.934)" />
+                                            P2
+                                        </Button>
+                                        <Button onclick={()=>{selectColor.value="oklch(0.488 0.243 264.376)";priority.value='P3'}} class={`${buttonStyle} hover:bg-rose-300 *:text-blue-700`}>
+                                            <Icon name="flag" class= {"w-7"} color="oklch(0.488 0.243 264.376)"  />
+                                            P3
+                                        </Button>
+                                        <Button onclick={()=>{selectColor.value="#737373";priority.value='P4'}} class={`${buttonStyle} hover:bg-rose-300 *:text-gray-400`}>
+                                            <Icon name="flag" class= {"w-7"}  color='white'/>
+                                            P4
+                                        </Button>
                                     </div>
                                             
 
