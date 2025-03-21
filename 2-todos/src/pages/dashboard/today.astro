@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Task } from "../../components/preact/Task";
+import { Task, ViewTask } from "../../components/preact/Task"
 import { tasks } from "../../utils/mocks";
 import { Icon } from "../../components/preact/icons/Icon";
 import { Button } from "../../components/preact/Button";
@@ -8,7 +8,7 @@ import { Button } from "../../components/preact/Button";
 
 <Layout title="Today">
     <main
-        class="flex flex-col items-left overflow-hidden h-dvh w-[80%] mx-auto"
+        class="flex flex-col items-left h-dvh w-[80%] mx-auto"
     >
         <section class="relative text-grey-200">
             <h1
@@ -17,10 +17,23 @@ import { Button } from "../../components/preact/Button";
                 Today
             </h1>
             <Icon name="circleCheker" class="w-6 h-6 absolute top-[40px]" />
-        </section>
-        <section>
-            <Task task={tasks[0]} client:load />
-        </section>
+          </section>
+
+          <section class="container">
+            <div data-swapy-slot="1" class="bg-black/5 rounded-2xl"> 
+              <div data-swapy-item="1">
+                <Task task={tasks[0]}  client:load/>
+              </div>
+            </div>
+
+            <div data-swapy-slot="2" class="bg-black/5 rounded-2xl">
+              <div data-swapy-item="2">
+                <Task task={tasks[1]}  client:load />
+              </div>
+            </div>
+           
+          </section>
+          <ViewTask client:load />
         <hr class="border-gray-200" />
         <Button
             class="cursor-pointer flex rounded items-center w-full hover:*:bg-red-500 hover:*:*:stroke-zinc-100 text-sm hover:text-red-500 text-zinc-400 hover:bg-white my-1"
@@ -32,5 +45,15 @@ import { Button } from "../../components/preact/Button";
             </div>
             Add task
         </Button>
+      
     </main>
 </Layout>
+
+<script>
+
+    import { createSwapy } from "swapy"
+const container = document.querySelector(".container") as HTMLElement;
+const swapy = createSwapy(container);
+swapy.enable(true)
+
+</script>

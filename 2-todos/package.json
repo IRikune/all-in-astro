@@ -17,6 +17,7 @@
     "@tailwindcss/vite": "^4.0.1",
     "astro": "5.1.7",
     "preact": "^10.25.4",
+    "swapy": "^1.0.5",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
