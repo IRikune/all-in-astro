@@ -6,9 +6,10 @@ import type {
   updateTaskOptions,
 } from "../types/mod.ts";
 import { kv } from "../main.ts";
+import { tasks } from "../routes/tasks.ts";
 
-export async function getTasks({ userID = "public" }) {
-  const key = ["tasks", userID];
+export async function getTasks( userID :string ) {
+  const key = [userID, "tasks"];
   const iter = kv.list<Task>({ prefix: key });
   const tasks: Task[] = [];
   for await (const task of iter) tasks.push(task.value);
@@ -47,7 +48,18 @@ export async function updateTask(
   { userID, taskID, newTask }: updateTaskOptions,
 ) {
   if (!taskID) return { ok: false };
-  const key = ["notes", userID, taskID];
+  const key = [userID,"tasks", taskID];
   const res = await kv.set(key, newTask);
   return res;
 }
+export async function deleteTasks(userID:string) {
+  const listTasks= kv.list({prefix:[userID, "tasks"]})
+  for await (const task of listTasks) {
+    kv.delete(task.key)
+  }
+  
+  
+  const result = { ok: true, data: userID };
+  return result;
+}
+

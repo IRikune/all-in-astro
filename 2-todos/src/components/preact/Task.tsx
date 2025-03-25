@@ -20,10 +20,10 @@ const colors = {
 }
 const taskSignal = signal<TaskType>(tasks[0]);
 const setPriority=(value:Priority)=>{taskSignal.value.priority=value};
-let priority = taskSignal.value.priority;
+const priority = taskSignal.value.priority;
 const buttonStyle= 'h-7 w-full *:w-4 *:mr-[1%] items-center';
 const hrStyle='opacity-10'
-let selectColor=signal(colors[priority]);
+const selectColor=signal(colors[priority]);
 
 
 export function Task({task}:Props) {
@@ -34,7 +34,7 @@ export function Task({task}:Props) {
                <Checker priority={task.priority} class="absolute ite" />
             </section>
             
-            <section id='task' class='flex flex-col items-start gap-1' onClick={()=>{showTaskDetails.value= !showTaskDetails.value;taskSignal.value=task} }>
+            <button type="button" id='task' class='flex flex-col items-start gap-1' onClick={()=>{!showTaskDetails.value;taskSignal.value=task} }>
                 <h2 class='font-bold text-[0.875rem]'>{task.title}</h2>
                 <p class='font-extralight text-[12px]'>{task.content}</p>
 
@@ -47,7 +47,7 @@ export function Task({task}:Props) {
                         <span class='text-red-500 '>{task.date.expected}</span>
                     </Button>
                 </div>
-            </section>
+            </button>
             <section>
     
             </section>
@@ -64,7 +64,10 @@ export function ViewTask(){
     
     return (
         <>
-            <dialog open={showTaskDetails.value} onClick={()=>{showTaskDetails.value=false;selecPriority.value=false}} class={"w-[100%] top-0 z-10 h-[100%] fixed bg-black/8"}/>
+            <dialog open={showTaskDetails.value}  class={"w-[100%] top-0 z-10 h-[100%] fixed bg-black/8"}>
+                <button type={"button"} onClick={()=>{showTaskDetails.value=false;selecPriority.value=false}} class={"w-[100%] top-0 z-10 h-[100%] fixed bg-black/8"}>
+                </button>
+            </dialog>
 
             <dialog open={showTaskDetails.value} class='w-[62%] h-[85%] z-20 top-[7.5%] left-[19%] fixed overflow-hidden rounded-2xl bg-white  '>
                 <div class={"grid grid-rows-[min(2.5rem)_1fr] grid-cols-[3fr_1.5fr] h-full p-2.5 w-full"}>
@@ -94,7 +97,7 @@ export function ViewTask(){
                             <hr class={`${hrStyle} `}/>
                             <section class={'relative'}>
                                 <div class={`${buttonStyle}`}>prioridad</div>
-                                <Button onclick={()=>selecPriority.value=!selecPriority.value} class={`${buttonStyle} hover:bg-rose-300 hover:*:visible relative `}>
+                                <Button onclick={()=>!selecPriority.value} class={`${buttonStyle} hover:bg-rose-300 hover:*:visible relative `}>
                                     <Icon name="flag" color={`${selectColor}`} styles={`color: ${ selectColor.value==="white"?"#737373":selectColor}`}/>
                                     {priority}
                                     <Icon name="chevron-down" class=" invisible absolute right-0" color="transparent"/>

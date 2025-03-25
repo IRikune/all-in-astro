@@ -56,7 +56,12 @@ export type updateUserOptions = {
   userID: string;
   newUser: User;
 };
-
+export interface newUser{
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+}
 export interface User {
   id: string;
   name: string;

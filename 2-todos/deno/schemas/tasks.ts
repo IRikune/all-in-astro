@@ -1,6 +1,11 @@
 import { z } from "zod";
 
 export const userIDSchema = z.string().ulid();
+export const taskIDSchema= z.object(
+  {
+    
+  }
+)
 
 export const commentSchema = z.object({
   id: z.string().ulid().optional(),
