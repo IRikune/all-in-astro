@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-    --color-theme-red: #c0392b;
+    --color-theme-red-100: #c0392b;
+    ---color-theme-red-200: oklch(0.505 0.213 27.518)
     --color-theme-orange: #FF5733;
-    --color-theme-yellow: #2980b9;
-    --color-theme-green: #bdc3c7;
+    --color-theme-orange-100: #FF5733;
+    --color-theme-orange-200: oklch(0.75 0.183 55.934);
+    --color-theme-yellow-100: #2980b9;
+    --color-theme-blue: oklch(0.488 0.243 264.376);
+    --color-theme-green-100: #bdc3c7;
 }

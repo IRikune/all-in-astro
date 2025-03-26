@@ -33,34 +33,32 @@ export const icons: Record<Icon['name'], Icon> = {
 				<path d="M13.73 21a2 2 0 0 1-3.46 0" />
 			</>),
 	},
-	check:{
-		name:'check',
-		svg:(
+	check: {
+		name: 'check',
+		svg: (
 			<>
-			  <svg width="24" height="24" viewBox="0 0 24 24">
 				<line
-				  x1="20"
-				  y1="6"
-				  x2="9"
-				  y2="17"
-				  stroke="currentColor"
-				  strokeWidth="2"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
+					x1="20"
+					y1="6"
+					x2="9"
+					y2="17"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 				/>
 				<line
-				  x1="9"
-				  y1="17"
-				  x2="4"
-				  y2="12"
-				  stroke="currentColor"
-				  strokeWidth="2"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
+					x1="9"
+					y1="17"
+					x2="4"
+					y2="12"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 				/>
-			  </svg>
 			</>
-		  )
+		)
 
 	},
 	calendar: {
@@ -147,131 +145,119 @@ export const icons: Record<Icon['name'], Icon> = {
 		)
 	},
 	circleCheker: {
-		name:'circleCheker',
-		svg:(
+		name: 'circleCheker',
+		svg: (
 			<>
-			  
-			  <path fill="currentColor" fill-rule="evenodd" d="M8 14.001a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-1a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM5.146 8.147a.5.5 0 0 1 .708 0L7 9.294l3.146-3.147a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 0-.708Z" clip-rule="evenodd"></path>
-			
+
+				<path fill="currentColor" fill-rule="evenodd" d="M8 14.001a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-1a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM5.146 8.147a.5.5 0 0 1 .708 0L7 9.294l3.146-3.147a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 0-.708Z" clip-rule="evenodd" />
+
 			</>
-		  )
+		)
 	},
-	'chevron-up':{
-		name:'chevron-up',
-		svg:(
+	'chevron-up': {
+		name: 'chevron-up',
+		svg: (
 			<>
-			  <svg width="24" height="24" viewBox="0 0 24 24">
 				<polyline
-				  points="18 15 12 9 6 15"
-				  stroke="currentColor"
-				  strokeWidth="1"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
+					points="18 15 12 9 6 15"
+					stroke="currentColor"
+					strokeWidth="1"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 				/>
-			  </svg>
 			</>
-		  )
+		)
 	},
-	'chevron-down':{
-		name:'chevron-down',
-		svg:(
+	'chevron-down': {
+		name: 'chevron-down',
+		svg: (
 			<>
-			  <svg width="24" height="24" viewBox="0 0 24 24">
 				<polyline
-				  points="6 9 12 15 18 9"
-				  stroke="currentColor"
-				  strokeWidth="1"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
+					points="6 9 12 15 18 9"
+					stroke="currentColor"
+					strokeWidth="1"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 				/>
-			  </svg>
 			</>
-		  )
+		)
 	},
-	'more-horizontal':{
-		name:'more-horizontal',
-		svg:(
+	'more-horizontal': {
+		name: 'more-horizontal',
+		svg: (
 			<>
-			  <svg width="24" height="24" viewBox="0 0 24 24">
-				<circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none"/>
-				<circle cx="19" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none"/>
-				<circle cx="5" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none"/>
-			  </svg>
+				<circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none" />
+				<circle cx="19" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none" />
+				<circle cx="5" cy="12" r="2" stroke="currentColor" strokeWidth="1" fill="none" />
 			</>
-		  )
+		)
 	},
-	'x':{
-		name:'x',
-		svg:(
+	'x': {
+		name: 'x',
+		svg: (
 			<>
-			  <svg width="24" height="24" viewBox="0 0 24 24">
 				<line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
 				<line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-			  </svg>
 			</>
-		  )
+		)
 	},
-	'flag':{
-		name:'flag',
-		svg:(
+	'flag': {
+		name: 'flag',
+		svg: (
 			<>
-			  <svg width="24" height="24" viewBox="0 0 24 24">
 				<path
-				  d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"
-				  stroke="currentColor"
-				  strokeWidth="1"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
+					d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"
+					stroke="currentColor"
+					strokeWidth="1"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 				/>
 				<line
-				  x1="4"
-				  y1="22"
-				  x2="4"
-				  y2="15"
-				  stroke="currentColor"
-				  strokeWidth="1"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
+					x1="4"
+					y1="22"
+					x2="4"
+					y2="15"
+					stroke="currentColor"
+					strokeWidth="1"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 				/>
-			  </svg>
 			</>
-		  )
+		)
 
 	},
-	'lock':{
-		name:'lock',
-		svg:(
+	'lock': {
+		name: 'lock',
+		svg: (
 			<>
-			  <svg width="24" height="24" viewBox="0 0 24 24">
 				<rect
-				  x="3"
-				  y="11"
-				  width="18"
-				  height="11"
-				  rx="2"
-				  ry="2"
-				  stroke="currentColor"
-				  strokeWidth="1"
-				  fill="none"
+					x="3"
+					y="11"
+					width="18"
+					height="11"
+					rx="2"
+					ry="2"
+					stroke="currentColor"
+					strokeWidth="1"
+					fill="none"
 				/>
 				<path
-				  d="M7 11V7a5 5 0 0 1 10 0v4"
-				  stroke="currentColor"
-				  strokeWidth="1"
-				  strokeLinecap="round"
-				  strokeLinejoin="round"
-				
+					d="M7 11V7a5 5 0 0 1 10 0v4"
+					stroke="currentColor"
+					strokeWidth="1"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+
 				/>
-			  </svg>
 			</>
-		  )
+		)
 	},
-	'drag':{
-		name:'drag',
-		svg:(<>
-			<path 
-			fill="currentColor" 
-			d="M14.5 15.5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 14.5 15.5zm-5 0a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 9.5 15.5zm5-5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 14.5 10.5zm-5 0a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 9.5 10.5zm5-5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 14.5 5.5zm-5 0a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 9.5 5.5z">
+	'drag': {
+		name: 'drag',
+		svg: (<>
+			<path
+				fill="currentColor"
+				d="M14.5 15.5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 14.5 15.5zm-5 0a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 9.5 15.5zm5-5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 14.5 10.5zm-5 0a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 9.5 10.5zm5-5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 14.5 5.5zm-5 0a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 9.5 5.5z">
 			</path>
 		</>)
 	}

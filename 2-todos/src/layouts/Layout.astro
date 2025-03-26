@@ -2,8 +2,6 @@
 import "../assets/global.css";
 import "@fontsource-variable/montserrat";
 import SideBar from "../components/Astro/SideBar.astro";
-//<Button class="peer w-fit *:mr-0 *:px-0 focus:left-3 top-[9.5px] absolute z-1 right-0" icon="sidebar"/>
-
 ---
 
 <html lang="en">
@@ -14,17 +12,23 @@ import SideBar from "../components/Astro/SideBar.astro";
 		<meta name="generator" content={Astro.generator} />
 		<title>Todo App</title>
 	</head>
-	<body class="w-dvw h-dvh  grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)] m-0 p-0">
+	<body
+		class="w-dvw h-dvh grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)] m-0 p-0 overflow-hidden"
+	>
 		<div class="grid relative">
-			<input type="checkbox" class="appearance-none  peer | bg-[url(../../public/sidebar.svg)] bg-no-repeat bg-[length:20px] bg-center opacity-30 | checked:left-3 hover:bg-rose-300 | w-9 h-9 z-1 rounded right-0 top-[9.5px] cursor-pointer  absolute "  >
-			<SideBar class="peer-checked:left-[-300px]  absolute w-full h-full"/>
-			
+			<input
+				type="checkbox"
+				class="appearance-none peer | bg-[url(../../public/sidebar.svg)] bg-no-repeat bg-[length:20px] bg-center opacity-30 | checked:left-3 hover:bg-rose-300 | w-9 h-9 z-1 rounded right-0 top-[9.5px] cursor-pointer absolute"
+			/>
+			<SideBar
+				class="peer-checked:left-[-300px] absolute w-full h-full"
+			/>
 		</div>
 		<section class="mx-20">
 			<header class="flex justify-end items-center h-16">
 				<slot name="header" />
 			</header>
-			<main class=" flex flex-col">
+			<main class="flex flex-col">
 				<slot />
 			</main>
 		</section>
