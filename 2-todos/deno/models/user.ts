@@ -21,26 +21,18 @@ export async function getUsers() {
 export async function createUser({ user }: { user: newUser }) {
   const userID = ulid();
   const newUser = { ...user, id: userID };
-  const key = ["users", userID];
-  const listUsers = kv.list({ prefix: ["users"] });
+  const primarykey = ["users", userID];
+  const emailkey = ["users", user.email];
 
-  let isRepeat=false;
-  for await (const user of listUsers) {
-    const users = user.value as User;
-    if(users.email === newUser.email){
-      isRepeat=true;
-      break;
-    }
-  }
-  if(!isRepeat){
-    const res = await kv.atomic()
-    .check({ key, versionstamp: null })
-    .set(key, newUser)
-    .commit();
   
+  const res = await kv.atomic()
+  .check({ key: primarykey, versionstamp: null })
+  .check({ key: emailkey, versionstamp: null })
+  .set(primarykey, newUser)
+  .set(emailkey, newUser)
+  .commit();
+
   return {resp:res, user : userID};
-  }
-  return 'Email already exists';
 }
 
 export async function updateUser(
@@ -52,7 +44,8 @@ export async function updateUser(
 }
 
 export async function deleteUser({ userID }: { userID: string }) {
-  const key = ["users", userID];
+  const primaryKey = ["users", userID];
+  const emailKey = ["users", userID];
   await kv.delete(key);
   const result = { ok: true, data: userID };
   return result;

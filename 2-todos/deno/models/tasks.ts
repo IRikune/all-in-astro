@@ -25,7 +25,7 @@ export async function createTask({ userID, task }: createTaskOptions) {
     .check({ key, versionstamp: null })
     .set(key, newTask)
     .commit();
-  return res;
+  return taskID;
 }
 
 export async function getTask({ userID, taskID }: getTaskOptions) {
@@ -52,6 +52,7 @@ export async function updateTask(
   const res = await kv.set(key, newTask);
   return res;
 }
+
 export async function deleteTasks(userID:string) {
   const listTasks= kv.list({prefix:[userID, "tasks"]})
   for await (const task of listTasks) {

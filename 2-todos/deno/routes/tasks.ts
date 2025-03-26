@@ -1,13 +1,13 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
-import { HTTPException } from "hono/:tasks/http-exception";
-import { postTaskSchema, userIDSchema, taskIDSchema } from "../schemas/tasks.ts";
+import { HTTPException } from "hono/http-exception";
+import { baseSchema, postTaskSchema, userIDSchema, taskPatchSchema } from "../schemas/tasks.ts";
 import { deleteTask, createTask, getTasks, deleteTasks, updateTask } from "../models/tasks.ts";
 
 export const tasks = new Hono();
 
 tasks.get("/", async (c) => {
-  const result = { ok: true, data: "Hello, world!" };
+  const result = await { ok: true, data: "Hello, world!" };
   return c.json(result);
 });
 
@@ -38,7 +38,7 @@ tasks.post(
     const userID = c.req.valid("param");
     const task = c.req.valid("json");
     const result = await createTask({ userID, task });
-    if (!result.ok) {
+    if (!result) {
       throw new HTTPException(400, { message: "Task creation failed" });
     }
     return c.json(result);
@@ -60,26 +60,63 @@ tasks.put("/:userID",
   }
 )
 
-tasks.patch("/:userID/:taskID",
+tasks.patch("/:userID/tasks/:taskID",
   validator("param",(value)=>{
-    const parse = userIDSchema.safeParse(value.userID);
-    console.log(parse)
+    const parse = taskPatchSchema.safeParse(value);
     if (!parse.success) {
       throw new HTTPException(400, {message: "user invalitor"})
     }
     return parse.data
 
   }),
+  validator("json",(value)=>{
+    const parse = baseSchema.safeParse(value);
+    if (!parse.success) {
+      throw new HTTPException(400, {message: "user invalitor"})
+    }
+    return parse.data
+  })
+  ,
   
   async (c) => {
-    const userID = c.req.valid("param")
+    const {userID, taskID} = c.req.valid("param")
+    const json = c.req.valid("json")
 
-    const upDatedTask = await updateTask({userID:})
+    const upDatedTask = await updateTask({userID: userID, taskID : taskID, newTask: json})
     return c.json(upDatedTask)
   }
 
 )
+const hola = {
+  "code": "invalid_type",
+  "expected": "string",
+  "received": "number",
+  "path": [ "name" ],
+  "message": "Expected string, received number"
+} 
+function fun(value: object) {
+  return `expected ${value.expected} received ${value.received}`
+}
+fun(hola)
 /*
+tarea de creacion
+{
+  "creator":"01JQ78S7GWQBFQ4VGN41GR1M87",
+      "title": "Completar informe anual y mensual",
+      "content": "Revisar y finalizar el informe mensual de ventas.",
+      "completed": false,
+      "comments": [],
+      "subTasks": [],
+      "date": {
+        "created" :1633072800000,
+        "completed": 0,
+        "expected": 1633332000000
+      },
+      "priority": 1
+    }
+
+
+
  {
   "creator":"yo mismossss",
       "title": "Completar informe mensual",

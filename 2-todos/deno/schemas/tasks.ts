@@ -1,9 +1,12 @@
 import { z } from "zod";
+import { user } from "../routes/user.ts";
 
 export const userIDSchema = z.string().ulid();
-export const taskIDSchema= z.object(
+
+export const taskPatchSchema= z.object(
   {
-    
+    userID: userIDSchema,
+    taskID: z.string().ulid()
   }
 )
 
@@ -14,7 +17,7 @@ export const commentSchema = z.object({
   createdAt: z.number(),
 });
 
-const baseSchema = z.object({
+export const baseSchema = z.object({
   id: z.string().ulid().optional(),
   title: z.string(),
   creator: userIDSchema,
