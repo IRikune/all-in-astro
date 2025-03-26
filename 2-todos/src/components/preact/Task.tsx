@@ -36,7 +36,6 @@ export function Task({ task }: Props) {
                 <section id='task' class='flex flex-col items-start gap-1' onClick={() => { showTaskDetails.value = !showTaskDetails.value; taskSignal.value = task }}>
                     <h2 class='font-bold text-[0.875rem]'>{task.title}</h2>
                     <p class='font-extralight text-[12px]'>{task.content}</p>
-
                     <div class='flex flex-row gap-2 justify-between'>
                         <Button class="flex w-fit text-[2px] p-0 h-[1rem]">
                             <Icon name="bell" class={"w-4"} />

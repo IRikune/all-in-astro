@@ -22,7 +22,9 @@ export function TaskComponent() {
                 <footer class="flex justify-between w-full">
                     <section class="flex justify-between">
                         <small
-                            class="text-theme-red-100 fill-theme-red-100">Feb 2</small>
+                            class="text-theme-red-100 fill-theme-red-100">
+                            Feb 2
+                        </small>
                     </section>
                     <aside>
                         <small class="">Inbox</small>
