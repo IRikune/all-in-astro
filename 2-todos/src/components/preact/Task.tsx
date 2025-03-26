@@ -92,7 +92,7 @@ export function ViewTask() {
                             <hr class={`${hrStyle} `} />
                             <section class={'relative'}>
                                 <div class={`${buttonStyle}`}>prioridad</div>
-                                <Button onclick={() => selecPriority.value = !selecPriority.value} class={`${buttonStyle} hover:bg-rose-300 hover:*:visible relative `}>
+                                <Button onclick={() => { selecPriority.value = !selecPriority.value }} class={`${buttonStyle} hover:bg-rose-300 hover:*:visible relative `}>
                                     <Icon name="flag" color={`${selectColor}`} styles={`color: ${selectColor.value === "white" ? "#737373" : selectColor}`} />
                                     {priority}
                                     <Icon name="chevron-down" class=" invisible absolute right-0" color="transparent" />

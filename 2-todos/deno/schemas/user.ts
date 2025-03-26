@@ -11,3 +11,7 @@ export const userSchema = z.object({
 export const postUserSchema = userSchema.extend({
   id: z.never().optional(),
 });
+
+export const validId = z.object({
+  userID : z.string().ulid()
+});
