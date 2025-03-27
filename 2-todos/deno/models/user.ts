@@ -1,7 +1,7 @@
 import { kv, ulid } from "../main.ts";
-import type { User,newUser } from "../types/mod.ts";
+import type { User,UserID,newUser } from "../types/mod.ts";
 
-export async function getUser({ userID }: { userID: string }) {
+export async function getUser( userID : string ) {
   const key = ["users", userID];
   const entry = await kv.get<User>(key);
   const user = entry?.value;
@@ -18,29 +18,29 @@ export async function getUsers() {
   return result;
 }
 
-export async function createUser({ user }: { user: newUser }) {
+export async function getUserByEmail(email: string) {
+  const key = ["users", email];
+  const entry = await kv.get<User>(key);
+  const user = entry?.value;
+  const result = { ok: true, data: user };
+  return result;
+}
+
+export async function createUser( user : newUser ) {
   const userID = ulid();
   const newUser = { ...user, id: userID };
-  const key = ["users", userID];
-  const listUsers = kv.list({ prefix: ["users"] });
-
-  let isRepeat=false;
-  for await (const user of listUsers) {
-    const users = user.value as User;
-    if(users.email === newUser.email){
-      isRepeat=true;
-      break;
-    }
-  }
-  if(!isRepeat){
-    const res = await kv.atomic()
-    .check({ key, versionstamp: null })
-    .set(key, newUser)
-    .commit();
+  const userKey = ["users", userID];
+  const emailKey = ["users", user.email];
+  
+  const res = await kv.atomic()
+  .check({ key:userKey, versionstamp: null })
+  .check({ key:emailKey, versionstamp: null })
+  .set(userKey, newUser)
+  .set(emailKey, newUser)
+  .commit();
   
   return {resp:res, user : userID};
-  }
-  return 'Email already exists';
+  
 }
 
 export async function updateUser(
@@ -51,7 +51,7 @@ export async function updateUser(
   return res;
 }
 
-export async function deleteUser({ userID }: { userID: string }) {
+export async function deleteUser( userID : UserID) {
   const key = ["users", userID];
   await kv.delete(key);
   const result = { ok: true, data: userID };

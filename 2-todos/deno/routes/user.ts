@@ -1,10 +1,12 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
 import { HTTPException } from "hono/http-exception";
-import {postUserSchema, validId } from "../schemas/user.ts";
-import { createUser, getUser, getUsers, deleteUser, updateUser} from "../models/user.ts";
-import { userIDSchema } from "../schemas/tasks.ts";
+import {postUserSchema, validId} from "../schemas/user.ts";
+import { createUser, getUser, deleteUser, updateUser} from "../models/user.ts";
+import { userIDSchema } from "../schemas/user.ts";
 export const user = new Hono();
+
+
 
 user.get("/:userID",
   validator("param",(value)=>{
@@ -16,15 +18,10 @@ user.get("/:userID",
   }),
   async (c) => {
   const userID = c.req.valid("param");
-  const user = await getUser(userID);
+  const user = await getUser(userID.userID);
   return c.json(user);
 });
 
-user.get("/",
-  async (c) => {
-  const user = await getUsers();
-  return c.json(user);
-});
 
 user.post(
   "/",
@@ -40,9 +37,9 @@ user.post(
     const newUser = c.req.valid("json");
 
    
-    const result = await createUser({
-      user:newUser
-    })
+    const result = await createUser(
+      newUser
+    )
     return c.json(result);
   },
 );
@@ -58,7 +55,7 @@ user.put("/:userID",
   async (c) => {
     const userID = c.req.valid("param");
     
-    const result = await deleteUser(userID);
+    const result = await deleteUser(userID.userID);
     return c.json(result);
   }
 );
