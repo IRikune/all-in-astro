@@ -8,9 +8,9 @@ export const userSchema = z.object({
   password: z.string().min(8),
   avatar: z.string(),
 });
-export const updateUserOptions = z.object({
+export const updateUserOptionsSchema = z.object({
   userID: z.string(),
-  User:userSchema,
+  User: userSchema,
 });
 export const newUserSchema = z.object({
   name: z.string().min(4),
@@ -23,12 +23,12 @@ export const postUserSchema = userSchema.extend({
 });
 
 export const validId = z.object({
-  userID : z.string().ulid()
+  userID: z.string().ulid(),
 });
 
 export const validLoginForm = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-})
+});
 
-export const validEmail=z.string().email();
+export const validEmail = z.string().email();

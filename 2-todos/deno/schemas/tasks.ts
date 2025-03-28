@@ -3,7 +3,6 @@ import { userIDSchema } from "./user.ts";
 
 export const taskIDSchema = z.string().ulid();
 
-
 export const commentSchema = z.object({
   id: z.string().ulid().optional(),
   creator: z.string().ulid(),
@@ -11,7 +10,7 @@ export const commentSchema = z.object({
   createdAt: z.number(),
 });
 
-//interface Task 
+//interface Task
 const baseSchema = z.object({
   id: z.string().ulid().optional(),
   title: z.string(),
@@ -39,13 +38,13 @@ export const postTaskSchema = taskSchema.extend({
 
 export const createTaskOptionsSchema = z.object({
   userID: userIDSchema,
-  task: postTaskSchema
+  task: postTaskSchema,
 });
 
-export const getTaskOptions = z.object({
+export const getTaskOptionsSchema = z.object({
   userID: userIDSchema,
-  taskID: taskIDSchema
-})
+  taskID: taskIDSchema,
+});
 export const updateTaskOptionsSchema = z.object({
   userID: userIDSchema,
   taskID: taskIDSchema,
