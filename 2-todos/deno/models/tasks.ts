@@ -6,7 +6,6 @@ import type {
   updateTaskOptions,
 } from "../types/mod.ts";
 import { kv } from "../main.ts";
-import { tasks } from "../routes/tasks.ts";
 
 export async function getTasks( userID :string ) {
   const key = [userID, "tasks"];
@@ -39,7 +38,7 @@ export async function getTask({ userID, taskID }: getTaskOptions) {
 
 export async function deleteTask({ userID, taskID }: getTaskOptions) {
   if (!taskID) return { ok: false };
-  const key = ["tasks", userID, taskID];
+  const key = [ userID,"tasks", taskID];
   await kv.delete(key);
   const result = { ok: true, data: taskID };
   return result;

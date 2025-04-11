@@ -1,21 +1,17 @@
+import type { z } from "zod";
+import type {userSchema,newUserSchema,userIDSchema, updateUserOptionsSchema} from "../schemas/user.ts";
+import type {subTaskSchema,taskSchema,commentSchema,postTaskSchema,taskIDSchema, createTaskOptionsSchema, getTaskOptionsSchema, updateTaskOptionsSchema} from "../schemas/tasks.ts";
+
 //#region task
-export interface Task extends SubTask {
-  subTasks?: SubTask[];
-}
-export interface SubTask {
-  id?: string;
-  title: string;
-  creator: string;
-  content?: string;
-  completed: boolean;
-  comments?: Comment[];
-  date: {
-    created: number;
-    completed?: number;
-    expected?: number;
-  };
-  priority: Priority;
-}
+export type Comment = z.infer<typeof commentSchema>;
+export type Task = z.infer<typeof taskSchema>;
+export type SubTask = z.infer<typeof subTaskSchema>;
+export type PostTask = z.infer<typeof postTaskSchema>;
+export type TaskID = z.infer<typeof taskIDSchema>;
+export type createTaskOptions = z.infer<typeof createTaskOptionsSchema>;
+export type getTaskOptions = z.infer<typeof getTaskOptionsSchema>
+export type updateTaskOptions = z.infer<typeof updateTaskOptionsSchema>;
+
 export enum Priority {
   low = 4,
   medium = 3,
@@ -23,49 +19,8 @@ export enum Priority {
   important = 1,
 }
 
-interface Comment {
-  id?: string;
-  creator: string;
-  content: string;
-  createdAt: number;
-}
-
-export type createTaskOptions = {
-  userID: string;
-  task: Omit<Task, "id">;
-};
-export type getTaskOptions = {
-  userID: string;
-  taskID: string;
-};
-export type updateTaskOptions = {
-  userID: string;
-  taskID: string;
-  newTask: Task;
-};
-
 //#region user
-
-export type createUserOptions = {
-  user: Omit<User, "id">;
-};
-export type getUserOptions = {
-  userID: string;
-};
-export type updateUserOptions = {
-  userID: string;
-  newUser: User;
-};
-export interface newUser{
-  name: string;
-  email: string;
-  password: string;
-  avatar: string;
-}
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  avatar: string;
-}
+export type User = z.infer<typeof userSchema>;
+export type newUser = z.infer<typeof newUserSchema>;
+export type UserID = z.infer<typeof userIDSchema>;
+export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
