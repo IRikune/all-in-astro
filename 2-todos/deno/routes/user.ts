@@ -1,27 +1,31 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
 import { HTTPException } from "hono/http-exception";
-import {postUserSchema, validId} from "../schemas/user.ts";
-import { createUser, getUser, deleteUser, updateUser} from "../models/user.ts";
-import { userIDSchema } from "../schemas/user.ts";
+import { postUserSchema, userIDSchema } from "../schemas/user.ts";
+import {
+  createUser,
+  deleteUser,
+  getUserByID,
+  updateUser,
+} from "../models/user.ts";
+
 export const user = new Hono();
 
-
-
-user.get("/:userID",
-  validator("param",(value)=>{
-    const valid = validId.safeParse(value)
-    if(!valid.success) {
-      throw new HTTPException(402, valid.error)
+user.get(
+  "/:userID",
+  validator("param", (value) => {
+    const valid = userIDSchema.safeParse(value);
+    if (!valid.success) {
+      throw new HTTPException(402, valid.error);
     }
-    return valid.data
+    return valid.data;
   }),
   async (c) => {
-  const userID = c.req.valid("param");
-  const user = await getUser(userID.userID);
-  return c.json(user);
-});
-
+    const userID = c.req.valid("param");
+    const result = await getUserByID(userID);
+    return c.json(result);
+  },
+);
 
 user.post(
   "/",
@@ -32,41 +36,40 @@ user.post(
     }
     return parsed.data;
   }),
-
   async (c) => {
     const newUser = c.req.valid("json");
 
-   
     const result = await createUser(
-      newUser
-    )
+      newUser,
+    );
     return c.json(result);
   },
 );
 
-user.put("/:userID",
-  validator("param",(value)=>{
-    const valid = validId.safeParse(value)
-    if(!valid.success) {
-      throw new HTTPException(402, valid.error)
+user.put(
+  "/:userID",
+  validator("param", (value) => {
+    const valid = userIDSchema.safeParse(value);
+    if (!valid.success) {
+      throw new HTTPException(402, valid.error);
     }
-    return valid.data
+    return valid.data;
   }),
   async (c) => {
     const userID = c.req.valid("param");
-    
-    const result = await deleteUser(userID.userID);
+    const result = await deleteUser(userID);
     return c.json(result);
-  }
+  },
 );
-user.patch("/:userID",
-  validator("json",(value)=>{
-    const valid = postUserSchema.safeParse(value)
-    if(!valid.success) {
-      throw new HTTPException(402, valid.error)
+user.patch(
+  "/:userID",
+  validator("json", (value) => {
+    const valid = postUserSchema.safeParse(value);
+    if (!valid.success) {
+      throw new HTTPException(402, valid.error);
     }
-    return valid.data
-  }) ,
+    return valid.data;
+  }),
   validator("param", (value) => {
     const parsed = userIDSchema.safeParse(value.userID);
     if (!parsed.success) {
@@ -76,16 +79,8 @@ user.patch("/:userID",
   }),
   async (c) => {
     const user = c.req.valid("json");
-    const userId = c.req.valid('param');
-    const upDatedUser = await updateUser( userId, user );
-    return c.json(upDatedUser);
-  }
-)
-/*
-{
-        "name": "jhon",
-        "email": "jhopnanda@kasdkas.con",
-        "password": "kjsdfhjasd",
-        "avatar": "string"
-}
-*/
+    const userID = c.req.valid("param");
+    const updatedUser = await updateUser(userID, user);
+    return c.json(updatedUser);
+  },
+);
