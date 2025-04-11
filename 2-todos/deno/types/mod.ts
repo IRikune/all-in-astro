@@ -4,8 +4,8 @@ import type {subTaskSchema,taskSchema,commentSchema,postTaskSchema,taskIDSchema,
 
 //#region task
 export type Comment = z.infer<typeof commentSchema>;
-export type Task =z.infer<typeof taskSchema>;
-export type SubTask =z.infer<typeof subTaskSchema>;
+export type Task = z.infer<typeof taskSchema>;
+export type SubTask = z.infer<typeof subTaskSchema>;
 export type PostTask = z.infer<typeof postTaskSchema>;
 export type TaskID = z.infer<typeof taskIDSchema>;
 export type createTaskOptions = z.infer<typeof createTaskOptionsSchema>;
@@ -19,10 +19,8 @@ export enum Priority {
   important = 1,
 }
 
-
 //#region user
 export type User = z.infer<typeof userSchema>;
-export type newUser=z.infer<typeof newUserSchema>;
+export type newUser = z.infer<typeof newUserSchema>;
 export type UserID = z.infer<typeof userIDSchema>;
 export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
-
