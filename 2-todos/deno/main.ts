@@ -1,13 +1,13 @@
 import { Hono } from "hono";
 import { tasks } from "./routes/tasks.ts";
-import { user } from "./routes/user.ts";
+import { users } from "./routes/users.ts";
 import { auth } from "./routes/auth.ts";
 import { cors } from "hono/cors";
 
 const app = new Hono()
   .use(cors({ origin: "http://localhost:4321" }))
   .route("/tasks/", tasks)
-  .route("/users/", user)
+  .route("/users/", users)
   .route("/auth/", auth);
 
 export const kv = await Deno.openKv();

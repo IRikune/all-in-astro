@@ -18,9 +18,5 @@ export const updateUserOptionsSchema = z.object({
   userID: z.string(),
   User: userSchema,
 });
-export const authSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-}).strict();
 
 export const emailSchema = z.string().email();

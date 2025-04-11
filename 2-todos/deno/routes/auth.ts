@@ -1,9 +1,11 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
-import { authSchema } from "../schemas/user.ts";
+import { authSchema } from "../schemas/auth.ts";
 import { HTTPException } from "hono/http-exception";
 import { getUserByEmail } from "../models/user.ts";
+
 export const auth = new Hono();
+
 auth.post(
   "/login",
   validator("form", (value) => {

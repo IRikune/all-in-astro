@@ -1,20 +1,25 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
 import { HTTPException } from "hono/http-exception";
-import { postTaskSchema,taskSchema, taskIDSchema } from "../schemas/tasks.ts";
-import { deleteTask, createTask, getTasks, updateTask } from "../models/tasks.ts";
-import { userIDSchema } from "../schemas/user.ts";
+import { postTaskSchema, taskIDSchema, taskSchema } from "../schemas/tasks.ts";
+import {
+  createTask,
+  deleteTask,
+  getTasks,
+  updateTask,
+} from "../models/tasks.ts";
+import { userIDSchema } from "../schemas/users.ts";
 
 export const tasks = new Hono();
 
-tasks.get("/",(c) => {
+tasks.get("/", (c) => {
   const result = { ok: true, data: "Hello, world!" };
   return c.json(result);
 });
 
 tasks.get("/:userID", async (c) => {
-  const userID = c.req.param("userID") as string;
-  const tasks = await getTasks( userID );
+  const userID = c.req.param("userID");
+  const tasks = await getTasks(userID);
   const result = { ok: true, data: tasks };
   return c.json(result);
 });
@@ -45,107 +50,56 @@ tasks.post(
     return c.json(result);
   },
 );
-tasks.delete("/:userID/:taskID",
+tasks.delete(
+  "/:userID/:taskID",
   validator("param", (value) => {
     const parseuserID = userIDSchema.safeParse(value.userID);
     const parsetaskID = taskIDSchema.safeParse(value.taskID);
     if (!parseuserID.success) {
-      throw new HTTPException(400, {message: "user invalitor"})
+      throw new HTTPException(400, { message: "user invalitor" });
     }
     if (!parsetaskID.success) {
-      throw new HTTPException(400, {message: "taskID invalid"})
+      throw new HTTPException(400, { message: "taskID invalid" });
     }
-    return {userID: parseuserID.data,taskID:parsetaskID.data}
-
+    return { userID: parseuserID.data, taskID: parsetaskID.data };
   }),
   async (c) => {
-    const userAndTaskId= c.req.valid("param")
+    const userAndTaskId = c.req.valid("param");
     const deleteTas = await deleteTask(userAndTaskId);
     return c.json(deleteTas);
-  }
-)
+  },
+);
 
-tasks.patch("/:userID/:taskID",
-  validator("param",(value)=>{
+tasks.patch(
+  "/:userID/:taskID",
+  validator("param", (value) => {
     const parseUser = userIDSchema.safeParse(value.userID);
     const parseTask = taskIDSchema.safeParse(value.taskID);
     if (!parseUser.success) {
-      throw new HTTPException(400, {message: "user invalitor"})
-    } 
+      throw new HTTPException(400, { message: "user invalitor" });
+    }
     if (!parseTask.success) {
-      throw new HTTPException(400, {message: "task invalitor"})
+      throw new HTTPException(400, { message: "task invalitor" });
     }
 
-    return {user:parseUser.data, task:parseTask.data} 
-
+    return { user: parseUser.data, task: parseTask.data };
   }),
-  validator("json",(value)=>{
+  validator("json", (value) => {
     const parse = taskSchema.safeParse(value);
     if (!parse.success) {
-      throw new HTTPException(400, parse.error)
+      throw new HTTPException(400, parse.error);
     }
-    return parse.data
-  })
-  ,
-  
+    return parse.data;
+  }),
   async (c) => {
-    const param = c.req.valid("param")
-    const body = c.req.valid("json")
+    const param = c.req.valid("param");
+    const body = c.req.valid("json");
 
-    const upDatedTask = await updateTask({userID: param.user, taskID : param.task , newTask: body })
-    return c.json(upDatedTask)
-  }
-
-)
-/*
- {
-  "creator":"yo mismossss",
-      "title": "Completar informe mensual",
-      "content": "Revisar y finalizar el informe mensual de ventas.",
-      "completed": false,
-      "comments": [
-        {
-          "id": "c1",
-          "creator": "u1",
-          "content": "No olvides incluir los datos de la última semana.",
-          "createdAt": 1633072800000
-        }
-      ],
-      "subTasks": [
-        {
-          "id": "s1",
-          "title": "Recopilar datos de ventas",
-          "creator":"yo mismossss",
-          "content": "Obtener los datos de ventas de todos los departamentos.",
-          "completed": true,
-          "comments": [],
-          "date": {
-            "created": 1633072800000,
-            "completed": 1633159200000,
-            "expected": 1633159200000
-          },
-          "priority": "Priority.medium"
-        },
-        {
-          "id": "s2",
-          "title": "Revisar cifras con el equipo",
-          "creator":"yo",
-          "content": "Reunirse con el equipo para validar las cifras.",
-          "completed": false,
-          "comments": [],
-          "date": {
-            "created": 1633072800000,
-            "completed": 0,
-            "expected": 1633245600000
-          },
-          "priority": "Priority.high"
-        }
-      ],
-      "date": {
-        "created" :1633072800000,
-        "completed": 0,
-        "expected": 1633332000000
-      },
-      "priority": "Priority.high"
-    }
-*/
+    const upDatedTask = await updateTask({
+      userID: param.user,
+      taskID: param.task,
+      newTask: body,
+    });
+    return c.json(upDatedTask);
+  },
+);

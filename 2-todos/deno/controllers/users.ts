@@ -1,7 +1,7 @@
-import { Hono } from "hono";
+import { createFactory } from "hono/factory";
 import { validator } from "hono/validator";
+import { postUserSchema, userIDSchema } from "../schemas/users.ts";
 import { HTTPException } from "hono/http-exception";
-import { postUserSchema, userIDSchema } from "../schemas/user.ts";
 import {
   createUser,
   deleteUser,
@@ -9,10 +9,9 @@ import {
   updateUser,
 } from "../models/user.ts";
 
-export const user = new Hono();
+const factory = createFactory();
 
-user.get(
-  "/:userID",
+export const getUserHandlers = factory.createHandlers(
   validator("param", (value) => {
     const valid = userIDSchema.safeParse(value);
     if (!valid.success) {
@@ -27,8 +26,7 @@ user.get(
   },
 );
 
-user.post(
-  "/",
+export const createUserHandlers = factory.createHandlers(
   validator("json", (value) => {
     const parsed = postUserSchema.safeParse(value);
     if (!parsed.success) {
@@ -38,7 +36,6 @@ user.post(
   }),
   async (c) => {
     const newUser = c.req.valid("json");
-
     const result = await createUser(
       newUser,
     );
@@ -46,8 +43,7 @@ user.post(
   },
 );
 
-user.put(
-  "/:userID",
+export const deleteUserHandlers = factory.createHandlers(
   validator("param", (value) => {
     const valid = userIDSchema.safeParse(value);
     if (!valid.success) {
@@ -61,8 +57,8 @@ user.put(
     return c.json(result);
   },
 );
-user.patch(
-  "/:userID",
+
+export const updateUserHandlers = factory.createHandlers(
   validator("json", (value) => {
     const valid = postUserSchema.safeParse(value);
     if (!valid.success) {

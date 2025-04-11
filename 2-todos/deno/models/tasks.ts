@@ -7,7 +7,7 @@ import type {
 } from "../types/mod.ts";
 import { kv } from "../main.ts";
 
-export async function getTasks( userID :string ) {
+export async function getTasks(userID: string) {
   const key = [userID, "tasks"];
   const iter = kv.list<Task>({ prefix: key });
   const tasks: Task[] = [];
@@ -38,7 +38,7 @@ export async function getTask({ userID, taskID }: getTaskOptions) {
 
 export async function deleteTask({ userID, taskID }: getTaskOptions) {
   if (!taskID) return { ok: false };
-  const key = [ userID,"tasks", taskID];
+  const key = [userID, "tasks", taskID];
   await kv.delete(key);
   const result = { ok: true, data: taskID };
   return result;
@@ -47,18 +47,16 @@ export async function updateTask(
   { userID, taskID, newTask }: updateTaskOptions,
 ) {
   if (!taskID) return { ok: false };
-  const key = [userID,"tasks", taskID];
+  const key = [userID, "tasks", taskID];
   const res = await kv.set(key, newTask);
   return res;
 }
-export async function deleteTasks(userID:string) {
-  const listTasks= kv.list({prefix:[userID, "tasks"]})
+export async function deleteTasks(userID: string) {
+  const listTasks = kv.list({ prefix: [userID, "tasks"] });
   for await (const task of listTasks) {
-    kv.delete(task.key)
+    kv.delete(task.key);
   }
-  
-  
+
   const result = { ok: true, data: userID };
   return result;
 }
-

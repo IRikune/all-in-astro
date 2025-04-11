@@ -4,7 +4,7 @@ import type {
   updateUserOptionsSchema,
   userIDSchema,
   userSchema,
-} from "../schemas/user.ts";
+} from "../schemas/users.ts";
 import type {
   commentSchema,
   createTaskOptionsSchema,
