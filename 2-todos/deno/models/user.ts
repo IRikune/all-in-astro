@@ -57,3 +57,14 @@ export async function deleteUser( userID : UserID) {
   const result = { ok: true, data: userID };
   return result;
 }
+
+export function getEmailAndPassword(formData : FormData){
+
+  const toString = formData.entries().next().value[1].split('\r\n').concat('') as string[];
+  console.log(toString[2]);
+  console.log(toString[6]);
+  
+  const email = toString[2]
+  const password = toString[6]
+  return {email:email,password:password}
+}

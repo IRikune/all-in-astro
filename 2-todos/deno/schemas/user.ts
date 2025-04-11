@@ -8,7 +8,7 @@ export const userSchema = z.object({
   password: z.string().min(8),
   avatar: z.string(),
 });
-export const updateUserOptions = z.object({
+export const updateUserOptionsSchema = z.object({
   userID: z.string(),
   User:userSchema,
 });
@@ -29,6 +29,9 @@ export const validId = z.object({
 export const validLoginForm = z.object({
   email: z.string().email(),
   password: z.string().min(8),
+})
+export const validLoginForm2 = z.object({
+  body: z.string(),
 })
 
 export const validEmail=z.string().email();

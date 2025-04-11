@@ -42,7 +42,7 @@ export const createTaskOptionsSchema = z.object({
   task: postTaskSchema
 });
 
-export const getTaskOptions = z.object({
+export const getTaskOptionsSchema = z.object({
   userID: userIDSchema,
   taskID: taskIDSchema
 })

@@ -45,7 +45,7 @@ tasks.post(
     return c.json(result);
   },
 );
-tasks.put("/:userID/:taskID",
+tasks.delete("/:userID/:taskID",
   validator("param", (value) => {
     const parseuserID = userIDSchema.safeParse(value.userID);
     const parsetaskID = taskIDSchema.safeParse(value.taskID);
