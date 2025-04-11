@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Task, ViewTask } from "../../components/preact/Task";
-import { tasks } from "../../utils/mocks";
+import { ViewTask } from "../../components/preact/Task";
 import { Icon } from "../../components/preact/icons/Icon";
 import { Button } from "../../components/preact/Button";
+import { ListTask } from "../../components/preact/ListTask";
 ---
 
 <Layout title="Today">
@@ -17,23 +17,12 @@ import { Button } from "../../components/preact/Button";
       <Icon name="circleCheker" class="w-6 h-6 absolute top-[40px]" />
     </section>
 
-    <section class="container">
-      <div data-swapy-slot="1" class="bg-black/5 rounded-2xl">
-        <div data-swapy-item="1">
-          <Task task={tasks[0]} client:load />
-        </div>
-      </div>
-
-      <div data-swapy-slot="2" class="bg-black/5 rounded-2xl">
-        <div data-swapy-item="2">
-          <Task task={tasks[1]} client:load />
-        </div>
-      </div>
-    </section>
+    <ListTask client:load></ListTask>
     <ViewTask client:load />
     <hr class="border-gray-200" />
     <Button
       class="cursor-pointer flex rounded items-center w-full hover:*:bg-red-500 hover:*:*:stroke-zinc-100 text-sm hover:text-red-500 text-zinc-400 hover:bg-white my-1"
+      
     >
       <div
         class="flex relative mx-2 w-4 h-4 rounded-full items-center justify-center text-sm ml-0"
