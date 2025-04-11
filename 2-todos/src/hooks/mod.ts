@@ -1,5 +1,4 @@
 import { error } from "../components/preact/Form";
-import type { newUser } from "../../deno/types/mod"; 
 enum endPoints{
     users = "http://localhost:8000/users",
     tasks = "http://localhost:8000/tasks",
