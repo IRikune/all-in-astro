@@ -1,4 +1,4 @@
-import { error } from "../components/preact/Form";
+import { error } from "../components/preact/FormLogin";
 enum endPoints{
     users = "http://localhost:8000/users",
     tasks = "http://localhost:8000/tasks",

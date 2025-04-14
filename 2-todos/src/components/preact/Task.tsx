@@ -4,22 +4,22 @@ import { Button } from "./Button"
 import { Checker } from "./Checker"
 import { Icon } from "./icons/Icon"
 import { tasks } from "../../utils/mocks";
+import { showTaskDetails } from "./ListTask"
 
 interface Props {
     task: TaskType
 }
-const showTaskDetails = signal(false);
 const selecPriority = signal(false);
 
-const colors = {
-    1: 'oklch(0.505 0.213 27.518)',
-    2: 'oklch(0.75 0.183 55.934)',
+const colors: Record<number, string> = {
+    1: "oklch(0.505 0.213 27.518)",
+    2: "oklch(0.75 0.183 55.934)",
     3: "oklch(0.488 0.243 264.376)",
-    4: 'green'
+    4: "green"
 }
 const taskSignal = signal<TaskType>(tasks[0]);
 const setPriority = (value: Priority) => { taskSignal.value.priority = value };
-const priority = taskSignal.value.priority;
+const priority = taskSignal.value.priority|1;
 const buttonStyle = 'h-7 w-full *:w-4 *:mr-[1%] items-center';
 const hrStyle = 'opacity-10'
 const selectColor = signal(colors[priority]);
@@ -27,7 +27,7 @@ const selectColor = signal(colors[priority]);
 
 export function Task({ task }: Props) {
     return (
-            <article class="bg-white rounded-2xl grid grid-cols-[18px_minmax(600px,1fr)_100px] h-20 gap-2">
+            <article  class="bg-white rounded-2xl grid grid-cols-[18px_minmax(600px,1fr)_100px] h-20 gap-2">
                 <section class='flex relative opa'>
                     <Checker priority={task.priority} class="absolute ite" />
                 </section>
@@ -45,7 +45,7 @@ export function Task({ task }: Props) {
                         </Button>
                     </div>
                 </button>
-                {/* comments */}
+                
                 <section>
                 </section>
 
