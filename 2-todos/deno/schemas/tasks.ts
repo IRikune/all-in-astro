@@ -23,6 +23,7 @@ const baseSchema = z.object({
     completed: z.number().optional(),
     expected: z.number().optional(),
   }),
+  categories: z.array(z.string()).optional(),
   priority: z.number().min(1).max(4),
 });
 
@@ -45,6 +46,7 @@ export const getTaskOptionsSchema = z.object({
   userID: userIDSchema,
   taskID: taskIDSchema,
 });
+
 export const updateTaskOptionsSchema = z.object({
   userID: userIDSchema,
   taskID: taskIDSchema,

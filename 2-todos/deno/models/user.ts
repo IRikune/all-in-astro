@@ -1,8 +1,14 @@
-import type { newUser, Result, User, UserID } from "../types/mod.ts";
+import type { newUser, Result, User } from "../types/mod.ts";
 import { monotonicUlid as ulid } from "@std/ulid/monotonic-ulid";
 import { kv } from "../main.ts";
 
-export async function getUserByID(userID: string): Promise<Result<User>> {
+interface GetUserByIDOptions {
+  userID: User["id"];
+}
+
+export async function getUserByID(
+  { userID }: GetUserByIDOptions,
+): Promise<Result<User>> {
   const key = ["users", userID];
   const entry = await kv.get<User>(key);
   const user = entry?.value;
@@ -26,7 +32,13 @@ export async function getUsers(): Promise<Result<User[]>> {
   return result;
 }
 
-export async function getUserByEmail(email: string): Promise<Result<User>> {
+interface GetUserByEmailOptions {
+  email: User["email"];
+}
+
+export async function getUserByEmail(
+  { email }: GetUserByEmailOptions,
+): Promise<Result<User>> {
   const key = ["users", email];
   const entry = await kv.get<User>(key);
   const user = entry?.value;
@@ -40,7 +52,11 @@ export async function getUserByEmail(email: string): Promise<Result<User>> {
   return result;
 }
 
-export async function createUser(user: newUser) {
+interface CreateUserOptions {
+  user: newUser;
+}
+
+export async function createUser({ user }: CreateUserOptions) {
   const userID = ulid();
   const newUser = { ...user, id: userID };
   const userKey = ["users", userID];
@@ -56,10 +72,12 @@ export async function createUser(user: newUser) {
   return result;
 }
 
-export async function updateUser(
-  userID: string,
-  newUser: newUser,
-) {
+interface UpdateUserOptions {
+  userID: User["id"];
+  newUser: newUser;
+}
+
+export async function updateUser({ userID, newUser }: UpdateUserOptions) {
   const key = ["users", userID];
   const user = await kv.get<User>(key);
   const result = await kv.atomic()
@@ -69,9 +87,19 @@ export async function updateUser(
   return result;
 }
 
-export async function deleteUser(userID: UserID): Promise<Result<UserID>> {
+interface deleteUserOptions {
+  userID: User["id"];
+}
+
+export async function deleteUser(
+  { userID }: deleteUserOptions,
+): Promise<Result<User>> {
   const key = ["users", userID];
-  await kv.delete(key);
-  const result = { ok: true, data: userID } as Result<UserID>;
+  const user = await kv.get<User>(key);
+  await kv.atomic()
+    .check(user)
+    .delete(key)
+    .commit();
+  const result = { ok: true, data: user.value } as Result<User>;
   return result;
 }

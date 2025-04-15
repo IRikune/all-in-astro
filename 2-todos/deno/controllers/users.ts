@@ -21,7 +21,7 @@ export const getUserHandlers = factory.createHandlers(
   }),
   async (c) => {
     const userID = c.req.valid("param");
-    const result = await getUserByID(userID);
+    const result = await getUserByID({ userID });
     return c.json(result);
   },
 );
@@ -36,9 +36,7 @@ export const createUserHandlers = factory.createHandlers(
   }),
   async (c) => {
     const newUser = c.req.valid("json");
-    const result = await createUser(
-      newUser,
-    );
+    const result = await createUser({ user: newUser });
     return c.json(result);
   },
 );
@@ -53,7 +51,7 @@ export const deleteUserHandlers = factory.createHandlers(
   }),
   async (c) => {
     const userID = c.req.valid("param");
-    const result = await deleteUser(userID);
+    const result = await deleteUser({ userID });
     return c.json(result);
   },
 );
@@ -76,7 +74,7 @@ export const updateUserHandlers = factory.createHandlers(
   async (c) => {
     const user = c.req.valid("json");
     const userID = c.req.valid("param");
-    const updatedUser = await updateUser(userID, user);
+    const updatedUser = await updateUser({ userID, newUser: user });
     return c.json(updatedUser);
   },
 );
