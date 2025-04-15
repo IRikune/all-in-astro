@@ -33,22 +33,6 @@ export const taskSchema = baseSchema.extend({
   subTasks: subTaskSchema.array().optional(),
 });
 
-export const postTaskSchema = taskSchema.extend({
+export const newTaskSchema = taskSchema.extend({
   id: z.never().optional(),
-});
-
-export const createTaskOptionsSchema = z.object({
-  userID: userIDSchema,
-  task: postTaskSchema,
-});
-
-export const getTaskOptionsSchema = z.object({
-  userID: userIDSchema,
-  taskID: taskIDSchema,
-});
-
-export const updateTaskOptionsSchema = z.object({
-  userID: userIDSchema,
-  taskID: taskIDSchema,
-  newTask: taskSchema,
 });

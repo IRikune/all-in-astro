@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import { validator } from "hono/validator";
 import { HTTPException } from "hono/http-exception";
-import { postTaskSchema, taskIDSchema, taskSchema } from "../schemas/tasks.ts";
+import { newTaskSchema, taskIDSchema, taskSchema } from "../schemas/tasks.ts";
 import {
   createTask,
   deleteTask,
-  getTasks,
+  getManyTask,
+  getTask,
   updateTask,
 } from "../models/tasks.ts";
 import { userIDSchema } from "../schemas/users.ts";
@@ -13,37 +14,39 @@ import { userIDSchema } from "../schemas/users.ts";
 export const tasks = new Hono();
 
 tasks.get("/", (c) => {
-  const result = { ok: true, data: "Hello, world!" };
+  const result = { ok: true, data: "Task base endpoint" };
   return c.json(result);
 });
 
-tasks.get("/:userID", async (c) => {
-  const userID = c.req.param("userID");
-  const tasks = await getTasks(userID);
-  const result = { ok: true, data: tasks };
-  return c.json(result);
-});
-
-tasks.post(
-  "/:userID",
-  validator("json", (value) => {
-    const parsed = postTaskSchema.safeParse(value);
+tasks.get(
+  "/:taskID",
+  validator("param", (value) => {
+    const parsed = taskIDSchema.safeParse(value);
     if (!parsed.success) {
-      throw new HTTPException(400, parsed.error);
+      throw new HTTPException(400, { message: "taskID invalid" });
     }
     return parsed.data;
   }),
-  validator("param", (value) => {
-    const parsed = userIDSchema.safeParse(value.userID);
+  async (c) => {
+    const taskID = c.req.valid("param");
+    const tasks = await getTask({ taskID });
+    const result = { ok: true, data: tasks };
+    return c.json(result);
+  },
+);
+
+tasks.post(
+  "/",
+  validator("json", (value) => {
+    const parsed = newTaskSchema.safeParse(value);
     if (!parsed.success) {
       throw new HTTPException(400, parsed.error);
     }
     return parsed.data;
   }),
   async (c) => {
-    const userID = c.req.valid("param");
     const task = c.req.valid("json");
-    const result = await createTask({ userID, task });
+    const result = await createTask({ task });
     if (!result.ok) {
       throw new HTTPException(400, { message: "Task creation failed" });
     }
@@ -64,25 +67,21 @@ tasks.delete(
     return { userID: parseuserID.data, taskID: parsetaskID.data };
   }),
   async (c) => {
-    const userAndTaskId = c.req.valid("param");
-    const deleteTas = await deleteTask(userAndTaskId);
-    return c.json(deleteTas);
+    const { taskID, userID } = c.req.valid("param");
+    const result = await deleteTask({ userID, taskID });
+    return c.json(result);
   },
 );
 
 tasks.patch(
-  "/:userID/:taskID",
+  "/:taskID",
   validator("param", (value) => {
-    const parseUser = userIDSchema.safeParse(value.userID);
-    const parseTask = taskIDSchema.safeParse(value.taskID);
-    if (!parseUser.success) {
-      throw new HTTPException(400, { message: "user invalitor" });
-    }
-    if (!parseTask.success) {
+    const parsed = taskIDSchema.safeParse(value);
+    if (!parsed.success) {
       throw new HTTPException(400, { message: "task invalitor" });
     }
 
-    return { user: parseUser.data, task: parseTask.data };
+    return parsed.data;
   }),
   validator("json", (value) => {
     const parse = taskSchema.safeParse(value);
@@ -92,14 +91,12 @@ tasks.patch(
     return parse.data;
   }),
   async (c) => {
-    const param = c.req.valid("param");
-    const body = c.req.valid("json");
-
-    const upDatedTask = await updateTask({
-      userID: param.user,
-      taskID: param.task,
-      newTask: body,
+    const taskID = c.req.valid("param");
+    const newTask = c.req.valid("json");
+    const updatedTask = await updateTask({
+      taskID,
+      newTask,
     });
-    return c.json(upDatedTask);
+    return c.json(updatedTask);
   },
 );

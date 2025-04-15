@@ -1,4 +1,5 @@
 import type { z } from "zod";
+import { kv } from "../main.ts";
 import type {
   newUserSchema,
   updateUserOptionsSchema,
@@ -7,24 +8,18 @@ import type {
 } from "../schemas/users.ts";
 import type {
   commentSchema,
-  createTaskOptionsSchema,
-  getTaskOptionsSchema,
-  postTaskSchema,
+  newTaskSchema,
   subTaskSchema,
   taskIDSchema,
   taskSchema,
-  updateTaskOptionsSchema,
 } from "../schemas/tasks.ts";
 
 //#region task
 export type Comment = z.infer<typeof commentSchema>;
 export type Task = z.infer<typeof taskSchema>;
 export type SubTask = z.infer<typeof subTaskSchema>;
-export type PostTask = z.infer<typeof postTaskSchema>;
+export type NewTask = z.infer<typeof newTaskSchema>;
 export type TaskID = z.infer<typeof taskIDSchema>;
-export type createTaskOptions = z.infer<typeof createTaskOptionsSchema>;
-export type getTaskOptions = z.infer<typeof getTaskOptionsSchema>;
-export type updateTaskOptions = z.infer<typeof updateTaskOptionsSchema>;
 
 export enum Priority {
   low = 4,
@@ -42,3 +37,7 @@ export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
 export type Result<T> =
   | { ok: true; data: T }
   | { ok: false; data: null; error: string };
+
+const kvResult = await kv.atomic().commit();
+
+export type DenoKVCommit = typeof kvResult;
