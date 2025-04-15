@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import {
   createTaskHandlers,
   deleteTaskHandlers,
+  getManyTaskHandlers,
   getTaskHandlers,
   updateTaskHandlers,
 } from "../controllers/tasks.ts";
@@ -14,6 +15,8 @@ tasks.get("/", (c) => {
 });
 
 tasks.get("/:taskID", ...getTaskHandlers);
+
+tasks.get("/:userID", ...getManyTaskHandlers);
 
 tasks.post("/", ...createTaskHandlers);
 

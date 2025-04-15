@@ -4,6 +4,7 @@ import { HTTPException } from "hono/http-exception";
 import {
   createTask,
   deleteTask,
+  getManyTask,
   getTask,
   updateTask,
 } from "../models/tasks.ts";
@@ -22,9 +23,23 @@ export const getTaskHandlers = factory.createHandlers(
   }),
   async (c) => {
     const taskID = c.req.valid("param");
-    const tasks = await getTask({ taskID });
-    const result = { ok: true, data: tasks };
-    return c.json(result);
+    const task = await getTask({ taskID });
+    return c.json(task);
+  },
+);
+
+export const getManyTaskHandlers = factory.createHandlers(
+  validator("param", (value) => {
+    const parsed = userIDSchema.safeParse(value);
+    if (!parsed.success) {
+      throw new HTTPException(400, { message: "Invalid userID" });
+    }
+    return parsed.data;
+  }),
+  async (c) => {
+    const userID = c.req.valid("param");
+    const tasks = await getManyTask({ userID });
+    return c.json(tasks);
   },
 );
 
