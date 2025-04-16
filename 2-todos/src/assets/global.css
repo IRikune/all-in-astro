@@ -14,3 +14,21 @@
 @utility content-visibility-auto {
     content-visibility: auto;
 }
+
+@utility allow-discrete {
+    transition-behavior: allow-discrete;
+}
+
+@utility motion-modal {
+    transition: scale .3s ease, display .3s ease allow-discrete;
+    scale: 0;
+    display: none;
+
+    &[checked] {
+        scale: 1;
+        transition: scale .3s ease-in-out, opacity .3s ease;
+        @starting-style {
+            scale: 0;
+        }
+    }
+}
