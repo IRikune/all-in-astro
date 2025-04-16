@@ -55,7 +55,7 @@ export function Task({ task }: Props) {
 				</div>
 			</button>
 
-			<section></section>
+			<section id={'comentarios de la tarea'} />
 		</article>
 	);
 }
