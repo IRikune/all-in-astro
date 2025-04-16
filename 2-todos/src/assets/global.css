@@ -10,3 +10,7 @@
     --color-theme-blue: oklch(0.488 0.243 264.376);
     --color-theme-green-100: #bdc3c7;
 }
+
+@utility content-visibility-auto {
+    content-visibility: auto;
+}

@@ -1,5 +1,6 @@
 ---
 import { Button } from "../preact/Button";
+import { AddButton } from "../preact/sidebar/AddButton";
 import { Icon } from "../preact/icons/Icon";
 import { DropDown } from "../preact/DropDown";
 
@@ -23,16 +24,7 @@ const { class: className } = Astro.props;
             />
         </section>
     </div>
-    <Button
-        class="cursor-pointer flex rounded items-center h-8 w-full text-sm text-rose-700 transition-all duration-300"
-    >
-        <div
-            class="mx-2 w-5.5 h-5.5 rounded-full bg-rose-700 flex items-center justify-center text-sm ml-0"
-        >
-            <Icon name="plus" class="w-7 h-7 stroke-white" />
-        </div>
-        Add task
-    </Button>
+    <AddButton/>
     <section class="my-2 h-[30%] *:h-8 *:px-2">
         <Button icon="search" class="w-full"> Search </Button>
         <Button page={currentPage} to="/dashboard/inbox" icon="inbox" class="">

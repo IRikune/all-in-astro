@@ -1,35 +1,84 @@
-import type { DialogHTMLAttributes } from "preact/compat";
-import { showTaskCreator } from "./AddTask";
-import { Input } from "./Input";
+import type { InputHTMLAttributes } from 'preact/compat';
+import { AddTask } from './AddInlineTask';
+import { Input } from './Input';
+import type { JSX } from 'preact/jsx-runtime';
+import { Button } from './Button';
+import { signal } from '@preact/signals';
 
-export function TaskCreator({...props}: DialogHTMLAttributes) {
-    return (
-        <dialog open={showTaskCreator} class={"w-[62%] h-[85%] z-1 top-[7.5%] left-[19%] fixed overflow-hidden rounded-2xl bg-white shadow "} {...props} >
-            <form onSubmit={()=>{"logica aqui"}} class=" flex flex-col W-2 gap-2 p-2 ">
-                <button onClick={()=>{showTaskCreator.value = !showTaskCreator.value}} type={"button"}>X</button>
-                <div class="flex flex-col gap-2 w-36" >
-                    <label for="taskName">Task Name</label>
-                    <Input
-                    type="text"
-                    id="taskName"
-                    placeholder="Enter task name"
-                    class="border border-gray-300 rounded-md p-2 peer block w-50 px-3 py-2 placeholder-gray-400 shadow-sm  invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-pink-500 focus:invalid:outline-pink-500  valid:border-emerald-400  "
-                    required
-                    pattern={"[a-zA-Z0-9 ]+"}
-                    title="Only letters and numbers are allowed"
-                    keyboard-focuchable={false}
-                    />
-                </div>
-                <div class="flex flex-col gap-2">
-                    <label for="taskDescription">Task Description</label>
-                    <Input
-                    id="taskDescription"
-                    placeholder="Enter task description"
-                    class="border border-gray-300 rounded-md p-2"
-                    />
-                </div>
-                <button type={'submit'} class="bg-blue-500 text-white rounded-md p-2">Create Task</button>
-            </form>
-        </dialog>
-    );
-    } 
+const description = signal('');
+const descriptionError = signal('');
+const text = signal('');
+const textError = signal('');
+
+const handleSubmit = (event: SubmitEvent) => {
+	event.preventDefault();
+	const form = event.currentTarget as HTMLFormElement;
+	if (!description.value) {
+		descriptionError.value = 'la descriccion no debe estar vacia';
+	}
+	if (!description.value) {
+		textError.value = 'la tarea no debe estar vacia';
+		return;
+	}
+	const formData = new FormData(form);
+};
+
+const handleInputDescription = (event: JSX.TargetedEvent<HTMLInputElement>) => {
+	description.value = event.currentTarget.value;
+};
+const handleInputText = (event: JSX.TargetedEvent<HTMLInputElement>) => {
+	text.value = event.currentTarget.value;
+};
+
+export function TaskCreator() {
+	return (
+		<>
+			<AddTask />
+			<div
+				class={
+					'hidden content-visibility-auto peer-has-checked:block w-full h-auto overflow-hidden rounded-2xl bg-white shadow '
+				}
+			>
+				<form onSubmit={handleSubmit} class=" flex flex-col W-2 gap-2 p-2 ">
+					<label class={'select-none'} for={'AddTask'}>
+						X
+					</label>
+					<div class="flex flex-col gap-2 w-full h-full">
+						<Input
+							id="taskName"
+							placeholder="Enter task name"
+							autoComplete={'off'}
+							type="text"
+							autoCorrect={'false'}
+							class="peer w-full h-[10%] outline-0 placeholder-gray-400 appearance-none "
+							onInput={handleInputDescription}
+						/>
+						{descriptionError}
+						<Input
+							type="text"
+							onInput={handleInputText}
+							id="taskDescription"
+							placeholder="Enter task description"
+							class=" peer w-full h-[10%] outline-0 placeholder-gray-400  appearance-none "
+							autoComplete={'off'}
+						/>
+						{textError}
+						<div>
+							<Button />
+							<Button />
+							<Button />
+							<Button />
+						</div>
+					</div>
+					<div class="flex flex-col gap-2"></div>
+					<button
+						type={'submit'}
+						class="bg-blue-500 text-white rounded-md p-2 w-[60%] h-[8%] mx-auto"
+					>
+						Create Task
+					</button>
+				</form>
+			</div>
+		</>
+	);
+}

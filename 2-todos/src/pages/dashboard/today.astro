@@ -4,7 +4,7 @@ import { ViewTask } from "../../components/preact/Task";
 import { Icon } from "../../components/preact/icons/Icon";
 import { ListTask } from "../../components/preact/ListTask";
 import { TaskCreator } from "../../components/preact/TaskCreator";
-import { AddTask } from "../../components/preact/AddTask"
+import { AddTask } from "../../components/preact/AddInlineTask"
 
 
 ---
@@ -23,15 +23,16 @@ import { AddTask } from "../../components/preact/AddTask"
     <ListTask client:load />
     <ViewTask client:load />
     <hr class="border-gray-200" />
-    <AddTask client:load/>
     <TaskCreator client:load/>
+    
   </main>
 </Layout>
 
 <script>
   import { createSwapy } from "swapy";
-  const container = document.querySelector(".container") as HTMLElement;
-  const swapy = createSwapy(container);
-  swapy.enable(true);
+
+const container = document.querySelector(".container") as HTMLElement;
+const swapy = createSwapy(container);
+swapy.enable(true);
   
 </script>
