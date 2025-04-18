@@ -1,8 +1,9 @@
 ---
 import { Button } from "../preact/Button";
 import { AddButton } from "../preact/sidebar/AddButton";
-import { Icon } from "../preact/icons/Icon";
 import { DropDown } from "../preact/DropDown";
+import { Modal } from "../preact/Modal";
+import { AddTaskForm } from "../preact/sidebar/AddTaskForm";
 
 interface Props {
     class?: string;
@@ -24,7 +25,7 @@ const { class: className } = Astro.props;
             />
         </section>
     </div>
-    <AddButton/>
+    <AddButton />
     <section class="my-2 h-[30%] *:h-8 *:px-2">
         <Button icon="search" class="w-full"> Search </Button>
         <Button page={currentPage} to="/dashboard/inbox" icon="inbox" class="">
@@ -50,6 +51,14 @@ const { class: className } = Astro.props;
             Filters & labels
         </Button>
     </section>
+    <Modal
+        class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/2 z-[100]"
+        id="add-task-modal"
+    >
+        <div class="bg-white w-xl text-center shadow-theme-2 rounded-lg p-2">
+            <AddTaskForm client:idle />
+        </div>
+    </Modal>
 </nav>
 
 <section class="self-end">

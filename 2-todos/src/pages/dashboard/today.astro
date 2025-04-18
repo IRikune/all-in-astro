@@ -17,19 +17,6 @@ import { Modal } from "../../components/preact/Modal";
       </h1>
       <Icon name="circleCheker" class="w-6 h-6 absolute top-[40px]" />
     </section>
-    <label
-      class="select-none cursor-pointer w-fit px-5 py-1 bg-neutral-200 rounded my-2 hover:bg-neutral-300 transition-all duration-300"
-      for="modal-today">X</label
-    >
-    <Modal
-      class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-8/2 border-2 border-theme-red-100/10 rounded z-[100]"
-      id="add-task-modal"
-    >
-      <div class="bg-white w-xl text-center shadow-lg">
-        <h2 class="py-2">Today</h2>
-      </div>
-    </Modal>
-
     <ListTask client:load />
     <ViewTask client:load />
     <hr class="border-gray-200" />

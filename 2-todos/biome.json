@@ -19,9 +19,8 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"security": {
-				"noDangerouslySetInnerHtmlWithChildren": "off",
-				"noDangerouslySetInnerHtml": "off"
+			"a11y": {
+				"useFocusableInteractive": "off"
 			},
 			"recommended": true
 		}
