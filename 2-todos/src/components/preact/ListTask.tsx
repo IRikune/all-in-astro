@@ -18,7 +18,9 @@ export function ListTask() {
 						class="bg-black/5 rounded-2xl"
 					>
 						<div data-swapy-item={task.id}>
-							<div>{<Task task={listTasks.value[index]} />}</div>
+							<div>
+								<Task task={task} />
+							</div>
 						</div>
 					</div>
 				);

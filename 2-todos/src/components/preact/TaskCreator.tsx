@@ -43,34 +43,46 @@ export function TaskCreator() {
 					<label class={'select-none'} for={'AddTask'}>
 						X
 					</label>
-					<div class="flex flex-col gap-2 w-full h-full">
-						<Input
-							id="taskName"
-							placeholder="Enter task name"
-							autoComplete={'off'}
-							type="text"
-							autoCorrect={'false'}
-							class="peer w-full h-[10%] outline-0 placeholder-gray-400 appearance-none "
-							onInput={handleInputDescription}
-						/>
-						{descriptionError}
-						<Input
-							type="text"
-							onInput={handleInputText}
-							id="taskDescription"
-							placeholder="Enter task description"
-							class=" peer w-full h-[10%] outline-0 placeholder-gray-400  appearance-none "
-							autoComplete={'off'}
-						/>
-						{textError}
-						<div>
-							<Button />
-							<Button />
-							<Button />
-							<Button />
+					<div class="flex flex-col gap-2 w-full h-full" />
+					<Input
+						id="taskName"
+						placeholder="Enter task name"
+						autoComplete={'off'}
+						type="text"
+						autoCorrect={'false'}
+						class="peer w-full h-[10%] outline-0 placeholder-gray-400 appearance-none "
+						onInput={handleInputDescription}
+					/>
+					{descriptionError}
+					<Input
+						type="text"
+						onInput={handleInputText}
+						id="taskDescription"
+						placeholder="Enter task description"
+						class=" peer w-full h-[10%] outline-0 placeholder-gray-400  appearance-none "
+						autoComplete={'off'}
+					/>
+					{textError}
+					<div class="flex gap-2">
+						<Button class=" border-1 w-20 h-7 p-1 border-gray-300 ">
+							Today
+						</Button>
+						<Button class=" border-1 w-20 h-7 p-1 border-gray-300 ">
+							Priorit
+						</Button>
+						<Button class=" border-1 w-20 h-7 p-1 border-gray-300 ">
+							recordatorio
+						</Button>
+						<Button class=" border-1 w-20 h-7 p-1 border-gray-300 ">...</Button>
+					</div>
+					<hr />
+					<div class={'flex justify-between items-center'}>
+						<div class="flex gap-2 w-[20%]">
+							<Button>Cansel</Button>
+							<Button>Anadir tarea</Button>
 						</div>
 					</div>
-					<div class="flex flex-col gap-2"></div>
+					<div class="flex flex-col gap-2" />
 					<button
 						type={'submit'}
 						class="bg-blue-500 text-white rounded-md p-2 w-[60%] h-[8%] mx-auto"

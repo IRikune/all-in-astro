@@ -14,18 +14,13 @@ import SideBar from "../components/Astro/SideBar.astro";
 		<title>Todo App</title>
 	</head>
 	<body
-		class="w-dvw h-dvh grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)] m-0 p-0 overflow-hidden"
+		class="group/body has-[#mover-sidebar:checked]: has-[#mover-sidebar:checked]:-translate-x-40  transition ease-linear duration-150   w-[100%] h-dvh grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)] grid-rows-1 m-0 p-0 overflow-hidden"
 	>
-		<div class="grid relative">
-			<input
-				type="checkbox"
-				class="appearance-none peer | bg-[url(../../public/sidebar.svg)] bg-no-repeat bg-[length:20px] bg-center opacity-30 |  checked:-translate-x-48 transition ease-linear delay-75 duration-250 hover:bg-rose-300 | w-9 h-9 z-1 rounded right-0 top-[9.5px] cursor-pointer absolute"
-			/>
-			<SideBar
-				class="peer-checked:-translate-x-70  transition ease-linear delay-75 duration-250 absolute w-full h-full"
-			/>
-		</div>
-		<section class="mx-20">
+	
+		<SideBar 
+			class="has-[#mover-sidebar:checked]:-translate-x-15 transition ease-linear duration-150"
+		/>
+		<section class="mx-20 group-has-[#mover-sidebar:checked]/body:translate-x-20 ease-linear transition duration-150">
 			<header class="flex justify-end items-center h-16">
 				<slot name="header" />
 			</header>

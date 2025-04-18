@@ -11,7 +11,7 @@ import { Modal } from "../../components/preact/Modal";
   <main class="flex flex-col items-left h-dvh w-[80%] mx-auto">
     <section class="relative text-grey-200">
       <h1
-        class="h-[5rem] font-bold text-3xl text-transparent bg-clip-text bg-gradient-to-br from-rose-900 to-rose-700"
+        class=" h-[5rem] font-bold text-3xl text-transparent bg-clip-text bg-gradient-to-br from-rose-900 to-rose-700"
       >
         Today
       </h1>
@@ -22,15 +22,15 @@ import { Modal } from "../../components/preact/Modal";
       for="modal-today">X</label
     >
     <Modal
-      class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-8/2 border border-neutral-200 rounded z-[100]"
+      class=" fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-8/2 border border-neutral-200 rounded z-[100]"
       id="modal-today"
     >
       <div class="bg-white w-xl text-center">
-        <h2 class="py-2">Today</h2>
+        <h2 class="py-2 ">Today</h2>
       </div>
     </Modal>
 
-    <ListTask client:load />
+    <ListTask />
     <ViewTask client:load />
     <hr class="border-gray-200" />
     <TaskCreator client:load />
