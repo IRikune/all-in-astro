@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "tailwindcss-motion";
 @theme {
     --color-theme-red-100: #c0392b;
     ---color-theme-red-200: oklch(0.505 0.213 27.518)
