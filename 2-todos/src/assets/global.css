@@ -15,11 +15,6 @@
 @utility content-visibility-auto {
     content-visibility: auto;
 }
-
-@utility allow-discrete {
-    transition-behavior: allow-discrete;
-}
-
 @utility motion-modal {
     transition: scale .3s ease, display .3s ease allow-discrete;
     scale: 0;
