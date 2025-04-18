@@ -10,6 +10,7 @@ interface Props {
 	class?: string;
 	onclick?: () => void;
 	color?: string;
+	id?: string;
 }
 
 export function Button({
@@ -19,11 +20,13 @@ export function Button({
 	class: className,
 	icon,
 	onclick,
+	id,
 }: Props) {
 	const Tag = to ? 'a' : 'button';
 	return (
 		<Tag
 			href={to}
+			id={id}
 			class={`hover:bg-gray-200 flex transition-colors duration-200 rounded text-sm text-neutral-700 tracking-tight cursor-pointer items-center ${className} ${to != null && to === page && 'bg-rose-100'}`}
 			onClick={onclick}
 		>
