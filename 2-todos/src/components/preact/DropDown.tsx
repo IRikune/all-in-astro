@@ -2,7 +2,7 @@ import { signal } from '@preact/signals';
 import { ProgressCircle } from './ProgressCircle';
 import { Button } from './Button';
 interface Props {
-	class: string;
+	class?: string;
 }
 
 const isOpen = signal(false);

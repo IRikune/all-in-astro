@@ -1,8 +1,9 @@
 ---
 import "../assets/global.css";
 import "@fontsource-variable/montserrat";
-import SideBar from "../components/Astro/SideBar.astro";
-
+import { Sidebar } from "../components/preact/sidebar/Sidebar";
+import { ToggleSidebar } from "../components/preact/sidebar/ToggleSidebar";
+const { pathname: currentPage } = Astro.url;
 ---
 
 <html lang="en">
@@ -14,15 +15,13 @@ import SideBar from "../components/Astro/SideBar.astro";
 		<title>Todo App</title>
 	</head>
 	<body
-		class="group/body has-[#mover-sidebar:checked]: has-[#mover-sidebar:checked]:-translate-x-40  transition ease-linear duration-150   w-[100%] h-dvh grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)] grid-rows-1 m-0 p-0 overflow-hidden"
+		class="w-dvw h-dvh grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)] overflow-hidden"
 	>
-	
-		<SideBar 
-			class="has-[#mover-sidebar:checked]:-translate-x-15 transition ease-linear duration-150"
-		/>
-		<section class="mx-20 group-has-[#mover-sidebar:checked]/body:translate-x-20 ease-linear transition duration-120">
+		<Sidebar currentPage={currentPage} client:load />
+		<section>
 			<header class="flex justify-end items-center h-16">
 				<slot name="header" />
+				<ToggleSidebar client:idle class={`absolute top-10 left-10`} />
 			</header>
 			<main class="flex flex-col">
 				<slot />
