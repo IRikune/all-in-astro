@@ -18,7 +18,7 @@ auth.post(
   async (c) => {
     const body = c.req.valid("form");
 
-    const user = await getUserByEmail(body.email);
+    const user = await getUserByEmail({email: body.email});
 
     if (!user.ok) {
       throw new HTTPException(401, { message: "User not found" });

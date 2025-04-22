@@ -30,7 +30,7 @@ export enum Priority {
 
 //#region user
 export type User = z.infer<typeof userSchema>;
-export type newUser = z.infer<typeof newUserSchema>;
+export type NewUser = z.infer<typeof newUserSchema>;
 export type UserID = z.infer<typeof userIDSchema>;
 export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
 

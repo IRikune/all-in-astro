@@ -5,7 +5,7 @@ import { auth } from "./routes/auth.ts";
 import { cors } from "hono/cors";
 
 const app = new Hono()
-  .use(cors({ origin: "http://localhost:4321" }))
+  .use(cors())
   .route("/tasks/", tasks)
   .route("/users/", users)
   .route("/auth/", auth);
@@ -13,7 +13,7 @@ const app = new Hono()
 export const kv = await Deno.openKv();
 
 app.get("/", (c) => {
-  return c.text("Hello Hono 2222!");
+  return c.text("Server is running");
 });
 
 Deno.serve(app.fetch);

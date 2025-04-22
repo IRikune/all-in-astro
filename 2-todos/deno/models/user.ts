@@ -1,4 +1,4 @@
-import type { newUser, Result, User } from "../types/mod.ts";
+import type { NewUser, Result, User } from "../types/mod.ts";
 import { monotonicUlid as ulid } from "@std/ulid/monotonic-ulid";
 import { kv } from "../main.ts";
 
@@ -53,7 +53,7 @@ export async function getUserByEmail(
 }
 
 interface CreateUserOptions {
-  user: newUser;
+  user: NewUser;
 }
 
 export async function createUser({ user }: CreateUserOptions) {
@@ -74,7 +74,7 @@ export async function createUser({ user }: CreateUserOptions) {
 
 interface UpdateUserOptions {
   userID: User["id"];
-  newUser: newUser;
+  newUser: NewUser;
 }
 
 export async function updateUser({ userID, newUser }: UpdateUserOptions) {
