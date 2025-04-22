@@ -1,4 +1,4 @@
-### Check
+### Check if the server is running
 
 GET http://localhost:8000/
 
@@ -13,5 +13,11 @@ Content-Type: application/json
     "avatar": "https://astro.build/assets/logo.svg"
 }
 
+### Update a user
+PATCH http://localhost:8000/users/
+Content-Type: application/json
+
 ### Create a new task
 POST http://localhost:8000/tasks/
+
+DELETE http://localhost:8000/users/
