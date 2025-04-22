@@ -1,10 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { ViewTask } from "../../components/preact/Task";
 import { Icon } from "../../components/preact/icons/Icon";
 import { ListTask } from "../../components/preact/ListTask";
 import { TaskCreator } from "../../components/preact/TaskCreator";
 import { Modal } from "../../components/preact/Modal";
+import { ViewTask } from "../../components/preact/Task";
+
 ---
 
 <Layout title="Today">
@@ -30,9 +31,10 @@ import { Modal } from "../../components/preact/Modal";
       </div>
     </Modal>
 
-    <ListTask />
+    <ListTask client:load/>
     <ViewTask client:load />
     <hr class="border-gray-200" />
+    
     <TaskCreator client:load />
   </main>
 </Layout>

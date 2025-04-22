@@ -5,8 +5,16 @@ import { Checker } from './Checker';
 import { Icon } from './icons/Icon';
 import { tasks } from '../../utils/mocks';
 import { showTaskDetails } from './ListTask';
+import { Modal } from './Modal';
+import { ShowModal } from './ShowModal';
+import type { JSX } from 'preact/jsx-runtime';
+import { CrossIcon } from './icons/CrossIcon';
+import { ChevronIcon } from './icons/ChevronIcon';
+import { ChevronDownIcon } from './icons/ChevronDownIcon';
+import { ChevronUpIcon } from './icons/ChevronUpIcon';
+import { MoreHorizontalIcon } from './icons/MoreHorizontal';
 
-interface Props {
+interface PropsTask extends JSX.HTMLAttributes<HTMLElement> {
 	task: TaskType;
 }
 const selecPriority = signal(false);
@@ -26,25 +34,18 @@ const buttonStyle = 'h-7 w-full *:w-4 *:mr-[1%] items-center';
 const hrStyle = 'opacity-10';
 const selectColor = signal(colors[priority]);
 
-export function Task({ task }: Props) {
+export function Task({ task }: PropsTask) {
 	return (
 		<article class="bg-white rounded-2xl grid grid-cols-[18px_minmax(600px,1fr)_100px] h-20 gap-2">
 			<section class="flex relative">
 				<Checker priority={task.priority} class="absolute ite" />
 			</section>
 
-			<button
-				type="button"
-				id="task"
-				class="flex flex-col items-start gap-1"
-				onClick={() => {
-					showTaskDetails.value = !showTaskDetails.value;
-					taskSignal.value = task;
-				}}
-			>
+			<ShowModal for="view-task-options">
 				<h2 class="font-bold text-[0.875rem]">{task.title}</h2>
 				<p class="font-extralight text-[12px]">{task.content}</p>
 				<div class="flex flex-row gap-2 justify-between">
+					<div data-swapy-handle>handle</div>
 					<Button class="flex w-fit text-[2px] p-0 h-[1rem]">
 						<Icon name="bell" class={'w-4'} />
 						<span>{task.comments?.length}</span>
@@ -53,29 +54,17 @@ export function Task({ task }: Props) {
 						<span class="text-red-500 ">{task.date.expected}</span>
 					</Button>
 				</div>
-			</button>
+			</ShowModal>
 
-			<section id={'comentarios de la tarea'} />
+			<section id="comentarios de la tarea" />
 		</article>
 	);
 }
 
 export function ViewTask() {
 	return (
-		<>
-			<dialog
-				open={showTaskDetails.value}
-				onClick={() => {
-					showTaskDetails.value = false;
-					selecPriority.value = false;
-				}}
-				class={'w-[100%] top-0 z-10 h-[100%] fixed bg-black/8'}
-			/>
-
-			<dialog
-				open={showTaskDetails.value}
-				class="w-[62%] h-[85%] z-20 top-[7.5%] left-[19%] fixed overflow-hidden rounded-2xl bg-white  "
-			>
+		<Modal id="view-task-options">
+			<div class="w-[62%] h-[85%] z-20 top-[7.5%] shadow-2xl left-[19%] fixed overflow-hidden rounded-2xl bg-white  ">
 				<div
 					class={
 						'grid grid-rows-[min(2.5rem)_1fr] grid-cols-[3fr_1.5fr] h-full p-2.5 w-full'
@@ -88,26 +77,24 @@ export function ViewTask() {
 						bandeja de entrada
 					</Button>
 					<div class="flex justify-end">
-						<Button
-							class={'w-10 h-10 active:bg-gray-300 justify-center'}
-							icon="chevron-down"
-						/>
-						<Button
-							class={'w-10 h-10 active:bg-gray-300 justify-center'}
-							icon="chevron-up"
-						/>
-						<Button
-							class={' w-10 h-10 active:bg-gray-300 justify-center'}
-							icon="more-horizontal"
-						/>
-						<Button
-							onclick={() => {
-								showTaskDetails.value = false;
-								selecPriority.value = false;
-							}}
-							class={' w-10 h-10 active:bg-gray-300 justify-center'}
-							icon="x"
-						/>
+						<Button class={'w-10 h-10 active:bg-gray-300 justify-center'}>
+							<ChevronDownIcon class="size-5" />
+						</Button>
+						<Button class={'w-10 h-10 active:bg-gray-300 justify-center'}>
+							<ChevronUpIcon class="size-5" />
+						</Button>
+						<Button class={' w-10 h-10 active:bg-gray-300 justify-center'}>
+							<MoreHorizontalIcon class="size-5" />
+						</Button>
+						<label for="view-task-options">
+							<div
+								class={
+									'grid content-center hover:bg-gray-200 w-10 h-10 rounded text-neutral-700 active:bg-gray-300 justify-center'
+								}
+							>
+								<CrossIcon />
+							</div>
+						</label>
 					</div>
 					<div>{taskSignal.value.creator}</div>
 					<div
@@ -240,7 +227,7 @@ export function ViewTask() {
 						</div>
 					</div>
 				</div>
-			</dialog>
-		</>
+			</div>
+		</Modal>
 	);
 }
