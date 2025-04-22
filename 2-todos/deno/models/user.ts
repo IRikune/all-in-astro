@@ -1,70 +1,105 @@
-import { kv, ulid } from "../main.ts";
-import type { User,UserID,newUser } from "../types/mod.ts";
+import type { newUser, Result, User } from "../types/mod.ts";
+import { monotonicUlid as ulid } from "@std/ulid/monotonic-ulid";
+import { kv } from "../main.ts";
 
-export async function getUser( userID : string ) {
+interface GetUserByIDOptions {
+  userID: User["id"];
+}
+
+export async function getUserByID(
+  { userID }: GetUserByIDOptions,
+): Promise<Result<User>> {
   const key = ["users", userID];
   const entry = await kv.get<User>(key);
   const user = entry?.value;
-  const result = { ok: true, data: user };
+  const result = { ok: true, data: user } as Result<User>;
   return result;
 }
-export async function getUsers() {
-  const entries = kv.list({ prefix: ["users"] });
+
+export async function getUsers(): Promise<Result<User[]>> {
+  const entries = kv.list<User>({ prefix: ["users"] });
   const listUsers = [];
   for await (const user of entries) {
     listUsers.push(user.value);
   }
-  const result = { ok: true, data: listUsers };
+  if (listUsers.length === 0) {
+    const result = { ok: false, data: null, error: "No users found" } as Result<
+      User[]
+    >;
+    return result;
+  }
+  const result = { ok: true, data: listUsers } as Result<User[]>;
   return result;
 }
 
-export async function getUserByEmail(email: string) {
+interface GetUserByEmailOptions {
+  email: User["email"];
+}
+
+export async function getUserByEmail(
+  { email }: GetUserByEmailOptions,
+): Promise<Result<User>> {
   const key = ["users", email];
   const entry = await kv.get<User>(key);
   const user = entry?.value;
-  const result = { ok: true, data: user };
+  if (user === null) {
+    const result = { ok: false, data: null, error: "User not found" } as Result<
+      User
+    >;
+    return result;
+  }
+  const result = { ok: true, data: user } as Result<User>;
   return result;
 }
 
-export async function createUser( user : newUser ) {
+interface CreateUserOptions {
+  user: newUser;
+}
+
+export async function createUser({ user }: CreateUserOptions) {
   const userID = ulid();
   const newUser = { ...user, id: userID };
   const userKey = ["users", userID];
   const emailKey = ["users", user.email];
-  
-  const res = await kv.atomic()
-  .check({ key:userKey, versionstamp: null })
-  .check({ key:emailKey, versionstamp: null })
-  .set(userKey, newUser)
-  .set(emailKey, newUser)
-  .commit();
-  
-  return {resp:res, user : userID};
-  
-}
 
-export async function updateUser(
-  userID:string, upDatedUser: newUser 
-) {
-  const key = ["users", userID];
-  const res = await kv.set(key, upDatedUser);
-  return res;
-}
+  const result = await kv.atomic()
+    .check({ key: userKey, versionstamp: null })
+    .check({ key: emailKey, versionstamp: null })
+    .set(userKey, newUser)
+    .set(emailKey, newUser)
+    .commit();
 
-export async function deleteUser( userID : UserID) {
-  const key = ["users", userID];
-  await kv.delete(key);
-  const result = { ok: true, data: userID };
   return result;
 }
 
-export function getEmailAndPassword(formData : FormData){
+interface UpdateUserOptions {
+  userID: User["id"];
+  newUser: newUser;
+}
 
-  const toString = formData.entries().next().value[1].split('\r\n').concat('') as string[];
-  console.log(toString[2]);
-  console.log(toString[6]);
-  
-  const email = toString[2]
-  const password = toString[6]
-  return {email:email,password:password}
+export async function updateUser({ userID, newUser }: UpdateUserOptions) {
+  const key = ["users", userID];
+  const user = await kv.get<User>(key);
+  const result = await kv.atomic()
+    .check(user)
+    .set(key, newUser)
+    .commit();
+  return result;
+}
+
+interface deleteUserOptions {
+  userID: User["id"];
+}
+
+export async function deleteUser(
+  { userID }: deleteUserOptions,
+): Promise<Result<User>> {
+  const key = ["users", userID];
+  const user = await kv.get<User>(key);
+  await kv.atomic()
+    .check(user)
+    .delete(key)
+    .commit();
+  const result = { ok: true, data: user.value } as Result<User>;
+  return result;
 }
