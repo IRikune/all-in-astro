@@ -1,5 +1,5 @@
 import { signal } from '@preact/signals';
-import { Priority, type Task as TaskType } from '../../../../backend/types/mod';
+import { Priority, type Task as TaskType } from '../../types/mod';
 import { Button } from './Button';
 import { Checker } from './Checker';
 import { Icon } from './icons/Icon';

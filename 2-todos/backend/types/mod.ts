@@ -35,8 +35,8 @@ export type UserID = z.infer<typeof userIDSchema>;
 export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
 
 export type Result<T> =
-  | { ok: true; data: T }
-  | { ok: false; data: null; error: string };
+  | { ok: true; data: T; message: string; versionstamp?: string }
+  | { ok: false; data: null; message: string };
 
 const kvResult = await kv.atomic().commit();
 

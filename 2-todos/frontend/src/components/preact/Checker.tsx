@@ -1,5 +1,5 @@
 import { useSignal } from '@preact/signals';
-import type { Priority } from '../../../../backend/types/mod';
+import type { Priority } from '../../types/mod';
 import { Icon } from './icons/Icon';
 
 interface Props {

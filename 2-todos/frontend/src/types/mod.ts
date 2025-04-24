@@ -26,3 +26,16 @@ interface SubTask extends BaseTask {}
 export interface Task extends BaseTask {
 	subTasks?: SubTask[];
 }
+
+export interface User {
+	name: string;
+	email: string;
+	password: string;
+	avatar?: string;
+}
+export enum Priority {
+	high = 1,
+	important = 2,
+	medium = 3,
+	low =  4,
+}

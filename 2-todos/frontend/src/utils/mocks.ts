@@ -1,5 +1,5 @@
-import type { Task } from '../../../backend/types/mod.ts';
-import { Priority } from '../../../backend/types/mod.ts';
+import type { Task } from '../types/mod';
+import { Priority } from '../types/mod';
 
 export const tasks: Task[] = [
 	{

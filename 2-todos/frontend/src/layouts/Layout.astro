@@ -30,12 +30,6 @@ const { pathname: currentPage } = Astro.url;
 	</body>
 </html>
 
-<script>
-	import { tasks } from "../stores/mod";
-	import { useGetTasks } from "../hooks/tasks";
-	const fetchedTasks = await useGetTasks();
-</script>
-
 <style>
 	html,
 	body {

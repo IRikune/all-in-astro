@@ -1,0 +1,13 @@
+GET http://localhost:8000/users/01JSN2M5RANS5JZ7ARJK5H1CB3
+
+###
+
+POST http://localhost:8000/users/
+Content-Type: application/json
+
+{
+	"name": "Alejandro2",
+    "email": "Alejandro2@gmail.com",
+    "password": "password",
+    "avatar": "https://url.com/avatar.png"
+}
