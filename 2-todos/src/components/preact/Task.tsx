@@ -37,15 +37,14 @@ const selectColor = signal(colors[priority]);
 export function Task({ task }: PropsTask) {
 	return (
 		<article class="bg-white rounded-2xl grid grid-cols-[18px_minmax(600px,1fr)_100px] h-20 gap-2">
-			<section class="flex relative">
-				<Checker priority={task.priority} class="absolute ite" />
+			<section class="flex-row">
+				<Checker priority={task.priority} class="" />
 			</section>
 
 			<ShowModal for="view-task-options">
 				<h2 class="font-bold text-[0.875rem]">{task.title}</h2>
 				<p class="font-extralight text-[12px]">{task.content}</p>
 				<div class="flex flex-row gap-2 justify-between">
-					<div data-swapy-handle>handle</div>
 					<Button class="flex w-fit text-[2px] p-0 h-[1rem]">
 						<Icon name="bell" class={'w-4'} />
 						<span>{task.comments?.length}</span>

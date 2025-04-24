@@ -2,7 +2,7 @@ import { Task } from './Task';
 import { signal } from '@preact/signals';
 import type { Task as TaskType } from '../../../deno/types/mod';
 import { tasks } from '../../utils/mocks';
-import { ShowModal } from './ShowModal';
+import { DragHandleIcon } from './icons/DragHandleIcon';
 
 export const showTaskDetails = signal(false);
 
@@ -19,7 +19,10 @@ export function ListTask() {
 						class="bg-black/5 rounded-2xl"
 					>
 						<div data-swapy-item={task.id}>
-							<div>
+							<div class={'relative'}>
+								<div data-swapy-handle class={'absolute -left-5'}>
+									<DragHandleIcon />
+								</div>
 								<Task task={task} />
 							</div>
 						</div>

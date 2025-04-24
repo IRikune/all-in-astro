@@ -1,22 +1,12 @@
 import { signal } from '@preact/signals';
-import { useLogin } from '../../hooks/mod';
-const handleSubmit = (event: SubmitEvent) => {
-	event.preventDefault();
-	const form = event.currentTarget as HTMLFormElement;
-	const formData = new FormData(form);
-	useLogin(formData);
-};
+import { useLogin, handleSubmit } from '../../hooks/mod';
 export const error = signal('');
 
 export function FormLogin() {
 	return (
 		<main>
 			<h1>Login</h1>
-			<form
-				onSubmit={(e) => handleSubmit(e)}
-				method="POST"
-				action="http://localhost:8000/login"
-			>
+			<form onSubmit={(e) => handleSubmit(e, useLogin)}>
 				<label for="email">Email:</label>
 				<input
 					class={

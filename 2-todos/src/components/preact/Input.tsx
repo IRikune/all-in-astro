@@ -1,6 +1,11 @@
 import type { InputHTMLAttributes } from 'preact/compat';
+import type { JSX } from 'preact/jsx-runtime';
 
-export function Input({ ...props }: InputHTMLAttributes) {
+interface InputProps extends JSX.HTMLAttributes<HTMLInputElement> {
+	id: string;
+}
+
+export function Input({ ...props }: InputProps) {
 	return (
 		<>
 			<input
