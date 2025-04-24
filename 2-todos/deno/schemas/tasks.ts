@@ -1,8 +1,7 @@
 import { z } from "zod";
-import { userIDSchema } from "./user.ts";
+import { userIDSchema } from "./users.ts";
 
 export const taskIDSchema = z.string().ulid();
-
 
 export const commentSchema = z.object({
   id: z.string().ulid().optional(),
@@ -11,7 +10,7 @@ export const commentSchema = z.object({
   createdAt: z.number(),
 });
 
-//interface Task 
+//interface Task
 const baseSchema = z.object({
   id: z.string().ulid().optional(),
   title: z.string(),
@@ -24,6 +23,7 @@ const baseSchema = z.object({
     completed: z.number().optional(),
     expected: z.number().optional(),
   }),
+  categories: z.array(z.string()).optional(),
   priority: z.number().min(1).max(4),
 });
 
@@ -33,21 +33,6 @@ export const taskSchema = baseSchema.extend({
   subTasks: subTaskSchema.array().optional(),
 });
 
-export const postTaskSchema = taskSchema.extend({
+export const newTaskSchema = taskSchema.extend({
   id: z.never().optional(),
-});
-
-export const createTaskOptionsSchema = z.object({
-  userID: userIDSchema,
-  task: postTaskSchema
-});
-
-export const getTaskOptionsSchema = z.object({
-  userID: userIDSchema,
-  taskID: taskIDSchema
-})
-export const updateTaskOptionsSchema = z.object({
-  userID: userIDSchema,
-  taskID: taskIDSchema,
-  newTask: taskSchema,
 });
