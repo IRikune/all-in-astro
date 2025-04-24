@@ -1,0 +1,23 @@
+### Check if the server is running
+
+GET http://localhost:8000/
+
+### Create a new user
+POST http://localhost:8000/users/
+Content-Type: application/json
+
+{
+    "name": "Test",
+    "email": "test@test.com",
+    "password": "test.test",
+    "avatar": "https://astro.build/assets/logo.svg"
+}
+
+### Update a user
+PATCH http://localhost:8000/users/
+Content-Type: application/json
+
+### Create a new task
+POST http://localhost:8000/tasks/
+
+DELETE http://localhost:8000/users/

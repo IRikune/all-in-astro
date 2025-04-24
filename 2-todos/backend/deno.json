@@ -2,10 +2,12 @@
   "imports": {
     "@std/ulid": "jsr:@std/ulid@^1.0.0",
     "hono": "jsr:@hono/hono@^4.6.16",
+    "vitest": "npm:vitest@^3.1.2",
     "zod": "npm:zod@^3.24.2"
   },
   "tasks": {
-    "start": "deno run --allow-net --unstable-kv --watch main.ts"
+    "start": "deno run --allow-net --unstable-kv --watch main.ts",
+    "test": "deno test vitest"
   },
   "compilerOptions": {
     "jsx": "precompile",
