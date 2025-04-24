@@ -1,6 +1,5 @@
 import { signal } from '@preact/signals';
 import { error } from '../components/preact/FormLogin';
-import type { Task as TaskType } from '../../../backend/types/mod';
 
 enum endPoints {
 	users = 'http://localhost:8000/users',
@@ -10,7 +9,7 @@ enum endPoints {
 export const taskError = signal('');
 export const taskCreated = signal(false);
 
-export const listTasks = signal<TaskType[]>([]);
+export const listTasks = signal([]);
 
 export const handleSubmit = (
 	event: SubmitEvent,
