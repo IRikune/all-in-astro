@@ -1,14 +1,11 @@
 import { Task } from './Task';
-import { signal } from '@preact/signals';
-import type { Task as TaskType } from '../../../deno/types/mod';
+import { effect, signal } from '@preact/signals';
 import { tasks } from '../../utils/mocks';
 import { DragHandleIcon } from './icons/DragHandleIcon';
-
-export const showTaskDetails = signal(false);
-
-const listTasks = signal<TaskType[]>(tasks);
+import { getTasks, listTasks } from '../../hooks/mod';
 
 export function ListTask() {
+	effect(() => getTasks());
 	return (
 		<section class="container flex flex-col gap-2">
 			{listTasks.value.map((task) => {

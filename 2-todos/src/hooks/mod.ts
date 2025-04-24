@@ -1,5 +1,7 @@
 import { signal } from "@preact/signals";
 import { error } from "../components/preact/FormLogin";
+import type { Task as TaskType } from '../../deno/types/mod';
+
 
 enum endPoints{
     users = "http://localhost:8000/users",
@@ -8,6 +10,9 @@ enum endPoints{
 };
 export const taskError = signal('');
 export const taskCreated=signal(false);
+
+export const listTasks = signal<TaskType[]>([]);
+
 
 export const handleSubmit = (
 	event: SubmitEvent,
@@ -74,6 +79,26 @@ export function useCreateTask(bodyContent: string) {
         }
         
         taskCreated.value=true;
+    })
+    .catch((error) => {
+        taskError.value=error;
+        taskCreated.value=false;
+    });
+}
+
+export function getTasks() {
+    fetch('http://localhost:8000/tasks/01JQSD6YFW3KHJ0NDZMRQ8960D', {
+        method: 'GET',
+    })
+    .then((response) => {
+        console.log(response)
+        if (!response.ok) {
+            const responseError = `Error ${response.status}`
+            taskError.value = responseError;
+            taskCreated.value=false;     
+        }
+        
+      
     })
     .catch((error) => {
         taskError.value=error;
