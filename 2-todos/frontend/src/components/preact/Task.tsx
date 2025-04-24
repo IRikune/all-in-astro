@@ -1,15 +1,13 @@
 import { signal } from '@preact/signals';
-import { Priority, type Task as TaskType } from '../../../deno/types/mod';
+import { Priority, type Task as TaskType } from '../../../../backend/types/mod';
 import { Button } from './Button';
 import { Checker } from './Checker';
 import { Icon } from './icons/Icon';
 import { tasks } from '../../utils/mocks';
-import { showTaskDetails } from './ListTask';
 import { Modal } from './Modal';
 import { ShowModal } from './ShowModal';
 import type { JSX } from 'preact/jsx-runtime';
 import { CrossIcon } from './icons/CrossIcon';
-import { ChevronIcon } from './icons/ChevronIcon';
 import { ChevronDownIcon } from './icons/ChevronDownIcon';
 import { ChevronUpIcon } from './icons/ChevronUpIcon';
 import { MoreHorizontalIcon } from './icons/MoreHorizontal';
