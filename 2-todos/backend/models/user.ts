@@ -1,4 +1,4 @@
-import type { KvResult, NewUser, Result, User } from "../types/mod.ts";
+import type { KvResult, NewUser, User } from "../types/mod.ts";
 import { monotonicUlid as ulid } from "@std/ulid/monotonic-ulid";
 import { kv } from "../main.ts";
 
@@ -20,7 +20,7 @@ export async function getUserByID({
   return result;
 }
 
-export async function getUsers(): Promise<Result<User[]>> {
+export async function getUsers(): Promise<KvResult<User[]>> {
   const entries = kv.list<User>({ prefix: ["users"] });
   const listUsers = [];
   for await (const user of entries) {
@@ -31,10 +31,10 @@ export async function getUsers(): Promise<Result<User[]>> {
       ok: false,
       data: null,
       message: "No users found",
-    } as Result<User[]>;
+    };
     return result;
   }
-  const result = { ok: true, data: listUsers } as Result<User[]>;
+  const result = { ok: true, data: listUsers };
   return result;
 }
 
@@ -44,19 +44,11 @@ interface GetUserByEmailOptions {
 
 export async function getUserByEmail({
   email,
-}: GetUserByEmailOptions): Promise<Result<User>> {
+}: GetUserByEmailOptions): Promise<KvResult<User>> {
   const key = ["users", email];
-  const entry = await kv.get<User>(key);
-  const user = entry?.value;
-  if (user === null) {
-    const result = {
-      ok: false,
-      data: null,
-      message: "User not found",
-    } as Result<User>;
-    return result;
-  }
-  const result = { ok: true, data: user } as Result<User>;
+  const user = await kv.get<User>(key);
+  if (user === null) return { ok: false, data: null };
+  const result = { ok: true, data: user.value, versionstamp: "" };
   return result;
 }
 
@@ -64,12 +56,13 @@ interface CreateUserOptions {
   user: NewUser;
 }
 
-export async function createUser({ user }: CreateUserOptions) {
+export async function createUser(
+  { user }: CreateUserOptions,
+): Promise<KvResult<User["id"]>> {
   const userID = ulid();
   const newUser = { ...user, id: userID };
   const userKey = ["users", userID];
   const emailKey = ["users", user.email];
-
   const res = await kv
     .atomic()
     .check({ key: userKey, versionstamp: null })
@@ -78,8 +71,8 @@ export async function createUser({ user }: CreateUserOptions) {
     .set(emailKey, newUser)
     .commit();
   const result = {
-    ...res,
-    id: res.ok && userID,
+    ok: res.ok,
+    data: userID,
   };
   return result;
 }
@@ -89,11 +82,22 @@ interface UpdateUserOptions {
   newUser: NewUser;
 }
 
-export async function updateUser({ userID, newUser }: UpdateUserOptions) {
+export async function updateUser(
+  { userID, newUser }: UpdateUserOptions,
+): Promise<KvResult<User["id"]>> {
   const key = ["users", userID];
   const user = await kv.get<User>(key);
-  const result = await kv.atomic().check(user).set(key, newUser).commit();
-  return result;
+  if (user.value === null) return { ok: false, data: null };
+  const res = await kv
+    .atomic()
+    .check(user)
+    .set(key, newUser)
+    .commit();
+  return {
+    ok: res.ok,
+    data: user.value.id,
+    versionstamp: user.versionstamp,
+  };
 }
 
 interface deleteUserOptions {
@@ -102,10 +106,14 @@ interface deleteUserOptions {
 
 export async function deleteUser({
   userID,
-}: deleteUserOptions): Promise<Result<User>> {
+}: deleteUserOptions): Promise<KvResult<User>> {
   const key = ["users", userID];
   const user = await kv.get<User>(key);
-  await kv.atomic().check(user).delete(key).commit();
-  const result = { ok: true, data: user.value } as Result<User>;
+  if (user.value === null) return { ok: false, data: null };
+  const res = await kv.atomic()
+    .check(user)
+    .delete(key)
+    .commit();
+  const result = { ok: res.ok, data: user.value };
   return result;
 }
