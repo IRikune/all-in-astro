@@ -17,9 +17,9 @@ const factory = createFactory();
 
 export const getTaskHandlers = factory.createHandlers(
   validator("param", (value) => {
-    const parsed = taskIDSchema.safeParse(value);
+    const parsed = taskIDSchema.safeParse(value?.taskID);
     if (!parsed.success) {
-      throw new HTTPException(400, { message: "taskID invalid" });
+      throw new HTTPException(400, { message: "Task ID is invalid" });
     }
     return parsed.data;
   }),
@@ -34,7 +34,7 @@ export const getManyTaskHandlers = factory.createHandlers(
   validator("param", (value) => {
     const parsed = userIDSchema.safeParse(value);
     if (!parsed.success) {
-      throw new HTTPException(400, { message: "Invalid userID" });
+      throw new HTTPException(400, { message: "User ID is Invalid" });
     }
     return parsed.data;
   }),

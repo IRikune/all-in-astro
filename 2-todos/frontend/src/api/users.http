@@ -6,17 +6,17 @@ POST http://localhost:8000/users/
 Content-Type: application/json
 
 {
-	"name": "Pablito4",
-    "email": "pablito4@gmail.com",
+	"name": "Pablito5",
+    "email": "pablito5@gmail.com",
     "password": "password",
     "avatar": "https://url.com/avatar.png"
 }
 
 ### 
 
-PATCH http://localhost:8000/users/
+PATCH http://localhost:8000/users/01JSPBGVGKDBDF17WP763TXW72
 
 
 ###
 
-DELETE http://localhost:8000/users/01JSN2M5RANS5JZ7ARJK5H1CB3
+DELETE http://localhost:8000/users/01JSPBGVGKDBDF17WP763TXW72
