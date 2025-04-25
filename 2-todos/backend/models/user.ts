@@ -26,14 +26,7 @@ export async function getUsers(): Promise<KvResult<User[]>> {
   for await (const user of entries) {
     listUsers.push(user.value);
   }
-  if (listUsers.length === 0) {
-    const result = {
-      ok: false,
-      data: null,
-      message: "No users found",
-    };
-    return result;
-  }
+  if (listUsers.length === 0) return { ok: false, data: null };
   const result = { ok: true, data: listUsers };
   return result;
 }
