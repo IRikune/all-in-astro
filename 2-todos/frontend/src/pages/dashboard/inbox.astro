@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "../../components/preact/icons/Icon";
+import Task from "../../components/svelte/Task.svelte";
 ---
 
 <Layout title="Inbox">
@@ -12,4 +13,5 @@ import { Icon } from "../../components/preact/icons/Icon";
     >
         Inbox
     </h1>
+    <Task client:load />
 </Layout>
