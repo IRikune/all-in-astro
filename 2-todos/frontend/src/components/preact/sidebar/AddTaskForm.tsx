@@ -7,6 +7,7 @@ import { ChevronIcon } from '../icons/ChevronIcon.tsx';
 import type { JSX } from 'preact/jsx-runtime';
 import { Priority, type NewTask } from '../../../types/mod';
 import { useCreateTask } from '../../../hooks/tasks.ts';
+import { userID } from '../../../stores/mod';
 
 const title = signal<NewTask['title']>('');
 const description = signal<NewTask['content']>('');
@@ -26,7 +27,7 @@ async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
 	const result = await useCreateTask({
 		newTask: {
 			title: title.value,
-			creator: '01JSQ04F625GGVDV5ZNENSDRRZ',
+			creator: userID,
 			date: {
 				created: Date.now(),
 				expected: expectedDate.value,

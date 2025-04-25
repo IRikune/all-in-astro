@@ -16,7 +16,7 @@ tasks.get("/", (c) => {
 
 tasks.get("/:taskID", ...getTaskHandlers);
 
-tasks.get("/:userID", ...getManyTaskHandlers);
+tasks.get("/users/:userID", ...getManyTaskHandlers);
 
 tasks.post("/", ...createTaskHandlers);
 

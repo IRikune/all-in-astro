@@ -1,13 +1,12 @@
 import { Task } from './Task';
 import { effect, signal } from '@preact/signals';
-import { tasks } from '../../utils/mocks';
 import { DragHandleIcon } from './icons/DragHandleIcon';
-import { listTasks } from '../../hooks/mod';
+import { tasks } from '../../stores/mod';
 
 export function ListTask() {
 	return (
 		<section class="container flex flex-col gap-2">
-			{listTasks.value.map((task) => {
+			{tasks.value.map((task) => {
 				return (
 					<div
 						key={task.id}

@@ -6,7 +6,7 @@ import {
   createTask,
   deleteCompleteTask,
   deleteUserTask,
-  getManyTask,
+  getManyTasks,
   getTask,
   updateTask,
 } from "../models/tasks.ts";
@@ -33,7 +33,7 @@ export const getTaskHandlers = factory.createHandlers(
 
 export const getManyTaskHandlers = factory.createHandlers(
   validator("param", (value) => {
-    const parsed = userIDSchema.safeParse(value);
+    const parsed = userIDSchema.safeParse(value.userID);
     if (!parsed.success) {
       throw new HTTPException(400, { message: "User ID is Invalid" });
     }
@@ -41,7 +41,8 @@ export const getManyTaskHandlers = factory.createHandlers(
   }),
   async (c) => {
     const userID = c.req.valid("param");
-    const tasks = await getManyTask({ userID });
+    console.log(userID);
+    const tasks = await getManyTasks({ userID });
     return c.json(tasks);
   },
 );

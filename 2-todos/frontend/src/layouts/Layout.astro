@@ -30,6 +30,16 @@ const { pathname: currentPage } = Astro.url;
 	</body>
 </html>
 
+<script>
+	import { useGetManyTasks } from "../hooks/tasks.ts";
+	import { tasks } from "../stores/mod";
+
+	const res = await useGetManyTasks({ userID: "01JSQ04F625GGVDV5ZNENSDRRZ" });
+	if (res.ok && res.data) {
+		tasks.value = res.data;
+	}
+</script>
+
 <style>
 	html,
 	body {

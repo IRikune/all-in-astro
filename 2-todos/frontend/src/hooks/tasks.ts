@@ -1,16 +1,17 @@
 import type { NewTask, Result, Task } from "../types/mod";
+import { Endpoints } from "../stores/mod";
 import { tasks } from "../stores/mod";
 
-const API_URL = 'http://localhost:3000/tasks/';
+const API_URL = 'http://localhost:8000/tasks/';
 
 interface useGetTasksOptions {
-	id?: string;
+	userID: string;
 }
 
-export async function useGetTasks({ id }: useGetTasksOptions) {
-	const response = await fetch(`${API_URL}${id}`);
+export async function useGetManyTasks({ userID }: useGetTasksOptions): Promise<Result<Task[]>> {
+	const response = await fetch(`${Endpoints.tasks}users/${userID}`);
 	const data = await response.json();
-	return data;
+	return data
 }
 
 interface useCreateTaskOptions {
@@ -27,3 +28,5 @@ export async function useCreateTask({ newTask }: useCreateTaskOptions): Promise<
 	const data = await response.json();
 	return data;
 }
+
+

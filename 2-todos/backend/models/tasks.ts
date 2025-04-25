@@ -6,7 +6,7 @@ interface GetTasksOptions {
   userID: User["id"];
 }
 
-export async function getManyTask({
+export async function getManyTasks({
   userID,
 }: GetTasksOptions): Promise<KvResult<Task[]>> {
   const key = ["tasks", userID];
