@@ -17,9 +17,9 @@ export function Modal(props: ModalProps) {
 			</label>
 			<main
 				class={`peer-checked:motion-scale-in
-					 peer-checked:motion-translate-y-in-25
-					 peer-not-checked:motion-translate-y-out-25
-					 peer-checked:motion-opacity-in peer-not-checked:motion-opacity-out peer-not-checked:motion-scale-out-[0.1] starting:opacity-0 starting:scale-0 motion-ease-spring-bouncier motion-duration-300 ${props.class}`}
+					peer-checked:motion-translate-y-in-25
+					peer-not-checked:motion-translate-y-out-25
+					peer-checked:motion-opacity-in peer-not-checked:motion-opacity-out peer-not-checked:motion-scale-out-[0.1] starting:opacity-0 starting:scale-0 motion-ease-spring-bouncier motion-duration-300 ${props.class}`}
 			>
 				{props.children}
 			</main>

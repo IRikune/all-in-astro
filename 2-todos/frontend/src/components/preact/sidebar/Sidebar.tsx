@@ -58,7 +58,7 @@ export function Sidebar({ class: className, currentPage }: Props) {
 				</Button>
 			</section>
 			<Modal
-				class="fixed left-5/3 top-2 translate-x-1/2 translate-y-1/2 z-[100]"
+				class="fixed left-6/3 top- translate-x-1/2 translate-y-1/2 z-[100]"
 				id="add-task-modal"
 			>
 				<div class="bg-white w-xl text-center shadow-theme-2 rounded-lg p-2">

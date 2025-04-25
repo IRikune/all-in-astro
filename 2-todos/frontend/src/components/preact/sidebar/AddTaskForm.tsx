@@ -1,13 +1,13 @@
 import { signal } from '@preact/signals';
-import type { Task } from '../../../../../backend/types/mod.ts';
-import { CalendarIcon } from '../icons/CalendarIcon.tsx';
-import { PriorityIcon } from '../icons/PriorityIcon.tsx';
-import { ClockIcon } from '../icons/ClockIcon.tsx';
-import { BookMarkIcon } from '../icons/BookMarkIcon.tsx';
-import { InboxIcon } from '../icons/InboxIcon.tsx';
-import { ChevronIcon } from '../icons/ChevronIcon.tsx';
-import { taskError, useCreateTask } from '../../../hooks/mod.ts';
-import { handleSubmit } from '../../../hooks/mod.ts';
+import type { Task } from '../../../../../backend/types/mod';
+import { CalendarIcon } from '../icons/CalendarIcon';
+import { PriorityIcon } from '../icons/PriorityIcon';
+import { ClockIcon } from '../icons/ClockIcon';
+import { BookMarkIcon } from '../icons/BookMarkIcon';
+import { InboxIcon } from '../icons/InboxIcon';
+import { ChevronIcon } from '../icons/ChevronIcon';
+import { taskError, useCreateTask } from '../../../hooks/mod';
+import { handleSubmit } from '../../../hooks/mod';
 import type { JSX } from 'preact/jsx-runtime';
 
 const title = signal('');
