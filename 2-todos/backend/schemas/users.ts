@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 export const userIDSchema = z.string().ulid();
 
 export const newUserSchema = z.object({
@@ -7,9 +8,11 @@ export const newUserSchema = z.object({
   password: z.string().min(8),
   avatar: z.string(),
 });
+
 export const userSchema = newUserSchema.extend({
   id: z.string().ulid(),
 });
+
 export const postUserSchema = userSchema.extend({
   id: z.never().optional(),
 }).strict();

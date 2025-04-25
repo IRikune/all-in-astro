@@ -2,7 +2,7 @@ GET http://localhost:8000/tasks/
 
 ###
 
-GET http://localhost:8000/tasks/01JSPC0SNDTGW0XP7CZEWJZKEN
+GET http://localhost:8000/tasks/01JSPDYW2HD6RPBEQW19M82VRS
 
 ###
 
@@ -10,9 +10,28 @@ POST http://localhost:8000/tasks/
 Content-Type: application/json
 
 {
-	"title": "Task title",
+	"title": "Tarea de test",
 	"content": "Task content",
 	"completed": false,
+    "creator": "01JSQ04F625GGVDV5ZNENSDRRZ",
+	"date": {
+		"created": 1673213200,
+		"completed": 1673213200,
+		"expected": 1673213200
+	},
+	"categories": ["category1", "category2"],
+	"priority": 1
+}
+
+###
+
+PATCH http://localhost:8000/tasks/01JSPDYW2HD6RPBEQW19M82VRS
+Content-Type: application/json
+
+{
+	"title": "Task title",
+	"content": "Task content",
+	"completed": true,
     "creator": "01JSP9J68CK06JQMHQY04QS3MG",
 	"date": {
 		"created": 1673213200,
@@ -22,3 +41,6 @@ Content-Type: application/json
 	"categories": ["category1", "category2"],
 	"priority": 1
 }
+
+###
+DELETE http://localhost:8000/tasks/01JSQ06QSYXTBQN4DR81PSNK3V/01JSQ04F625GGVDV5ZNENSDRRZ

@@ -44,7 +44,6 @@ export function useRegister(data: FormData) {
 		});
 }
 
-//funcion optener usuario
 export function useLogin(bodyContent: FormData) {
 	fetch(endPoints.login, {
 		method: 'POST',

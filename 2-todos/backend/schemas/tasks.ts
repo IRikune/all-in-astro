@@ -26,6 +26,7 @@ export const newTaskSchema = z.object({
   }),
   categories: z.array(z.string()).optional(),
   priority: z.number().min(1).max(4),
+  colaborators: z.array(userIDSchema).optional(),
 });
 
 export const taskSchema = newTaskSchema.extend({

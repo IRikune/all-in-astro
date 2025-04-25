@@ -76,16 +76,16 @@ export const deleteUserHandlers = factory.createHandlers(
 
 export const updateUserHandlers = factory.createHandlers(
   validator("json", (value) => {
-    const valid = postUserSchema.safeParse(value);
-    if (!valid.success) {
-      throw new HTTPException(402, valid.error);
+    const parsed = postUserSchema.safeParse(value);
+    if (!parsed.success) {
+      throw new HTTPException(402, parsed.error);
     }
-    return valid.data;
+    return parsed.data;
   }),
   validator("param", (value) => {
     const parsed = userIDSchema.safeParse(value.userID);
     if (!parsed.success) {
-      throw new HTTPException(400, parsed.error);
+      throw new HTTPException(400, { message: "user invalitor2" });
     }
     return parsed.data;
   }),

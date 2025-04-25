@@ -1,12 +1,6 @@
 import { monotonicUlid as ulid } from "@std/ulid";
 import { kv } from "../main.ts";
-import type {
-  DenoKVCommit,
-  KvResult,
-  NewTask,
-  Task,
-  User,
-} from "../types/mod.ts";
+import type { KvResult, NewTask, Task, User } from "../types/mod.ts";
 
 interface GetTasksOptions {
   userID: User["id"];
@@ -64,30 +58,46 @@ interface DeleteTaskOptions {
   taskID: Task["id"];
 }
 
-interface DeleteTaskOptions {
+interface DeleteUserTaskOptions {
   userID: User["id"];
   taskID: Task["id"];
 }
 
-export async function deleteTask({
-  userID,
+export async function deleteUserTask({
   taskID,
-}: DeleteTaskOptions): Promise<KvResult<Task["id"]>> {
-  const key = [userID, "tasks", taskID];
-  await kv.delete(key);
+  userID,
+}: DeleteUserTaskOptions): Promise<KvResult<Task["id"]>> {
+  const taskByCreatorKey = ["tasks", userID, taskID];
+  await kv.delete(taskByCreatorKey);
   const result = { ok: true, data: taskID };
+  console.log(result);
+  return result;
+}
+
+type DeleteCompleteTaskResponse = Promise<KvResult<Record<Task["id"], Task>>>;
+
+export async function deleteCompleteTask(
+  { taskID, userID }: DeleteUserTaskOptions,
+): Promise<KvResult<Task["id"]>> {
+  const taskByIDKey = ["tasks", taskID];
+  const taskByCreatorKey = ["tasks", userID, taskID];
+  const res = await kv.atomic()
+    .delete(taskByCreatorKey)
+    .delete(taskByIDKey)
+    .commit();
+  const result = { ok: res.ok, data: taskID };
   return result;
 }
 
 interface UpdateTaskOptions {
   taskID: Task["id"];
-  newTask: Task;
+  newTask: NewTask;
 }
 
 export async function updateTask({
   taskID,
   newTask,
-}: UpdateTaskOptions): Promise<KvResult<DenoKVCommit>> {
+}: UpdateTaskOptions): Promise<KvResult<Task["id"]>> {
   const key = ["tasks", taskID];
   const creatorKey = ["tasks", newTask.creator, taskID];
   const res = await kv
@@ -95,7 +105,8 @@ export async function updateTask({
     .set(key, newTask)
     .set(creatorKey, newTask)
     .commit();
-  const result = { ok: true, data: res };
+  if (!res.ok) return { ok: false, data: null };
+  const result = { ok: true, data: taskID };
   return result;
 }
 

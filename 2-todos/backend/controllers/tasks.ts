@@ -4,12 +4,13 @@ import { HTTPException } from "hono/http-exception";
 import { getUserByID } from "../models/user.ts";
 import {
   createTask,
-  deleteTask,
+  deleteCompleteTask,
+  deleteUserTask,
   getManyTask,
   getTask,
   updateTask,
 } from "../models/tasks.ts";
-import { newTaskSchema, taskIDSchema, taskSchema } from "../schemas/tasks.ts";
+import { newTaskSchema, taskIDSchema } from "../schemas/tasks.ts";
 import { userIDSchema } from "../schemas/users.ts";
 import type { Result, Task } from "../types/mod.ts";
 
@@ -78,31 +79,49 @@ export const deleteTaskHandlers = factory.createHandlers(
     const parsedUserID = userIDSchema.safeParse(value.userID);
     const parsedTaskID = taskIDSchema.safeParse(value.taskID);
     if (!parsedUserID.success) {
-      throw new HTTPException(400, { message: "user invalitor" });
+      throw new HTTPException(400, { message: "User ID is invalid" });
     }
     if (!parsedTaskID.success) {
-      throw new HTTPException(400, { message: "taskID invalid" });
+      throw new HTTPException(400, { message: "Task ID is invalid" });
     }
     return { userID: parsedUserID.data, taskID: parsedTaskID.data };
   }),
   async (c) => {
     const { taskID, userID } = c.req.valid("param");
-    const result = await deleteTask({ userID, taskID });
+    const task = await getTask({ taskID });
+    if (!task.ok) {
+      throw new HTTPException(400, { message: "Task not found" });
+    }
+    if (task.data?.colaborators) {
+      const res = await deleteUserTask({ taskID, userID });
+      const result = {
+        ok: res.ok,
+        data: res.data,
+        message: "Task deleted from user",
+      };
+      console.log(result);
+      return c.json(result);
+    }
+    const res = await deleteCompleteTask({ userID, taskID });
+    const result = {
+      ok: res.ok,
+      data: res.data,
+      message: "Task deleted completely",
+    };
     return c.json(result);
   },
 );
 
 export const updateTaskHandlers = factory.createHandlers(
   validator("param", (value) => {
-    const parsed = taskIDSchema.safeParse(value);
+    const parsed = taskIDSchema.safeParse(value.taskID);
     if (!parsed.success) {
-      throw new HTTPException(400, { message: "task invalitor" });
+      throw new HTTPException(400, { message: "Task ID is invalid" });
     }
-
     return parsed.data;
   }),
   validator("json", (value) => {
-    const parse = taskSchema.safeParse(value);
+    const parse = newTaskSchema.safeParse(value);
     if (!parse.success) {
       throw new HTTPException(400, parse.error);
     }
@@ -115,6 +134,11 @@ export const updateTaskHandlers = factory.createHandlers(
       taskID,
       newTask,
     });
-    return c.json(updatedTask);
+    const result = {
+      ok: updatedTask.ok,
+      data: updatedTask.data,
+      message: "Task updated succesfully",
+    };
+    return c.json(result);
   },
 );

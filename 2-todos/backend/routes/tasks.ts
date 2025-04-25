@@ -20,6 +20,6 @@ tasks.get("/:userID", ...getManyTaskHandlers);
 
 tasks.post("/", ...createTaskHandlers);
 
-tasks.delete("/:userID/:taskID", ...deleteTaskHandlers);
+tasks.delete("/:taskID/:userID", ...deleteTaskHandlers);
 
 tasks.patch("/:taskID", ...updateTaskHandlers);
