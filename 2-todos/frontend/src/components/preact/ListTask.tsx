@@ -2,10 +2,9 @@ import { Task } from './Task';
 import { effect, signal } from '@preact/signals';
 import { tasks } from '../../utils/mocks';
 import { DragHandleIcon } from './icons/DragHandleIcon';
-import { getTasks, listTasks } from '../../hooks/mod';
+import { listTasks } from '../../hooks/mod';
 
 export function ListTask() {
-	effect(() => getTasks());
 	return (
 		<section class="container flex flex-col gap-2">
 			{listTasks.value.map((task) => {

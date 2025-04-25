@@ -1,6 +1,5 @@
 import { signal } from '@preact/signals';
 import { useLogin, handleSubmit } from '../../hooks/mod';
-export const error = signal('');
 
 export function FormLogin() {
 	return (

@@ -1,5 +1,4 @@
-interface BaseTask {
-	id?: string;
+export interface NewTask {
 	title: string;
 	creator: string;
 	content?: string;
@@ -12,6 +11,7 @@ interface BaseTask {
 	};
 	categories?: string[];
 	priority: number;
+	collaborators?: string[];
 }
 
 interface Comment {
@@ -21,10 +21,10 @@ interface Comment {
 	createdAt: number;
 }
 
-interface SubTask extends BaseTask {}
 
-export interface Task extends BaseTask {
-	subTasks?: SubTask[];
+export interface Task extends NewTask {
+	id: string,
+	subTasks?: NewTask[];
 }
 
 export interface User {
@@ -39,3 +39,7 @@ export enum Priority {
 	medium = 3,
 	low =  4,
 }
+
+export type Result<T> =
+  | { ok: boolean; data: T; message: string; versionstamp?: string }
+  | { ok: boolean; data: null; message: string };
