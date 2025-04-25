@@ -9,7 +9,7 @@ Content-Type: application/json
 	"title": "Task title",
 	"content": "Task content",
 	"completed": false,
-    "creator": "",
+    "creator": "01JSP9J68CK06JQMHQY04QS3MG",
 	"date": {
 		"created": 1673213200,
 		"completed": 1673213200,

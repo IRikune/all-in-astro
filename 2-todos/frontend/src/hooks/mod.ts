@@ -58,7 +58,6 @@ export function useLogin(bodyContent: FormData) {
 					`Network response was not ok status:${response.status}`,
 				);
 			}
-			console.log('respuesta:', response);
 			return response.json();
 		})
 		.catch((error) => {
@@ -92,7 +91,6 @@ export function getTasks() {
 		method: 'GET',
 	})
 		.then((response) => {
-			console.log(response);
 			if (!response.ok) {
 				const responseError = `Error ${response.status}`;
 				taskError.value = responseError;

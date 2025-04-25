@@ -9,7 +9,6 @@ import type {
 import type {
   commentSchema,
   newTaskSchema,
-  subTaskSchema,
   taskIDSchema,
   taskSchema,
 } from "../schemas/tasks.ts";
@@ -17,7 +16,6 @@ import type {
 //#region task
 export type Comment = z.infer<typeof commentSchema>;
 export type Task = z.infer<typeof taskSchema>;
-export type SubTask = z.infer<typeof subTaskSchema>;
 export type NewTask = z.infer<typeof newTaskSchema>;
 export type TaskID = z.infer<typeof taskIDSchema>;
 
@@ -35,8 +33,12 @@ export type UserID = z.infer<typeof userIDSchema>;
 export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
 
 export type Result<T> =
-  | { ok: true; data: T; message: string; versionstamp?: string }
-  | { ok: false; data: null; message: string };
+  | { ok: boolean; data: T; message: string; versionstamp?: string }
+  | { ok: boolean; data: null; message: string };
+
+export type KvResult<T> =
+  | { ok: boolean; data: T; versionstamp?: string }
+  | { ok: boolean; data: null };
 
 const kvResult = await kv.atomic().commit();
 

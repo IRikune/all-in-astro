@@ -11,8 +11,9 @@ export const commentSchema = z.object({
 });
 
 //interface Task
-const baseSchema = z.object({
-  id: z.string().ulid().optional(),
+
+export const newTaskSchema = z.object({
+  id: z.unknown(),
   title: z.string(),
   creator: userIDSchema,
   content: z.string().optional(),
@@ -27,12 +28,7 @@ const baseSchema = z.object({
   priority: z.number().min(1).max(4),
 });
 
-export const subTaskSchema = baseSchema.extend({});
-
-export const taskSchema = baseSchema.extend({
-  subTasks: subTaskSchema.array().optional(),
-});
-
-export const newTaskSchema = taskSchema.extend({
-  id: z.never().optional(),
+export const taskSchema = newTaskSchema.extend({
+  id: z.string().ulid(),
+  subTasks: newTaskSchema.array().optional(),
 });

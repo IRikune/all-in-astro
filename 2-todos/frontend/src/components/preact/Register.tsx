@@ -11,9 +11,7 @@ export function Register() {
 		event.preventDefault();
 		const form = event.currentTarget as HTMLFormElement;
 		const formData = new FormData(form);
-		console.log('formData:', formData);
 	};
-
 	return (
 		<form onSubmit={handleSubmit}>
 			<label for="email">

@@ -1,6 +1,7 @@
 import { createFactory } from "hono/factory";
 import { validator } from "hono/validator";
 import { HTTPException } from "hono/http-exception";
+import { getUserByID } from "../models/user.ts";
 import {
   createTask,
   deleteTask,
@@ -10,6 +11,7 @@ import {
 } from "../models/tasks.ts";
 import { newTaskSchema, taskIDSchema, taskSchema } from "../schemas/tasks.ts";
 import { userIDSchema } from "../schemas/users.ts";
+import type { Result, Task } from "../types/mod.ts";
 
 const factory = createFactory();
 
@@ -53,10 +55,20 @@ export const createTaskHandlers = factory.createHandlers(
   }),
   async (c) => {
     const task = c.req.valid("json");
-    const result = await createTask({ task });
-    if (!result.ok) {
-      throw new HTTPException(400, { message: "Task creation failed" });
+    const creator = await getUserByID({ userID: task.creator });
+    console.log(creator);
+    if (!creator.ok) {
+      throw new HTTPException(400, { message: "Task creator not found" });
     }
+    const taskResult = await createTask({ task });
+    if (!taskResult.ok) {
+      throw new HTTPException(400, { message: "Task already exists" });
+    }
+    const result = {
+      ok: taskResult.ok,
+      data: taskResult.data,
+      message: "Task created succesfull",
+    } as Result<Task["id"]>;
     return c.json(result);
   },
 );

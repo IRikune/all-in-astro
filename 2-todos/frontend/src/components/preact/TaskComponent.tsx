@@ -1,4 +1,4 @@
-import { Priority } from '../../../../backend/types/mod';
+import { Priority } from '../../types/mod';
 import { Checker } from './Checker';
 import { Icon } from './icons/Icon';
 
