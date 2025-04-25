@@ -7,7 +7,7 @@ interface ShowModalprops extends JSX.HTMLAttributes<HTMLLabelElement> {
 
 export function ShowModal(props: ShowModalprops) {
 	return (
-		<label for={props.for} class={`${props.class}`}>
+		<label htmlFor={props.for} class={`${props.class}`}>
 			{props.children}
 		</label>
 	);
