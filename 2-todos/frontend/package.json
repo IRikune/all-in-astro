@@ -16,10 +16,10 @@
     "@fontsource-variable/montserrat": "5.1.1",
     "@preact/signals": "^2.0.1",
     "@tailwindcss/vite": "^4.0.1",
-    "@thisux/sveltednd": "^0.0.20",
     "astro": "5.1.7",
     "preact": "^10.25.4",
     "svelte": "^5.28.2",
+    "svelte-dnd-action": "^0.9.61",
     "swapy": "^1.0.5",
     "tailwindcss": "4.1.4",
     "typescript": "^5.8.3"

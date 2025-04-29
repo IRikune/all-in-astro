@@ -29,9 +29,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.1
         version: 4.0.1(vite@6.0.7(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
-      '@thisux/sveltednd':
-        specifier: ^0.0.20
-        version: 0.0.20(svelte@5.28.2)
       astro:
         specifier: 5.1.7
         version: 5.1.7(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.0)
@@ -41,6 +38,9 @@ importers:
       svelte:
         specifier: ^5.28.2
         version: 5.28.2
+      svelte-dnd-action:
+        specifier: ^0.9.61
+        version: 0.9.61(svelte@5.28.2)
       swapy:
         specifier: ^1.0.5
         version: 1.0.5
@@ -1229,24 +1229,6 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6
 
-  '@thisux/sveltednd@0.0.14':
-    resolution: {integrity: sha512-Vbq69SU3HUomPg6oCXtb89OG89hka0YIkdaErYibn3waK7tYE66IcQxD/Fzg8YNW3EVsXoA9kc7kW5EUBCSQGg==}
-
-  '@thisux/sveltednd@0.0.17':
-    resolution: {integrity: sha512-lRninjw439phhA8xAHqCpMAX0hnwFMdbXW4M0XJgAdnGxeum+QsLiIC4P3HnkNXAygsVKUqxRcbS84CxDZ9hPw==}
-    peerDependencies:
-      svelte: ^5.0.0
-
-  '@thisux/sveltednd@0.0.18':
-    resolution: {integrity: sha512-MO+iR9ZRHApvtwgWujmqwUbhv9mKs0jLOmeG4tn98GmU1/9wVOi02jrNqeggKg3c8dXz6pMmUHfOfmcq7WwYZg==}
-    peerDependencies:
-      svelte: ^5.0.0
-
-  '@thisux/sveltednd@0.0.20':
-    resolution: {integrity: sha512-VE0HopIlHIvNOfSZ1SsiIzl1AmTU0VSd2Nz2Q2nIdqIUsT/UP4hiLw2ed2jFqTKTbqC+kbCYL9vuBpkYnEw+Kw==}
-    peerDependencies:
-      svelte: ^5.0.0
-
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
@@ -2308,6 +2290,11 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  svelte-dnd-action@0.9.61:
+    resolution: {integrity: sha512-xj0jZNdV44MAMbdGIAuBYEombmK7A7ticemOtdR5ErWw0f3IxcfcnrRjlYEK0rRjsahVsU+VdGUMwjPVyXrSrA==}
+    peerDependencies:
+      svelte: '>=3.23.0 || ^5.0.0-next.0'
 
   svelte2tsx@0.7.36:
     resolution: {integrity: sha512-nBlERuCZRwmpebC8m0vDqZ9oaKsqW8frQS2l3zwFQW1voQIkItYtHxh1F5OTZEmE0meDIH6cxU36eIOQVOxlCw==}
@@ -3625,23 +3612,6 @@ snapshots:
       lightningcss: 1.29.1
       tailwindcss: 4.0.1
       vite: 6.0.7(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0)
-
-  '@thisux/sveltednd@0.0.14': {}
-
-  '@thisux/sveltednd@0.0.17(svelte@5.28.2)':
-    dependencies:
-      '@thisux/sveltednd': 0.0.14
-      svelte: 5.28.2
-
-  '@thisux/sveltednd@0.0.18(svelte@5.28.2)':
-    dependencies:
-      '@thisux/sveltednd': 0.0.17(svelte@5.28.2)
-      svelte: 5.28.2
-
-  '@thisux/sveltednd@0.0.20(svelte@5.28.2)':
-    dependencies:
-      '@thisux/sveltednd': 0.0.18(svelte@5.28.2)
-      svelte: 5.28.2
 
   '@types/cookie@0.6.0': {}
 
@@ -5096,6 +5066,10 @@ snapshots:
   strip-bom@3.0.0: {}
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  svelte-dnd-action@0.9.61(svelte@5.28.2):
+    dependencies:
+      svelte: 5.28.2
 
   svelte2tsx@0.7.36(svelte@5.28.2)(typescript@5.8.3):
     dependencies:
