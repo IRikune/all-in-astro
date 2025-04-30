@@ -20,12 +20,12 @@
     "preact": "^10.25.4",
     "svelte": "^5.28.2",
     "svelte-dnd-action": "^0.9.61",
-    "swapy": "^1.0.5",
     "tailwindcss": "4.1.4",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "date-fns": "^4.1.0",
     "tailwindcss-motion": "^1.1.0"
   }
 }
