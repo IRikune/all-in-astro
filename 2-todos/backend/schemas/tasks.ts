@@ -13,7 +13,6 @@ export const commentSchema = z.object({
 //interface Task
 
 export const newTaskSchema = z.object({
-  id: z.unknown(),
   title: z.string(),
   creator: userIDSchema,
   content: z.string().optional(),
@@ -27,7 +26,7 @@ export const newTaskSchema = z.object({
   categories: z.array(z.string()).optional(),
   priority: z.number().min(1).max(4),
   colaborators: z.array(userIDSchema).optional(),
-});
+}).strict();
 
 export const taskSchema = newTaskSchema.extend({
   id: z.string().ulid(),

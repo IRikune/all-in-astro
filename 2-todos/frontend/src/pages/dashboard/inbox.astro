@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "../../components/preact/icons/Icon";
 import Task from "../../components/svelte/Task.svelte";
+import TasksZone from "../../components/svelte/TasksZone.svelte";
 ---
 
 <Layout title="Inbox">
@@ -13,7 +14,7 @@ import Task from "../../components/svelte/Task.svelte";
     >
         Inbox
     </h1>
-    <section class="mx-auto">
-        <Task client:load />
-    </section>
+    <main class="mx-auto w-full px-10">
+        <TasksZone client:load />
+    </main>
 </Layout>

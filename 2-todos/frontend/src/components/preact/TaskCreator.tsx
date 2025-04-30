@@ -1,6 +1,4 @@
 import { AddTask } from './AddInlineTask';
-import type { JSX } from 'preact/jsx-runtime';
-import { signal } from '@preact/signals';
 import { AddTaskForm } from './sidebar/AddTaskForm';
 
 
