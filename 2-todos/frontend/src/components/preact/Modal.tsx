@@ -1,18 +1,26 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { JSX } from "preact/jsx-runtime";
 
 interface ModalProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	id: string;
 	backdrop?: boolean;
+	OnInput?: () => void;
 }
 
 export function Modal(props: ModalProps) {
 	return (
 		<div class="has-checked:*:block has-not-checked:*:hidden has-checked-:*:motion-scale-100 *:transition-discrete *:duration-300 has-not-checked:duration-300 peer-not-checked:opacity-0 peer-not-checked:scale-0">
 			{/* State */}
-			<input type="checkbox" id={props.id} class="peer hidden!" />
+			<input
+				onInput={props.OnInput}
+				type="checkbox"
+				id={props.id}
+				class="peer hidden!"
+			/>
 			<label for={props.id}>
 				<div
-					class={`w-dvw h-dvh fixed left-0 top-0 z-[49] ${props.backdrop && 'bg-black/20'}`}
+					class={`w-dvw h-dvh fixed left-0 top-0 z-[49] ${
+						props.backdrop && "bg-black/20"
+					}`}
 				/>
 			</label>
 			<main
