@@ -16,7 +16,7 @@
             priority: Priority.important,
         },
     }: { task?: Task } = $props();
-    const formatedDate = useFormatedDate({ date: task.date.created });
+    const formatedDate = useFormatedDate({ date: task.date.created || 0 });
 </script>
 
 <label

@@ -1,10 +1,27 @@
 <script lang="ts">
     import { flip } from "svelte/animate";
     import { dndzone } from "svelte-dnd-action";
+    import { useGetManyTasks } from "../../hooks/tasks";
     import Task from "./Task.svelte";
-    import { tasks } from "../../utils/mocks";
-    let currentTasks = [...tasks];
+    import { userID } from "../../stores/mod";
     const flipDurationMs = 300;
+    let currentTasks = $state<Task[]>([]);
+    let loading = $state<boolean>(false);
+    let error = $state<string>("");
+    useGetManyTasks({ userID })
+        .then(({ data, ok, message }) => {
+            if (ok && data) {
+                currentTasks = data;
+            } else {
+                error = message || "Error al cargar tareas";
+            }
+        })
+        .catch((err) => {
+            error = err.message;
+        })
+        .finally(() => {
+            loading = false;
+        });
     function handleDndConsider(e: CustomEvent<any>) {
         currentTasks = e.detail.items;
     }
@@ -23,11 +40,17 @@
     on:consider={handleDndConsider}
     on:finalize={handleDndFinalize}
 >
-    {#each currentTasks as item (item.id)}
-        <div animate:flip={{ duration: flipDurationMs }}>
-            <Task task={item} />
-        </div>
-    {/each}
+    {#if loading}
+        <div>Cargando tareas...</div>
+    {:else if error}
+        <div class="text-red-500">{error}</div>
+    {:else}
+        {#each currentTasks as item (item.id)}
+            <div animate:flip={{ duration: flipDurationMs }}>
+                <Task task={item} />
+            </div>
+        {/each}
+    {/if}
 </section>
 
 <style>
