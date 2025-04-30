@@ -5,14 +5,14 @@ export const error = signal("");
 export function FormLogin() {
 	return (
 		<main
-			class={"flex flex-col   min-w-100 min-h-100 mx-auto my-auto items-center  text-white text-shadow-2xs rounded-3xl bg-[#073b3a]"}
+			class={"flex flex-col  min-w-120 min-h-100 mx-auto my-auto items-center justify-center text-gray-600 text-shadow-2xs rounded-3xl bg-gray-100 "}
 		>
-			<h1 class={"my-2"}>Well come to Esmeralde</h1>
-
 			<form
 				onSubmit={(e) => handleSubmit(e, useLogin)}
-				class={"w-full  h-full flex flex-col my-[10%] items-center gap-6 "}
+				class={"w-full  h-full flex flex-col my-[10%] items-center gap-6 justify-center"}
 			>
+				<h1 class={"my-2"}>Well come to Esmeralde</h1>
+
 				<div
 					class={"w-[50%] flex flex-row relative items-center "}
 				>
@@ -43,20 +43,17 @@ export function FormLogin() {
 
 				<div class={"flex flex-row justify-center w-[30%] h-10"}>
 					<button
-						class="w-full  border-b-[2px] border-b-green-900 rounded hover:cursor-pointer bg-[#059257] hover:shadow-lg hover:shadow-white/20 active:bg-green-900 active:shadow-none "
+						class="w-full text-shadow-lg border-b-[2px] text-shadow-sky-300 border-emerald-500 bg-emerald-400 rounded hover:cursor-pointer  hover:shadow-lg hover:shadow-white/20 active:bg-emerald-500 active:shadow-none "
 						type="submit"
 					>
 						Login
 					</button>
 				</div>
-				<footer class="flex flex-col items-center gap-1 w-full">
-					<a href="" class={"hover:shadow-lg hover:shadow-white/20"}>
+				<footer class="flex flex-col gap-1 items-center w-full text-gray-600">
+					<a href="a">
 						¿Olvidaste tu contraseña?
 					</a>
-					<a
-						href=""
-						class={"text-shadow-lg/20 text-white  "}
-					>
+					<a href="a">
 						¿No tienes cuenta?
 					</a>
 				</footer>

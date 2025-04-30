@@ -4,8 +4,11 @@ import LandingLayout from "../../layouts/LandingLayout.astro"
 ---
 
 <LandingLayout>
-    <div class="h-dvh bg-gradient-to-b bg-[#059257]  w-dvw flex flex-col items-center justify-center">
-
-        <FormLogin client:load>
+    <div class="h-dvh bg-gradient-to-b w-dvw grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-2 items-center">
+        <section class="col-start-2 h-full w-full grid items-center">    
+            <h1 class="text-center text-4xl">Login</h1>
+            <FormLogin client:load/>
+        </section>
+        <section></section>
     </div>
 </LandingLayout>
