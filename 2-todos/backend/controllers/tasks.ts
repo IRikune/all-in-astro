@@ -100,7 +100,6 @@ export const deleteTaskHandlers = factory.createHandlers(
         data: res.data,
         message: "Task deleted from user",
       };
-      console.log(result);
       return c.json(result);
     }
     const res = await deleteCompleteTask({ userID, taskID });

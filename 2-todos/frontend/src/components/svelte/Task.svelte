@@ -19,10 +19,15 @@
         },
     }: { task?: Task } = $props();
     const formatedDate = useFormatedDate({ date: task.date.created || 0 });
+    const handleDelete = () => {
+        alert("delete");
+    };
 </script>
 
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <label
-    for="show-task-modal"
+    for="view-task-options"
     class="flex justify-between w-full border-b border-neutral-200 p-2 outline-none! cursor-pointer active:cursor-grab motion-scale-in-105 motion-duration-300 motion-ease-spring-bouncy"
 >
     <div class="flex">
@@ -41,11 +46,11 @@
     <aside
         class="flex flex-col *:p-1.5 *:hover:bg-neutral-100 *:cursor-pointer *:rounded gap-1 *:transition-colors *:duration-300 text-neutral-700"
     >
-        <button type="button">
+        <button onclick={handleDelete} type="button">
             <TrashIcon class="size-3.5" />
         </button>
-        <button type="button">
+        <label for="toggle-popover-modal">
             <DotsIcon class="size-3.5" />
-        </button>
+        </label>
     </aside>
 </label>

@@ -41,6 +41,7 @@
 <style>
     :global(#dnd-action-dragged-el > *) {
         border: 1px solid oklch(92.2% 0 0);
+        border-radius: 0.25rem;
         background-color: #ffffffde;
         box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
     }

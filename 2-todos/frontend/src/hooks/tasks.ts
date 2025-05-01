@@ -29,4 +29,10 @@ export async function useCreateTask({ newTask }: useCreateTaskOptions): Promise<
 	return data;
 }
 
+interface useDeleteTaskOptions {
+	id: string;
+}
 
+export async function useDeleteTask({ id }: useDeleteTaskOptions): Promise<Result<Task["id"]>> {
+	
+}

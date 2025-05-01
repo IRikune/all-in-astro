@@ -10,10 +10,11 @@
     const colors = {
         [Priority.high]:
             "bg-theme-red-100/20 border-theme-red-100 hover:bg-theme-red-100/50 checked:bg-theme-red-100 hover:checked:bg-theme-red-100 hover:checked:delay-200",
-        [Priority.medium]:
-            "bg-amber-500/20 border-amber-500 hover:bg-amber-500/30 checked:bg-amber-500 hover:checked:bg-amber-500 hover:checked:delay-200",
         [Priority.important]:
             "bg-orange-500/20 border-orange-500 hover:bg-orange-500/30 checked:bg-orange-500 hover:checked:bg-orange-500 hover:checked:delay-200",
+        [Priority.medium]:
+            "bg-amber-500/20 border-amber-500 hover:bg-amber-500/30 checked:bg-amber-500 hover:checked:bg-amber-500 hover:checked:delay-200",
+
         [Priority.low]:
             "bg-theme-gray-100/20 border-theme-gray-100 hover:bg-theme-gray-100/30 checked:bg-theme-gray-100 hover:checked:bg-theme-gray-100 hover:checked:delay-200",
     };
