@@ -1,37 +1,24 @@
-<script lang="ts">
+<script>
     import { flip } from "svelte/animate";
     import { dndzone } from "svelte-dnd-action";
-    import { useGetManyTasks } from "../../hooks/tasks";
+    import { tasks } from "../../stores/mod";
     import Task from "./Task.svelte";
-    import { userID } from "../../stores/mod";
+    import TaskSkeleton from "./TaskSkeleton.svelte";
+
     const flipDurationMs = 300;
-    let currentTasks = $state<Task[]>([]);
-    let loading = $state<boolean>(false);
-    let error = $state<string>("");
-    useGetManyTasks({ userID })
-        .then(({ data, ok, message }) => {
-            if (ok && data) {
-                currentTasks = data;
-            } else {
-                error = message || "Error al cargar tareas";
-            }
-        })
-        .catch((err) => {
-            error = err.message;
-        })
-        .finally(() => {
-            loading = false;
-        });
-    function handleDndConsider(e: CustomEvent<any>) {
+
+    let currentTasks = $state([...tasks.value]);
+
+    function handleDndConsider(e) {
         currentTasks = e.detail.items;
     }
-    function handleDndFinalize(e: CustomEvent<any>) {
+    function handleDndFinalize(e) {
         currentTasks = e.detail.items;
     }
 </script>
 
 <section
-    class="first:border-t border-neutral-200"
+    class="first:border-t border-neutral-200 overflow-y-auto"
     use:dndzone={{
         items: currentTasks,
         flipDurationMs,
@@ -40,10 +27,8 @@
     on:consider={handleDndConsider}
     on:finalize={handleDndFinalize}
 >
-    {#if loading}
-        <div>Cargando tareas...</div>
-    {:else if error}
-        <div class="text-red-500">{error}</div>
+    {#if currentTasks.length === 0}
+        <TaskSkeleton />
     {:else}
         {#each currentTasks as item (item.id)}
             <div animate:flip={{ duration: flipDurationMs }}>
