@@ -1,6 +1,8 @@
 <script lang="ts">
     import Checker from "./Checker.svelte";
     import ClockIcon from "./icons/ClockIcon.svelte";
+    import TrashIcon from "./icons/TrashIcon.svelte";
+    import DotsIcon from "./icons/DotsIcon.svelte";
     import { useFormatedDate } from "../../hooks/mod";
     import { Priority, type Task } from "../../types/mod";
     const {
@@ -21,18 +23,29 @@
 
 <label
     for="show-task-modal"
-    class="flex w-full border-b border-neutral-200 p-2 outline-none! cursor-pointer active:cursor-grab"
+    class="flex justify-between w-full border-b border-neutral-200 p-2 outline-none! cursor-pointer active:cursor-grab motion-scale-in-105 motion-duration-300 motion-ease-spring-bouncy"
 >
-    <aside class="mt-1 mr-2">
-        <Checker priority={task.priority} />
+    <div class="flex">
+        <aside class="mt-1 mr-2">
+            <Checker priority={task.priority} />
+        </aside>
+        <section class="flex flex-col">
+            <h2 class="text-sm">{task.title}</h2>
+            <small class="text-xs text-neutral-500">{task.content}</small>
+            <div class="flex items-center text-theme-red-100">
+                <ClockIcon class="size-3.5 mr-0.5" />
+                <small>{formatedDate}</small>
+            </div>
+        </section>
+    </div>
+    <aside
+        class="flex flex-col *:p-1.5 *:hover:bg-neutral-100 *:cursor-pointer *:rounded gap-1 *:transition-colors *:duration-300 text-neutral-700"
+    >
+        <button type="button">
+            <TrashIcon class="size-3.5" />
+        </button>
+        <button type="button">
+            <DotsIcon class="size-3.5" />
+        </button>
     </aside>
-    <section class="flex flex-col">
-        <h2 class="text-sm">{task.title}</h2>
-        <small class="text-xs text-neutral-500">{task.content}</small>
-        <div class="flex items-center text-theme-red-100">
-            <ClockIcon class="size-3.5 mr-0.5" />
-            <small>{formatedDate}</small>
-        </div>
-    </section>
-    <aside></aside>
 </label>

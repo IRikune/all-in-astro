@@ -18,7 +18,7 @@
 </script>
 
 <section
-    class="first:border-t border-neutral-200 overflow-y-auto"
+    class="first:border-t border-neutral-200"
     use:dndzone={{
         items: currentTasks,
         flipDurationMs,
