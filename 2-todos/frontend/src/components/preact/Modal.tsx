@@ -4,7 +4,7 @@ interface ModalProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	id: string;
 	backdrop?: boolean;
 	backdropLabel?: boolean;
-	animation?: "scale";
+	animation?: "scale" | "fade";
 	classBackdrop?: string;
 	oninput?: () => void;
 }
@@ -13,6 +13,7 @@ export function Modal({ backdropLabel = true, id, animation, children, class: cl
 
 	const ANIMATIONS = {
 		scale: "peer-checked:motion-scale-in peer-checked:motion-translate-y-in-25 peer-not-checked:motion-translate-y-out-25 peer-checked:motion-opacity-in peer-not-checked:motion-opacity-out peer-not-checked:motion-scale-out-[0.1] starting:opacity-0 starting:scale-0 motion-ease-spring-bouncy motion-duration-300",
+		fade: "peer-not-checked:motion-translate-y-out peer-not-checked:motion-opacity-out peer-checked:motion-opacity-in motion-ease-in-out-cubic peer-checked:motion-translate-y-in-50 peer-checked:motion-scale-in-80 motion-duration-150",
 	}
 
 	return (

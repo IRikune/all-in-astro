@@ -31,7 +31,7 @@ function SidebarPriority() {
             </label>
             <Modal
                 classBackdrop="-top-20! -left-55! h-[200dvh]!"
-                animation="scale"
+                animation="fade"
                 id="priority-dropdown"
                 class="absolute z-50 -left-1 bg-white">
                 <div
@@ -80,7 +80,7 @@ function SidebarProject() {
             </label>
             <Modal
                 classBackdrop=" -top-20! -left-55! h-[200dvh]!"
-                animation="scale"
+                animation="fade"
                 id="projects-dropdown"
                 class="absolute rounded -left-2 bg-white z-50">
                 <div class="bg-white w-3xs text-center border border-neutral-200 rounded p-2">
@@ -105,7 +105,7 @@ function SidebarCategory() {
             </label>
             <Modal
                 classBackdrop=" -top-20! -left-55! h-[200dvh]!"
-                animation="scale"
+                animation="fade"
                 id="category-dropdown"
                 class="absolute rounded -left-2 bg-white z-50">
                 <div class="bg-white w-3xs text-center border border-neutral-200 rounded p-2">
@@ -118,7 +118,6 @@ function SidebarCategory() {
                             required
                             class="border border-neutral-200 rounded w-full my-1 focus:outline-none text-sm p-1 valid:text-emerald-600 valid:border-2 invalid:text-theme-red-100 valid:border-emerald-600 invalid:border-theme-red-100 invalid:border-2"
                             onInput={handleInput} />
-
                     </form>
                     <button type="button" class="w-full flex items-center gap-1 hover:bg-neutral-100 rounded">
                     </button>
