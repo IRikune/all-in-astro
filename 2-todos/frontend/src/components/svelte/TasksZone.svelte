@@ -1,4 +1,5 @@
 <script>
+    import { effect } from "@preact/signals";
     import { flip } from "svelte/animate";
     import { dndzone } from "svelte-dnd-action";
     import { tasks } from "../../stores/mod";
@@ -7,7 +8,11 @@
 
     const flipDurationMs = 300;
 
-    let currentTasks = $state([...tasks.value]);
+    let currentTasks = $state(tasks.value);
+
+    effect(() => {
+        currentTasks = tasks.value.toReversed();
+    });
 
     function handleDndConsider(e) {
         currentTasks = e.detail.items;

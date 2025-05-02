@@ -5,9 +5,9 @@ import { BookMarkIcon } from '../icons/BookMarkIcon.tsx';
 import { InboxIcon } from '../icons/InboxIcon.tsx';
 import { ChevronIcon } from '../icons/ChevronIcon.tsx';
 import type { JSX } from 'preact/jsx-runtime';
-import { Priority, type NewTask } from '../../../types/mod';
+import { Priority, type NewTask, type Task } from '../../../types/mod';
 import { useCreateTask } from '../../../hooks/tasks.ts';
-import { userID } from '../../../stores/mod';
+import { userID, tasks } from '../../../stores/mod';
 
 const title = signal<NewTask['title']>('');
 const description = signal<NewTask['content']>('');
@@ -17,27 +17,31 @@ const labels = signal<NewTask['categories']>([]);
 
 async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
 	event.preventDefault();
-	const $modal = document.getElementById('add-task-modal') as HTMLInputElement;
+	const $modal = document.getElementById('add-task-modal') as
+		HTMLInputElement;
+	const currentTask = {
+		title: title.value,
+		creator: userID,
+		date: {
+			created: Date.now(),
+			expected: expectedDate.value,
+		},
+		priority: priority.value,
+		content: description.value,
+		completed: false,
+	}
+	const result = await useCreateTask({ newTask: currentTask });
+	const newTask: Task = {
+		...currentTask,
+		id: result.data || "",
+	}
+	tasks.value = [...tasks.value, newTask];
 	$modal.checked = false;
 	title.value = '';
 	description.value = '';
 	expectedDate.value = 0;
 	priority.value = Priority.low;
 	labels.value = [];
-	const result = await useCreateTask({
-		newTask: {
-			title: title.value,
-			creator: userID,
-			date: {
-				created: Date.now(),
-				expected: expectedDate.value,
-			},
-			priority: priority.value,
-			content: description.value,
-			completed: false,
-		},
-	});
-	alert(result.message);
 }
 
 export function AddTaskForm({ close = 'add-task-modal', ...props }) {
@@ -48,6 +52,7 @@ export function AddTaskForm({ close = 'add-task-modal', ...props }) {
 				placeholder="Go for a walk tomorrow p1"
 				type="text"
 				name="title"
+				required
 				value={title.value}
 				onInput={(e) => {
 					title.value = e.currentTarget.value;
@@ -58,6 +63,9 @@ export function AddTaskForm({ close = 'add-task-modal', ...props }) {
 				placeholder="Description"
 				type="text"
 				value={description.value}
+				onInput={(e) => {
+					description.value = e.currentTarget.value;
+				}}
 				name="content"
 			/>
 			<section class="flex *:items-center *:cursor-pointer *:p-2 text-xs mt-2">

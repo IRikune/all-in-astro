@@ -6,8 +6,8 @@ POST http://localhost:8000/users/
 Content-Type: application/json
 
 {
-	"name": "Pablito6",
-    "email": "pablito6@gmail.com",
+	"name": "Pablito7",
+    "email": "pablito7@gmail.com",
     "password": "password",
     "avatar": "https://url.com/avatar.png"
 }

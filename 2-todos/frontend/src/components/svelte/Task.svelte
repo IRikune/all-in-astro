@@ -19,9 +19,6 @@
         },
     }: { task?: Task } = $props();
     const formatedDate = useFormatedDate({ date: task.date.created || 0 });
-    const handleDelete = () => {
-        alert("delete");
-    };
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->

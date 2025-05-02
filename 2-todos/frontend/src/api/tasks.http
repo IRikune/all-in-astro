@@ -19,7 +19,7 @@ Content-Type: application/json
 	"title": "Tarea de test",
 	"content": "Task content",
 	"completed": false,
-    "creator": "01JSQ04F625GGVDV5ZNENSDRRZ",
+    "creator": "01JT9CAHXYGVQFZ0BWQD42PS3A",
 	"date": {
 		"created": 1673213200,
 		"completed": 1673213200,

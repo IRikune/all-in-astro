@@ -1,8 +1,5 @@
 import type { NewTask, Result, Task } from "../types/mod";
 import { Endpoints } from "../stores/mod";
-import { tasks } from "../stores/mod";
-
-const API_URL = 'http://localhost:8000/tasks/';
 
 interface useGetTasksOptions {
 	userID: string;
@@ -31,8 +28,4 @@ export async function useCreateTask({ newTask }: useCreateTaskOptions): Promise<
 
 interface useDeleteTaskOptions {
 	id: string;
-}
-
-export async function useDeleteTask({ id }: useDeleteTaskOptions): Promise<Result<Task["id"]>> {
-	
 }
