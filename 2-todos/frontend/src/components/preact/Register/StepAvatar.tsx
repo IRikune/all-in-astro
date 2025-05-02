@@ -1,32 +1,45 @@
-import { AvatarRegistred } from "./RoadRegistration";
-import { Step, Steps } from "./Registration";
+import { useRegister } from "../../../hooks/mod";
+import {
+	AuthStatus,
+	AvatarStatus,
+	EmailStatus,
+	NameStatus,
+	PasswordStatus,
+} from "./RoadRegistration";
+import { signal } from "@preact/signals";
+import { authInfo } from "../../../stores/mod";
+
+const userAvatar = signal<string>("");
 export function StepAvatar() {
-    return (
-        <form
-            class={"w-full  h-full flex flex-col my-[10%] items-center gap-6 justify-center"}
-        >
-            <div
-                class={"w-[50%] flex flex-row relative items-center "}
-            >
-                <label class={"flex w-full items-center gap-7"}>
-                    <span class={"select-none"}>Avatar:</span>
-                    <input
-                        class={"peer block w-full h-10 rounded-md border border-esmerald-800 px-3 py-2 placeholder-gray-400 shadow-sm  invalid:border-red-500 focus:text-black focus:border-0 focus:invalid:border-red-500 focus:shadow-white/20 focus:shadow-lg  valid:border-whitehover:shadow-lg"}
-                        type="file"
-                        name="file"
-                    />
-                </label>
-            </div>
-            <a
-                onClick={() => {
-                    Step.value = Steps.name;
-                    console.log(Step.value);
-                }}
-                href="/dashboard/today"
-                class={"border-b-[2px] border-b-green-900 rounded hover:cursor-pointer bg-emerald-400 hover:shadow-lg hover:shadow-white/20 active:bg-green-900 active:shadow-none"}
-            >
-                Submit
-            </a>
-        </form>
-    );
+	return (
+		<>
+			<label
+				for="File"
+				class="flex flex-col items-center rounded border border-gray-300 p-4 text-gray-900 shadow-sm sm:p-6"
+			>
+				<svg
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="size-6"
+				>
+					<title>Avatar</title>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m0-3-3-3m0 0-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
+					/>
+				</svg>
+
+				<span class="mt-4 font-medium"> Upload your file(s) </span>
+
+				<span class="mt-2 inline-block rounded border border-gray-200 bg-gray-50 px-3 py-1.5 text-center text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-100">
+					Browse files
+				</span>
+
+				<input multiple type="file" id="File" class="sr-only" />
+			</label>
+		</>
+	);
 }

@@ -33,8 +33,12 @@ export function Registration() {
 	};
 	const CurrentStep = steps[Step.value];
 	return (
-		<>
+		<form
+			class={
+				"w-100  h-150 flex flex-col my-[10%] items-center gap-6 justify-center"
+			}
+		>
 			<CurrentStep />
-		</>
+		</form>
 	);
 }
