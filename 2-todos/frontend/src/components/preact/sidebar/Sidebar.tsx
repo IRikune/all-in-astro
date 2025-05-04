@@ -13,7 +13,7 @@ interface Props {
 export function Sidebar({ class: className, currentPage }: Props) {
 	return (
 		<nav
-			class={`w-55 h-full bg-neutral-100 z-10 rounded-r-lg p-3 grid grid-cols-1 -ml-51 motion-ease-in-out-quart grid-rows-[38px_32px_7fr_1fr] ${className} ${isOpenNavbar.value ? 'motion-translate-x-in-[90%] motion-opacity-out' : 'motion-translate-x-out-[90%] motion-opacity-in'}`}
+			class={`w-55 sticky h-dvh bg-neutral-100 z-10 rounded-r-lg p-3 grid grid-cols-1 -ml-51 motion-ease-in-out-quart grid-rows-[38px_32px_7fr_1fr] ${className} ${isOpenNavbar.value ? 'motion-translate-x-in-[90%] motion-opacity-out' : 'motion-translate-x-out-[90%] motion-opacity-in'}`}
 		>
 			<div class="flex items-center">
 				<DropDown />
@@ -21,7 +21,6 @@ export function Sidebar({ class: className, currentPage }: Props) {
 					<ToggleSidebar />
 				</section>
 			</div>
-
 			<AddButton />
 			<section class="my-2 h-[30%] *:h-8 *:px-2">
 				<Button icon="search" class="w-[20%]">

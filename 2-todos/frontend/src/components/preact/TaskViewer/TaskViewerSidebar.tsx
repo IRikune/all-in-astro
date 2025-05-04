@@ -3,6 +3,9 @@ import { BookMarkIcon } from "../icons/BookMarkIcon";
 import { ChevronIcon } from "../icons/ChevronIcon";
 import { InboxIcon } from "../icons/InboxIcon";
 import { Modal } from "../Modal";
+import { iconColors } from "../Checker";
+import { selectedTask } from "../../../stores/mod";
+import type { Priority, Task } from "../../../types/mod";
 
 export function TaskViewerSidebar() {
     return (
@@ -20,12 +23,14 @@ export function TaskViewerSidebar() {
 }
 
 function SidebarPriority() {
+    const taskPriority = selectedTask.value?.priority;
+    const priorityColor = iconColors[taskPriority as Priority];
     return (
         <section class="relative">
             <h3 class="text-sm mt-2">Priority</h3>
-            <label for="priority-dropdown" class="group cursor-pointer flex hover:bg-neutral-100 px-2 py-1.5 rounded transition-colors duration-300 justify-between">
+            <label for="priority-dropdown" class="group cursor-pointer flex hover:bg-neutral-100 px-2 py-1.5 rounded transition-colors duration-300 justify-between ">
                 <div class="flex justify-between gap-1">
-                    <BookMarkIcon class="size-4 text-theme-gray-100" />
+                    <BookMarkIcon class={`size-4 ${priorityColor}`} />
                     <span class="text-xs">Priority</span>
                 </div>
             </label>
@@ -93,7 +98,6 @@ function SidebarProject() {
 
 function SidebarCategory() {
     const handleInput = (e: JSX.TargetedEvent<HTMLInputElement>) => {
-
     }
     return (
         <section class="relative">

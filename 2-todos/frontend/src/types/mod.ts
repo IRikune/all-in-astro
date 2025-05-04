@@ -21,9 +21,8 @@ interface Comment {
 	createdAt: number;
 }
 
-
 export interface Task extends NewTask {
-	id: string,
+	id: string;
 	subTasks?: NewTask[];
 }
 
@@ -37,9 +36,9 @@ export enum Priority {
 	high = 1,
 	important = 2,
 	medium = 3,
-	low =  4,
+	low = 4,
 }
 
 export type Result<T> =
-  | { ok: boolean; data: T; message: string; versionstamp?: string }
-  | { ok: boolean; data: null; message: string };
+	| { ok: boolean; data: T; message: string; versionstamp?: string }
+	| { ok: boolean; data: null; message: string };

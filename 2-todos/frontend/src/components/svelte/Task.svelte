@@ -3,8 +3,10 @@
     import ClockIcon from "./icons/ClockIcon.svelte";
     import TrashIcon from "./icons/TrashIcon.svelte";
     import DotsIcon from "./icons/DotsIcon.svelte";
+    import { selectedTask } from "../../stores/mod";
     import { useFormatedDate } from "../../hooks/mod";
     import { Priority, type Task } from "../../types/mod";
+    import { useGetTask } from "../../hooks/tasks";
     const {
         task = {
             id: "jasdifgjasdoighais",
@@ -25,6 +27,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <label
     for="view-task-options"
+    onclick={() => (selectedTask.value = task)}
     class="flex justify-between w-full border-b border-neutral-200 p-2 outline-none! cursor-pointer active:cursor-grab motion-scale-in-105 motion-duration-300 motion-ease-spring-bouncy"
 >
     <div class="flex">
@@ -43,7 +46,7 @@
     <aside
         class="flex flex-col *:p-1.5 *:hover:bg-neutral-100 *:cursor-pointer *:rounded gap-1 *:transition-colors *:duration-300 text-neutral-700"
     >
-        <button onclick={handleDelete} type="button">
+        <button onclick={() => {}} type="button">
             <TrashIcon class="size-3.5" />
         </button>
         <label for="toggle-popover-modal">

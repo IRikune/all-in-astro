@@ -21,11 +21,12 @@ const { pathname: currentPage } = Astro.url;
 		<section>
 			<header class="flex justify-end items-center h-16">
 				<slot name="header" />
-				<ToggleSidebar client:idle class={`absolute top-10 left-10`} />
+				<ToggleSidebar client:idle class=`absolute top-10 left-10` />
 			</header>
-			<main class="flex flex-col overflow-hidden h-dvh">
+			<main class="flex flex-col overflow-scroll h-[80dvh] px-10 rounded">
 				<slot />
 			</main>
+			<footer class="bg-white w-full h-full"></footer>
 		</section>
 	</body>
 </html>

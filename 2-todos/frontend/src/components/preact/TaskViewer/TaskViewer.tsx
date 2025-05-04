@@ -1,28 +1,35 @@
 import { Modal } from "../Modal";
+import { Checker } from "../Checker";
 import { InboxIcon } from "../icons/InboxIcon";
 import { CrossIcon } from "../icons/CrossIcon";
-import { ChevronIcon } from "../icons/ChevronIcon";
-import { BookMarkIcon } from "../icons/BookMarkIcon";
 import { TaskViewerSidebar } from "./TaskViewerSidebar";
-interface Props {
-    taskID: string;
-}
+import { selectedTask } from "../../../stores/mod";
+import type { Task } from "../../../types/mod";
+import { signal } from "@preact/signals";
 
+const taskTitle = signal<Task["title"]>()
+const taskDescription = signal<Task["content"]>()
 
-export function TaskViewer({ taskID }: Props) {
-
+export function TaskViewer() {
     return (
         <Modal
             id="view-task-options"
-            backdrop
             animation='scale'
-            class="fixed left-1/6 top-1/10 z-[100]"
+            backdropLabel={false}
+            class="fixed left-1/6 top-1/10 z-[100] overflow-hidden rounded-lg shadow-theme-2"
         >
             <div class="bg-white w-4xl text-center shadow-theme-2 rounded-lg">
                 <TaskViewerHeader />
-
                 <div class="h-[70dvh] flex">
-                    <TaskViewerMain />
+                    {
+                        selectedTask.value
+                            ? <TaskViewerMain task={selectedTask.value} />
+                            : (
+                                <main class="w-[70%]">
+
+                                </main>
+                            )
+                    }
                     <TaskViewerSidebar />
                 </div>
             </div>
@@ -52,9 +59,50 @@ function TaskViewerHeader() {
     )
 }
 
-function TaskViewerMain() {
+interface TaskViewerMainProps {
+    task: Task
+}
+
+function TaskViewerMain({ task }: TaskViewerMainProps) {
     return (
-        <main class="w-[70%]">
+        <main class="w-[70%] group">
+            <section class="flex items-center ml-5 my-2">
+                <Checker priority={task.priority} />
+                <div class="flex-col flex ml-2 mr-5 has-focus:border rounded border-neutral-300 p-2 w-full">
+                    <input
+                        class="font-medium focus:outline-none text-lg"
+                        placeholder="Write a shop list."
+                        value={task.title}
+                        type="text" />
+                    <div class="flex w-full">
+                        <input
+                            class="text-sm w-full outline-none"
+                            placeholder="Content"
+                            value={task.content}
+                            type="text"
+                        />
+                    </div>
+
+                </div>
+            </section>
+            <div class="justify-end gap-2 w-full pr-5 text-sm *:px-3 *:py-1.5 font-medium group-has-focus:flex hidden transition-discrete starting:opacity-0">
+                <button
+                    class="bg-neutral-200 cursor-pointer rounded hover:bg-neutral-300 transition-colors duration-300"
+                    type="button">
+                    Cancel
+                </button>
+                <button
+                    class="bg-rose-700 rounded text-white cursor-pointer hover:bg-rose-800 transition-colors duration-300"
+                    type="button">
+                    Save
+                </button>
+            </div>
+
+            <hr class="text-neutral-200 my-2" />
+
+            <section class="bg-amber-300 w-full h-full overflow-x-hidden">
+                <p class="text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.</p>
+            </section>
         </main>
     )
 }

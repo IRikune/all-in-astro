@@ -40,7 +40,7 @@ async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
 	title.value = '';
 	description.value = '';
 	expectedDate.value = 0;
-	priority.value = Priority.low;
+	priority.value = Priority.important;
 	labels.value = [];
 }
 
@@ -53,6 +53,7 @@ export function AddTaskForm({ close = 'add-task-modal', ...props }) {
 				type="text"
 				name="title"
 				required
+				autocomplete="off"
 				value={title.value}
 				onInput={(e) => {
 					title.value = e.currentTarget.value;
@@ -66,6 +67,7 @@ export function AddTaskForm({ close = 'add-task-modal', ...props }) {
 				onInput={(e) => {
 					description.value = e.currentTarget.value;
 				}}
+				autocomplete="off"
 				name="content"
 			/>
 			<section class="flex *:items-center *:cursor-pointer *:p-2 text-xs mt-2">

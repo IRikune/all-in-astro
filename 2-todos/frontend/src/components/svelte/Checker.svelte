@@ -18,7 +18,7 @@
         [Priority.low]:
             "bg-theme-gray-100/20 border-theme-gray-100 hover:bg-theme-gray-100/30 checked:bg-theme-gray-100 hover:checked:bg-theme-gray-100 hover:checked:delay-200",
     };
-    const iconColors = {
+    export const iconColors = {
         [Priority.high]: "text-theme-red-100",
         [Priority.important]: "text-amber-500",
         [Priority.medium]: "text-theme-orange-100",
