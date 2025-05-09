@@ -1,6 +1,10 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
-import { Button } from "../components/preact/Button";
+import { ShowModal } from "../components/preact/ShowModal";
+import {Modal} from "../components/preact/Modal";
+import {Register} from "../components/preact/Registration/Register";
+import { FormLogin } from "../components/preact/FormLogin";
+
 ---
 
 
@@ -9,7 +13,7 @@ import { Button } from "../components/preact/Button";
 	<svg
 		class="fixed top-0 left-0 -z-10 opacity-10"
 		viewBox="0 0 200 200"
-		xmlns="http://www.w3.org/2000/svg"
+	
 	>
 		<path
 			fill="oklch(69.6% 0.17 162.48)"
@@ -18,7 +22,7 @@ import { Button } from "../components/preact/Button";
 		>
 		</path>
 	</svg>
-	<section class="">
+	<section class=" grid  h-dvh w-dvw">
 		<div
 			class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"
 		>
@@ -34,18 +38,33 @@ import { Button } from "../components/preact/Button";
 					</strong>
 				</h1>
 				<div class="mt-8 flex flex-wrap justify-center gap-4">
-					<a
-						class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto"
-						href="/dashboard/today"
-					>
-						Get Started
-					</a>
-	
-					<Button class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto" to="/dashboard/login">login</Button>
+					
+					<ShowModal class="block w-full rounded-sm bg-emerald-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 transition-colors duration-600 ease focus:ring-3 focus:outline-hidden sm:w-auto" for="Register">Register</ShowModal>
 
-					<Button class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto" to="/dashboard/register">register</Button>
+					
+					<ShowModal class="block w-full rounded-sm bg-emerald-500 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 transition-colors duration-600 ease focus:ring-3 focus:outline-hidden sm:w-auto" for="Login">Login</ShowModal>
+					
 				</div>
 			</div>
+			
 		</div>
+		
+		
+	
+		<div class="has-checked:block hidden absolute self-center place-self-center">
+			<Modal backdrop  id="Login">
+				<FormLogin client:load/>
+			</Modal>
+		</div>
+		
+		
+		<Modal backdrop class=" absolute self-center place-self-center" id="Register">
+			<Register client:load/>
+		</Modal>
+			
+		
+			
+		
 	</section>
+	
 </LandingLayout>

@@ -26,10 +26,6 @@ export function useRegister(data: FormData) {
 	if (!data) return;
 	fetch(endPoints.users, {
 		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
-		},
 		body: data,
 	})
 		.then((response) => {
