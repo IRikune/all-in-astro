@@ -7,7 +7,7 @@ GET http://localhost:8000/tasks/01JSPDYW2HD6RPBEQW19M82VRS
 
 ### Get Tasks by User
 
-GET http://localhost:8000/tasks/users/01JSQ04F625GGVDV5ZNENSDRRZ
+GET http://localhost:8000/tasks/users/01JTRRQPE7AAHAV239AX113N0F
 
 ### Create Task
 
@@ -26,7 +26,15 @@ Content-Type: application/json
 		"expected": 1673213200
 	},
 	"categories": ["category1", "category2"],
-	"priority": 1
+	"priority": 1,
+	"comments": [
+		{
+			"id": "01JSPBGVGKDBDF17WP763TXW72",
+			"content": "Comment content",
+			"creator": "01JTRRQPE7AAHAV239AX113N0F",
+			"createdAt": 1673213200
+		}
+	]
 }
 
 ### Update Task

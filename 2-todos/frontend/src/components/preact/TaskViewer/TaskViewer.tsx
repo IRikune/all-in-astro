@@ -1,4 +1,4 @@
-import { signal } from "@preact/signals";
+import { signal, effect } from "@preact/signals";
 import { ChevronIcon } from "../icons/ChevronIcon";
 import { Modal } from "../Modal";
 import { Checker } from "../Checker";
@@ -65,8 +65,13 @@ interface TaskViewerMainProps {
 }
 
 function TaskViewerMain({ task }: TaskViewerMainProps) {
+
+    effect(() => {
+        console.log({ commets: selectedTask.value })
+    })
+
     return (
-        <main class="w-[70%] group">
+        <main class="w-[70%] group @container">
             <section class="peer flex items-center ml-5 my-2">
                 <Checker priority={task.priority} />
                 <div class="flex-col flex ml-2 mr-5 has-focus:border rounded border-neutral-300 p-2 w-full">
@@ -100,16 +105,28 @@ function TaskViewerMain({ task }: TaskViewerMainProps) {
 
             <hr class="text-neutral-200 my-2" />
 
-            <section class="w-full h-full flex m-10s justify-start overflow-x-hidden">
+            <section class="w-full h-[50cqh] flex justify-start overflow-x-hidden overflow-y-scroll">
                 <details class="[&_summary::-webkit-details-marker]:hidden w-full group select-none" open>
-                    <summary class="w-full cursor-pointer text-start [list-style:none]"><span>Comment</span></summary>
-                    <Comment
-                        class="group-open:motion-opacity-in motion-duration-300 motion-ease-spring-bouncy transition-discrete starting:opacity-0"
-                        content="Hola"
-                        createdAt={selectedTask.peek()?.date.created ?? 0}
-                        creator={selectedTask.peek()?.creator ?? ''}
-                        id="01JSPBGVGKDBDF17WP763TXW72"
-                    />
+                    <summary class="w-full cursor-pointer text-start [list-style:none] mx-10 flex items-center py-2">
+                        <div>
+                            <ChevronIcon class="size-3.5 group-not-open:-rotate-90 group-open:rotate-0 transition duration-300" />
+                        </div>
+                        <span>Comment</span>
+                    </summary>
+                    {selectedTask.value?.comments?.map((comment) => {
+                        return (
+                            <>
+                                <Comment
+                                    key={comment.id}
+                                    class="group-open:opacity-100 motion-duration-300 motion-ease-spring-bouncy transition-discrete starting:opacity-0"
+                                    content={comment.content}
+                                    createdAt={comment.createdAt}
+                                    creator={comment.creator}
+                                    id={comment.id}
+                                />
+                            </>
+                        )
+                    })}
                 </details>
             </section>
         </main>

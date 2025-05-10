@@ -1,6 +1,8 @@
 import { effect, useSignal } from "@preact/signals";
 import { useGetUser } from "../../hooks/users";
 import { useFormatedDate } from "../../hooks/mod";
+import { EditIcon } from "./icons/EditIcon";
+import { TrashIcon } from "./icons/TrashIcon";
 import type { Comment as CommentType, User } from "../../types/mod";
 
 interface CommentProps extends CommentType {
@@ -23,7 +25,7 @@ export function Comment({ content, creator, createdAt, class: className }: Comme
     })
     const formatedDate = useFormatedDate({ date: createdAt });
     return (
-        <article class={`flex mx-10 ${className}`}>
+        <article class={`flex flex-row mx-10 hover:*:opacity-100! hover:cursor-pointer ${className}`}>
             <div class="size-10 border-neutral-200 border rounded-full overflow-hidden mr-2 shadow-theme-3">
                 <img
                     class="w-full"
@@ -44,6 +46,14 @@ export function Comment({ content, creator, createdAt, class: className }: Comme
                     {content}
                 </p>
             </main>
+            <aside class="text-neutral-600 *:p-1 *:rounded *:hover:bg-neutral-200 *:cursor-pointer transition duration-300 opacity-0">
+                <button type="button">
+                    <EditIcon class="size-4" />
+                </button>
+                <button type="button">
+                    <TrashIcon class="size-4" />
+                </button>
+            </aside>
         </article>
     )
 }
