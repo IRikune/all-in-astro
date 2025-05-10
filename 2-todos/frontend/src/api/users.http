@@ -6,10 +6,10 @@ POST http://localhost:8000/users/
 Content-Type: application/json
 
 {
-	"name": "Pablito7",
-    "email": "pablito7@gmail.com",
+	"name": "Messi",
+    "email": "messi@gmail.com",
     "password": "password",
-    "avatar": "https://url.com/avatar.png"
+    "avatar": "https://img.a.transfermarkt.technology/portrait/header/28003-1740766555.jpg?lm=1"
 }
 
 ### 

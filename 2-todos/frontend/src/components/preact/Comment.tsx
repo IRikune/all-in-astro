@@ -1,0 +1,49 @@
+import { effect, useSignal } from "@preact/signals";
+import { useGetUser } from "../../hooks/users";
+import { useFormatedDate } from "../../hooks/mod";
+import type { Comment as CommentType, User } from "../../types/mod";
+
+interface CommentProps extends CommentType {
+    class?: string
+
+}
+
+export function Comment({ content, creator, createdAt, class: className }: CommentProps) {
+    const user = useSignal<User>();
+    effect(() => {
+        useGetUser({ userID: creator })
+            .then(res => {
+                if (res.ok && res.data) {
+                    user.value = res.data;
+                }
+            })
+            .finally(() => {
+                console.log({ user })
+            })
+    })
+    const formatedDate = useFormatedDate({ date: createdAt });
+    return (
+        <article class={`flex mx-10 ${className}`}>
+            <div class="size-10 border-neutral-200 border rounded-full overflow-hidden mr-2 shadow-theme-3">
+                <img
+                    class="w-full"
+                    src={user.value?.avatar}
+                    alt={`${user.value?.name} Avatar`}
+                />
+            </div>
+            <main class="w-full">
+                <header class="flex gap-3 items-center">
+                    <span class="font-medium text-sm">
+                        {user.value?.name}
+                    </span>
+                    <span class="text-xs text-neutral-700">
+                        {formatedDate}
+                    </span>
+                </header>
+                <p class="flex text-sm">
+                    {content}
+                </p>
+            </main>
+        </article>
+    )
+}

@@ -3,11 +3,14 @@ import { userIDSchema } from "./users.ts";
 
 export const taskIDSchema = z.string().ulid();
 
-export const commentSchema = z.object({
-  id: z.string().ulid().optional(),
+export const newCommentSchema = z.object({
   creator: z.string().ulid(),
   content: z.string(),
   createdAt: z.number(),
+}).strict();
+
+export const commentSchema = newCommentSchema.extend({
+  id: z.string().ulid(),
 });
 
 //interface Task
@@ -26,7 +29,8 @@ export const newTaskSchema = z.object({
   categories: z.array(z.string()).optional(),
   priority: z.number().min(1).max(4),
   colaborators: z.array(userIDSchema).optional(),
-}).strict();
+})
+  .strict();
 
 export const taskSchema = newTaskSchema.extend({
   id: z.string().ulid(),

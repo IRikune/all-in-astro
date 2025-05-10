@@ -8,6 +8,7 @@ import type {
 } from "../schemas/users.ts";
 import type {
   commentSchema,
+  newCommentSchema,
   newTaskSchema,
   taskIDSchema,
   taskSchema,
@@ -15,6 +16,7 @@ import type {
 
 //#region task
 export type Comment = z.infer<typeof commentSchema>;
+export type NewComment = z.infer<typeof newCommentSchema>;
 export type Task = z.infer<typeof taskSchema>;
 export type NewTask = z.infer<typeof newTaskSchema>;
 export type TaskID = z.infer<typeof taskIDSchema>;

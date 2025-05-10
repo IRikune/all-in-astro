@@ -1,11 +1,13 @@
+import { signal } from "@preact/signals";
+import { ChevronIcon } from "../icons/ChevronIcon";
 import { Modal } from "../Modal";
 import { Checker } from "../Checker";
 import { InboxIcon } from "../icons/InboxIcon";
 import { CrossIcon } from "../icons/CrossIcon";
 import { TaskViewerSidebar } from "./TaskViewerSidebar";
 import { selectedTask } from "../../../stores/mod";
+import { Comment } from "../Comment";
 import type { Task } from "../../../types/mod";
-import { signal } from "@preact/signals";
 
 const taskTitle = signal<Task["title"]>()
 const taskDescription = signal<Task["content"]>()
@@ -26,7 +28,6 @@ export function TaskViewer() {
                             ? <TaskViewerMain task={selectedTask.value} />
                             : (
                                 <main class="w-[70%]">
-
                                 </main>
                             )
                     }
@@ -66,7 +67,7 @@ interface TaskViewerMainProps {
 function TaskViewerMain({ task }: TaskViewerMainProps) {
     return (
         <main class="w-[70%] group">
-            <section class="flex items-center ml-5 my-2">
+            <section class="peer flex items-center ml-5 my-2">
                 <Checker priority={task.priority} />
                 <div class="flex-col flex ml-2 mr-5 has-focus:border rounded border-neutral-300 p-2 w-full">
                     <input
@@ -82,10 +83,9 @@ function TaskViewerMain({ task }: TaskViewerMainProps) {
                             type="text"
                         />
                     </div>
-
                 </div>
             </section>
-            <div class="justify-end gap-2 w-full pr-5 text-sm *:px-3 *:py-1.5 font-medium group-has-focus:flex hidden transition-discrete starting:opacity-0">
+            <div class="justify-end gap-2 w-full pr-5 text-sm *:px-3 *:py-1.5 font-medium peer-has-focus:flex hidden transition-discrete starting:opacity-0">
                 <button
                     class="bg-neutral-200 cursor-pointer rounded hover:bg-neutral-300 transition-colors duration-300"
                     type="button">
@@ -100,8 +100,17 @@ function TaskViewerMain({ task }: TaskViewerMainProps) {
 
             <hr class="text-neutral-200 my-2" />
 
-            <section class="bg-amber-300 w-full h-full overflow-x-hidden">
-                <p class="text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero similique voluptatem sunt aliquid consectetur. Perspiciatis, deleniti dolorem facere facilis, accusamus, dolorum vel aut possimus doloremque ducimus soluta maiores sunt magni.</p>
+            <section class="w-full h-full flex m-10s justify-start overflow-x-hidden">
+                <details class="[&_summary::-webkit-details-marker]:hidden w-full group select-none" open>
+                    <summary class="w-full cursor-pointer text-start [list-style:none]"><span>Comment</span></summary>
+                    <Comment
+                        class="group-open:motion-opacity-in motion-duration-300 motion-ease-spring-bouncy transition-discrete starting:opacity-0"
+                        content="Hola"
+                        createdAt={selectedTask.peek()?.date.created ?? 0}
+                        creator={selectedTask.peek()?.creator ?? ''}
+                        id="01JSPBGVGKDBDF17WP763TXW72"
+                    />
+                </details>
             </section>
         </main>
     )

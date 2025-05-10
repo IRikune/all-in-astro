@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import {
+  createCommentHandlers,
   createTaskHandlers,
   deleteTaskHandlers,
   getManyTaskHandlers,
@@ -23,3 +24,5 @@ tasks.post("/", ...createTaskHandlers);
 tasks.delete("/:taskID/:userID", ...deleteTaskHandlers);
 
 tasks.patch("/:taskID", ...updateTaskHandlers);
+
+tasks.post("/:taskID/comments/", ...createCommentHandlers);

@@ -1,0 +1,8 @@
+POST http://localhost:8000/tasks/01JSPDYW2HD6RPBEQW19M82VRS/comments/
+Content-Type: application/json
+
+{
+    "content": "Comment content",
+    "creator": "01JTRRQPE7AAHAV239AX113N0F",
+    "createdAt": 1673213200
+}

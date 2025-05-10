@@ -21,9 +21,9 @@ interface CreateTaskOptions {
   task: NewTask;
 }
 
-export async function createTask(
-  { task }: CreateTaskOptions,
-): Promise<KvResult<Task["id"]>> {
+export async function createTask({
+  task,
+}: CreateTaskOptions): Promise<KvResult<Task["id"]>> {
   const taskID = ulid();
   const newTask = { ...task, id: taskID };
   const taskByCreator = ["tasks", task.creator, taskID];
@@ -74,14 +74,14 @@ export async function deleteUserTask({
   return result;
 }
 
-type DeleteCompleteTaskResponse = Promise<KvResult<Record<Task["id"], Task>>>;
-
-export async function deleteCompleteTask(
-  { taskID, userID }: DeleteUserTaskOptions,
-): Promise<KvResult<Task["id"]>> {
+export async function deleteCompleteTask({
+  taskID,
+  userID,
+}: DeleteUserTaskOptions): Promise<KvResult<Task["id"]>> {
   const taskByIDKey = ["tasks", taskID];
   const taskByCreatorKey = ["tasks", userID, taskID];
-  const res = await kv.atomic()
+  const res = await kv
+    .atomic()
     .delete(taskByCreatorKey)
     .delete(taskByIDKey)
     .commit();

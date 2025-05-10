@@ -7,7 +7,7 @@ import { ChevronIcon } from '../icons/ChevronIcon.tsx';
 import type { JSX } from 'preact/jsx-runtime';
 import { Priority, type NewTask, type Task } from '../../../types/mod';
 import { useCreateTask } from '../../../hooks/tasks.ts';
-import { userID, tasks } from '../../../stores/mod';
+import { userID, tasks } from '../../../stores/mod.ts';
 
 const title = signal<NewTask['title']>('');
 const description = signal<NewTask['content']>('');
