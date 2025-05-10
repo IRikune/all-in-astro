@@ -1,0 +1,22 @@
+###
+GET http://localhost:8000/users/01JSQ04F625GGVDV5ZNENSDRRZ
+
+### 
+POST http://localhost:8000/users/
+Content-Type: application/json
+
+{
+	"name": "Pablito7",
+    "email": "pablito7@gmail.com",
+    "password": "password",
+    "avatar": "https://url.com/avatar.png"
+}
+
+### 
+
+PATCH http://localhost:8000/users/01JSPBGVGKDBDF17WP763TXW72
+
+
+###
+
+DELETE http://localhost:8000/users/01JSPBGVGKDBDF17WP763TXW72

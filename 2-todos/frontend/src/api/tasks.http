@@ -1,0 +1,52 @@
+### Base endpoint
+GET http://localhost:8000/tasks/
+
+### Get Task by ID
+
+GET http://localhost:8000/tasks/01JSPDYW2HD6RPBEQW19M82VRS
+
+### Get Tasks by User
+
+GET http://localhost:8000/tasks/users/01JSQ04F625GGVDV5ZNENSDRRZ
+
+### Create Task
+
+
+POST http://localhost:8000/tasks/
+Content-Type: application/json
+
+{
+	"title": "Tarea de test",
+	"content": "Task content",
+	"completed": false,
+    "creator": "01JT9CAHXYGVQFZ0BWQD42PS3A",
+	"date": {
+		"created": 1673213200,
+		"completed": 1673213200,
+		"expected": 1673213200
+	},
+	"categories": ["category1", "category2"],
+	"priority": 1
+}
+
+### Update Task
+
+PATCH http://localhost:8000/tasks/01JSPDYW2HD6RPBEQW19M82VRS
+Content-Type: application/json
+
+{
+	"title": "Task title",
+	"content": "Task content",
+	"completed": true,
+    "creator": "01JSP9J68CK06JQMHQY04QS3MG",
+	"date": {
+		"created": 1673213200,
+		"completed": 1673213200,
+		"expected": 1673213200
+	},
+	"categories": ["category1", "category2"],
+	"priority": 1
+}
+
+### Delete Task
+DELETE http://localhost:8000/tasks/01JSQ06QSYXTBQN4DR81PSNK3V/01JSQ04F625GGVDV5ZNENSDRRZ

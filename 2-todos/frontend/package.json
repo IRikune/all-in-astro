@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/preact": "^4.0.2",
+    "@astrojs/svelte": "^7.0.11",
     "@dicebear/collection": "^9.2.2",
     "@dicebear/core": "^9.2.2",
     "@fontsource-variable/montserrat": "5.1.1",
@@ -17,11 +18,14 @@
     "@tailwindcss/vite": "^4.0.1",
     "astro": "5.1.7",
     "preact": "^10.25.4",
-    "swapy": "^1.0.5",
-    "tailwindcss": "4.1.4"
+    "svelte": "^5.28.2",
+    "svelte-dnd-action": "^0.9.61",
+    "tailwindcss": "4.1.4",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "date-fns": "^4.1.0",
     "tailwindcss-motion": "^1.1.0"
   }
 }
