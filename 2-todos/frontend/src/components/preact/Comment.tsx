@@ -26,13 +26,11 @@ export function Comment({ content, creator, createdAt, class: className }: Comme
     const formatedDate = useFormatedDate({ date: createdAt });
     return (
         <article class={`flex flex-row mx-10 hover:*:opacity-100! hover:cursor-pointer ${className}`}>
-            <div class="size-10 border-neutral-200 border rounded-full overflow-hidden mr-2 shadow-theme-3">
-                <img
-                    class="w-full"
-                    src={user.value?.avatar}
-                    alt={`${user.value?.name} Avatar`}
-                />
-            </div>
+            <aside>
+                <div class="size-8 rounded-full border border-neutral-100 overflow-hidden mr-2 flex items-center justify-center">
+                    <img src={user.value?.avatar} alt="user avatar" />
+                </div>
+            </aside>
             <main class="w-full">
                 <header class="flex gap-3 items-center">
                     <span class="font-medium text-sm">
