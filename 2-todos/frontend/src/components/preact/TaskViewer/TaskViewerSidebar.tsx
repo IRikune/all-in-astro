@@ -75,7 +75,7 @@ function SidebarDate() {
 function SidebarProject() {
     return (
         <section class="relative">
-            <h3 class="text-sm mt-2">Project</h3>
+            <h3 class="text-sm mt-2">Group of work</h3>
             <label for="projects-dropdown" class="cursor-pointer flex hover:bg-neutral-100 px-2 py-1.5 rounded transition-colors duration-300 justify-between">
                 <div class="flex justify-between gap-1">
                     <InboxIcon />
@@ -92,6 +92,28 @@ function SidebarProject() {
                     <h1 class="text-xl">Projects</h1>
                 </div>
             </Modal>
+
+            <select>
+                <button>
+                    <div>
+                        <selectedcontent> </selectedcontent>
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="m7 10l5 5l5-5z" />
+                        </svg>
+                    </div>
+                </button>
+
+                <optgroup label="Group A">
+                    <option>One</option>
+                    <option>Two</option>
+                </optgroup>
+                <hr />
+                <optgroup label="Group B">
+                    <option>Three</option>
+                    <option>Four</option>
+                </optgroup>
+            </select>
+
         </section>
     )
 }
