@@ -1,6 +1,5 @@
 import { Button } from '../Button';
 import { AddButton } from './AddButton';
-import { DropDown } from '../DropDown';
 import { Modal } from '../Modal';
 import { AddTaskForm } from './AddTaskForm';
 import { isOpenNavbar } from '../../../stores/mod';
@@ -16,7 +15,6 @@ export function Sidebar({ class: className, currentPage }: Props) {
 			class={`w-55 sticky h-dvh bg-neutral-100 z-10 rounded-r-lg p-3 grid grid-cols-1 -ml-51 motion-ease-in-out-quart grid-rows-[38px_32px_7fr_1fr] ${className} ${isOpenNavbar.value ? 'motion-translate-x-in-[90%] motion-opacity-out' : 'motion-translate-x-out-[90%] motion-opacity-in'}`}
 		>
 			<div class="flex items-center">
-				<DropDown />
 				<section class="flex h-8 items-center mx-10 justify-between">
 					<ToggleSidebar />
 				</section>

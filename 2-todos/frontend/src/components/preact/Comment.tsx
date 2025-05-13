@@ -12,7 +12,7 @@ interface CommentProps extends CommentType {
 export function Comment({ content, creator, createdAt, class: className }: CommentProps) {
     const user = useSignal<User>();
     useSignalEffect(() => {
-        if (creator === user.value?.id) return
+        if (creator === user.peek()?.id) return
         useGetUser({ userID: creator })
             .then(res => {
                 if (res.ok && res.data) {
@@ -25,13 +25,13 @@ export function Comment({ content, creator, createdAt, class: className }: Comme
         <article class={`flex flex-row mx-10 hover:*:opacity-100! hover:cursor-pointer ${className}`}>
             <aside>
                 <div class="size-8 rounded-full border border-neutral-100 overflow-hidden mr-2 flex items-center justify-center">
-                    <img src={user.value?.avatar} alt="user avatar" />
+                    <img src={user.peek()?.avatar} alt="user avatar" />
                 </div>
             </aside>
             <main class="w-full">
                 <header class="flex gap-3 items-center">
                     <span class="font-medium text-sm">
-                        {user.value?.name}
+                        {user.peek()?.name}
                     </span>
                     <span class="text-xs text-neutral-700">
                         {formatedDate}

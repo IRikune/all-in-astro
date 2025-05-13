@@ -19,7 +19,7 @@ export function ProgressCircle({
 
 	const taskAndCompleted = tasksCompleted
 		? 'green 360deg'
-		: `#ff6900 ${progress === 0 ? 0 : grados}deg`;
+		: `#ff6900 ${progress === 0 || grados}deg`;
 	const cssVarStyles = `
         background: conic-gradient(${taskAndCompleted}, rgb(238, 238, 238) 0deg);
     `;
