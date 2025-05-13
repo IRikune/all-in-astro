@@ -93,17 +93,8 @@ function SidebarProject() {
                 </div>
             </Modal>
 
-            <select>
-                <button>
-                    <div>
-                        <selectedcontent> </selectedcontent>
-                        <svg width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="m7 10l5 5l5-5z" />
-                        </svg>
-                    </div>
-                </button>
-
-                <optgroup label="Group A">
+            <select class="[&::picker(select)]:rounded-2xl">
+                <optgroup class="" label="Group A">
                     <option>One</option>
                     <option>Two</option>
                 </optgroup>

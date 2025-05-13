@@ -1,4 +1,4 @@
-import { effect, useSignal } from "@preact/signals";
+import { useSignalEffect, useSignal } from "@preact/signals";
 import { useGetUser } from "../../hooks/users";
 import { useFormatedDate } from "../../hooks/mod";
 import { EditIcon } from "./icons/EditIcon";
@@ -7,20 +7,17 @@ import type { Comment as CommentType, User } from "../../types/mod";
 
 interface CommentProps extends CommentType {
     class?: string
-
 }
 
 export function Comment({ content, creator, createdAt, class: className }: CommentProps) {
     const user = useSignal<User>();
-    effect(() => {
+    useSignalEffect(() => {
+        if (creator === user.value?.id) return
         useGetUser({ userID: creator })
             .then(res => {
                 if (res.ok && res.data) {
                     user.value = res.data;
                 }
-            })
-            .finally(() => {
-                console.log({ user })
             })
     })
     const formatedDate = useFormatedDate({ date: createdAt });

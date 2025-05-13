@@ -6,10 +6,10 @@ POST http://localhost:8000/users/
 Content-Type: application/json
 
 {
-	"name": "Messi",
-    "email": "messi@gmail.com",
+	"name": "Goku",
+    "email": "goku@gmail.com",
     "password": "password",
-    "avatar": "https://img.a.transfermarkt.technology/portrait/header/28003-1740766555.jpg?lm=1"
+    "avatar": "https://imgcdn.stablediffusionweb.com/2025/5/12/daccefb6-0c47-46ce-b875-b59138fd975d.jpg"
 }
 
 ### 

@@ -3,7 +3,7 @@ GET http://localhost:8000/tasks/
 
 ### Get Task by ID
 
-GET http://localhost:8000/tasks/01JSPDYW2HD6RPBEQW19M82VRS
+GET http://localhost:8000/tasks/01JV5MMTT8SFK21T8PS970BKHS
 
 ### Get Tasks by User
 
@@ -16,25 +16,17 @@ POST http://localhost:8000/tasks/
 Content-Type: application/json
 
 {
-	"title": "Tarea de test",
+	"title": "Tarea de Goku",
 	"content": "Task content",
 	"completed": false,
-    "creator": "01JTRRQPE7AAHAV239AX113N0F",
+    "creator": "01JV5MHNMBJW67FJYG5V4QVMAT",
 	"date": {
 		"created": 1673213200,
 		"completed": 1673213200,
 		"expected": 1673213200
 	},
 	"categories": ["category1", "category2"],
-	"priority": 1,
-	"comments": [
-		{
-			"id": "01JSPBGVGKDBDF17WP763TXW72",
-			"content": "Comment content",
-			"creator": "01JTRRQPE7AAHAV239AX113N0F",
-			"createdAt": 1673213200
-		}
-	]
+	"priority": 1
 }
 
 ### Update Task

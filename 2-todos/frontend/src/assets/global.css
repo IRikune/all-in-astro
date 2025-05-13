@@ -49,14 +49,32 @@ select {
   
   &:not(:open)::picker(select) {
     opacity: 0;
-    transform: translateY(2rem);
   }
   
   &:open::picker(select) {
     opacity: 1;
-    transform: translateY(0);
     @starting-style {
       opacity: 0;
     }
+  }
+    &::picker-icon {
+    display: none;
+  }
+    &:not(:open)::picker(select) {
+    opacity: 0;
+    transform: scale(.95);
+  }
+    &:open > button svg {
+    transform: rotate(.5turn);
+  }
+    &::picker(select) {
+    background: light-dark(white, var(--color-theme-gray-100));
+    padding: 0;
+    margin-block: 5px;
+    border: none;
+    box-shadow: var(--shadow-theme-1);
+  }
+  & option {
+
   }
 }

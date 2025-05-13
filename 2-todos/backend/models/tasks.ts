@@ -90,23 +90,22 @@ export async function deleteCompleteTask({
 }
 
 interface UpdateTaskOptions {
-  taskID: Task["id"];
-  newTask: NewTask;
+  task: Task;
 }
 
 export async function updateTask({
-  taskID,
-  newTask,
+  task,
 }: UpdateTaskOptions): Promise<KvResult<Task["id"]>> {
-  const key = ["tasks", taskID];
-  const creatorKey = ["tasks", newTask.creator, taskID];
+  console.log({ task });
+  const key = ["tasks", task.id];
+  const creatorKey = ["tasks", task.creator, task.id];
   const res = await kv
     .atomic()
-    .set(key, newTask)
-    .set(creatorKey, newTask)
+    .set(key, task)
+    .set(creatorKey, task)
     .commit();
   if (!res.ok) return { ok: false, data: null };
-  const result = { ok: true, data: taskID };
+  const result = { ok: true, data: task.id };
   return result;
 }
 
