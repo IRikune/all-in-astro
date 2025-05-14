@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
 @custom-variant select-picker [&::picker(select)];
+
+@custom-variant option-checkmark [&::checkmark];
+
 @theme {
     --color-theme-red-100: #c0392b;
     ---color-theme-red-200: oklch(0.505 0.213 27.518) --color-theme-orange: #FF5733;
@@ -35,16 +38,15 @@
 select {
   &, &::picker(select) {
     appearance: base-select;
-    @apply motion-ease
+    @apply motion-ease-spring-smooth
   }
   
   &::picker(select) {
     transition: 
       display allow-discrete .3s, 
       opacity 150ms,
-      transform 150ms ease-in-out,
+      transform 150ms,
       overlay 150ms allow-discrete;
-      animation: ease-in-out;
   }
   
   &:not(:open)::picker(select) {
@@ -73,8 +75,5 @@ select {
     margin-block: 5px;
     border: none;
     box-shadow: var(--shadow-theme-1);
-  }
-  & option {
-
   }
 }

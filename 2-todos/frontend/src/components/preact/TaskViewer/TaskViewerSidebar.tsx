@@ -93,13 +93,13 @@ function SidebarProject() {
                 </div>
             </Modal>
 
-            <select class="select-picker:rounded-2xl">
-                <optgroup class="" label="Group A">
+            <select class="select-picker:rounded active:scale-98 transition duration-200 rounded px-2 text-xs items-center font-medium hover:bg-neutral-100 w-full flex">
+                <optgroup class="pt-2 font-semibold *:transition *:option-checkmark:text-theme-red-100 *:option-checkmark:font-extrabold *:option-checkmark:mx-1" label="Group A">
                     <option>One</option>
                     <option>Two</option>
                 </optgroup>
                 <hr />
-                <optgroup label="Group B">
+                <optgroup class="pt-2 font-semibold" label="Group B">
                     <option>Three</option>
                     <option>Four</option>
                 </optgroup>
