@@ -9,9 +9,12 @@ import {
   getProject,
   updateProject,
 } from "../models/projects.ts";
-import { userIDSchema } from "../schemas/users.ts";
+import {
+  newProjectSchema,
+  projectIDSchema,
+  userIDSchema,
+} from "../schemas/mod.ts";
 import type { Project, Result } from "../types/mod.ts";
-import { newProjectSchema, projectIDSchema } from "../schemas/projects.ts";
 
 const factory = createFactory();
 

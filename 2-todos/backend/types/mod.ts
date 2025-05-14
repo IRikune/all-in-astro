@@ -1,18 +1,17 @@
 import type { z } from "zod";
 import { kv } from "../main.ts";
 import type {
-  newUserSchema,
-  userIDSchema,
-  userSchema,
-} from "../schemas/users.ts";
-import type {
   commentSchema,
   newCommentSchema,
+  newProjectSchema,
   newTaskSchema,
+  newUserSchema,
+  projectSchema,
   taskIDSchema,
   taskSchema,
-} from "../schemas/tasks.ts";
-import type { newProjectSchema, projectSchema } from "../schemas/projects.ts";
+  userIDSchema,
+  userSchema,
+} from "../schemas/mod.ts";
 
 //#region task
 export type Comment = z.infer<typeof commentSchema>;

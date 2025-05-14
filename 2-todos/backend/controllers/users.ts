@@ -1,6 +1,6 @@
 import { createFactory } from "hono/factory";
 import { validator } from "hono/validator";
-import { newUserSchema, userIDSchema } from "../schemas/users.ts";
+import { newUserSchema, userIDSchema } from "../schemas/mod.ts";
 import { HTTPException } from "hono/http-exception";
 import {
   createUser,

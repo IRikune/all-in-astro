@@ -14,8 +14,8 @@ import {
   newCommentSchema,
   newTaskSchema,
   taskIDSchema,
-} from "../schemas/tasks.ts";
-import { userIDSchema } from "../schemas/users.ts";
+  userIDSchema,
+} from "../schemas/mod.ts";
 import { monotonicUlid as ulid } from "@std/ulid";
 import type { Comment, Result, Task } from "../types/mod.ts";
 
