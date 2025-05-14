@@ -1,5 +1,5 @@
 import { signal } from '@preact/signals';
-import type { Task, User } from '../types/mod';
+import type { Project, Task, User } from '../types/mod';
 
 export const isOpenNavbar = signal(false);
 
@@ -16,11 +16,11 @@ export enum Endpoints {
 }
 
 export const user = signal<User>({
-	id: '',
-	name: '',
-	email: '',
-	password: '',
-	avatar: '',
+	id: 'id.prueba',
+	name: 'name.prueba',
+	email: 'email.prueba',
+	password: 'password.prueba',
+	avatar: 'avatar.prueba',
 });
 
-export const projects = signal<string[]>([]);
+export const projects = signal<Project[]>([]);

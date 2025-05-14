@@ -33,8 +33,10 @@ const { pathname: currentPage } = Astro.url;
 
 <script>
 	import { useGetManyTasks } from "../hooks/tasks.ts";
+	import { useGetManyProjects } from "../hooks/projects";
 	import { useGetUser } from "../hooks/users";
-	import { tasks, user, userID } from "../stores/mod";
+	import { tasks, user, userID, projects } from "../stores/mod";
+	const projectsResult = await useGetManyProjects({ userID });
 	const tasksResult = await useGetManyTasks({ userID });
 	const userResult = await useGetUser({ userID });
 	if (tasksResult.ok && tasksResult.data) {
@@ -43,6 +45,10 @@ const { pathname: currentPage } = Astro.url;
 	if (userResult.ok && userResult.data) {
 		user.value = userResult.data;
 	}
+	if (projectsResult.ok && projectsResult.data) {
+		projects.value = projectsResult.data;
+	}
+	console.log({ projects: projects.value?.[0] });
 </script>
 
 <style>

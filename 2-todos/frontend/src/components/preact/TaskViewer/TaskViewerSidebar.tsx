@@ -3,7 +3,7 @@ import { BookMarkIcon } from '../icons/BookMarkIcon';
 import { InboxIcon } from '../icons/InboxIcon';
 import { Modal } from '../Modal';
 import { iconColors } from '../Checker';
-import { selectedTask, user } from '../../../stores/mod';
+import { projects, selectedTask, user } from '../../../stores/mod';
 import type { Priority, Project } from '../../../types/mod';
 import { type Signal, useComputed, useSignal } from '@preact/signals';
 import { DragHandleIcon } from '../icons/DragHandleIcon';
@@ -11,28 +11,31 @@ import { PinIcon } from '../icons/PinIcon';
 
 export function TaskViewerSidebar() {
 	return (
-		<aside class="w-[30%] h-full border-l border-neutral-200 px-3">
-			<SidebarProject />
-			<hr class="text-neutral-200 my-2" />
-			<SidebarDate />
-			<hr class="text-neutral-200 my-2" />
-			<SidebarPriority />
-			<hr class="text-neutral-200 my-2" />
-			<SidebarCategory />
-			<hr class="text-neutral-200 my-2" />
-		</aside>
+		<>
+			<aside class="w-[30%] h-full border-l border-neutral-200 px-3">
+				<SidebarProject />
+				<hr class="text-neutral-200 my-2" />
+				<SidebarDate />
+				<hr class="text-neutral-200 my-2" />
+				<SidebarPriority />
+				<hr class="text-neutral-200 my-2" />
+				<SidebarCategory />
+				<hr class="text-neutral-200 my-2" />
+			</aside>
+		</>
 	);
 }
 
 function SidebarPriority() {
-	const taskPriority = selectedTask.value?.priority;
-	const priorityColor = iconColors[taskPriority as Priority];
+	if (!user.value && !selectedTask.value) return <></>;
+	const taskPriority = selectedTask.value?.priority as Priority;
+	const priorityColor = iconColors[taskPriority];
 	return (
 		<section class="relative">
 			<h3 class="text-sm mt-2">Priority</h3>
 			<label
 				for="priority-dropdown"
-				class="group cursor-pointer flex hover:bg-neutral-100 px-2 py-1.5 rounded transition-colors duration-300 justify-between "
+				class="group cursor-pointer flex hover:bg-neutral-100 px-2 py-1.5 rounded transition-colors duration-300 justify-between  "
 			>
 				<div class="flex justify-between gap-1">
 					<BookMarkIcon class={`size-4 ${priorityColor}`} />
@@ -93,20 +96,22 @@ function SidebarDate() {
 }
 
 function SidebarProject() {
+	if (!selectedTask.value) return <></>;
+	if (projects.value?.length === 0) return <></>;
 	const projectInput = useSignal('');
 	const currentSelectedProject = useSignal(
 		selectedTask.value?.project || user.value.projects?.[0].title,
 	);
 	const filteredProjects = useComputed(() => {
-		if (user.value.projects) {
-			return user.value.projects.filter((project) =>
+		if (projects.value) {
+			return projects.value.filter((project) =>
 				project.title.includes(projectInput.value),
 			);
 		}
 		return [];
 	});
 	return (
-		<section class="relative">
+		<section class="relative ">
 			<h3 class="text-sm my-2 font-medium text-start">Project</h3>
 			<select
 				value={currentSelectedProject.value}
@@ -151,7 +156,7 @@ function SidebarProjectDropdown({
 	if (!projectInput.value) {
 		return (
 			<>
-				{user.value.projects?.map((project) => (
+				{projects.value?.map((project) => (
 					<option
 						class="px-2 transition duration-200 text-sm py-1"
 						key={project.id}
@@ -188,6 +193,7 @@ function SidebarProjectDropdown({
 }
 
 function SidebarCategory() {
+	if (!selectedTask.value) return <></>;
 	const selectedCategory = useSignal(selectedTask.value?.categories?.[0]);
 	return (
 		<section class="relative">

@@ -61,9 +61,6 @@ export async function useUpdateTask({
 	const data = await response.json();
 	return data;
 }
-interface useDeleteTaskOptions {
-	id: string;
-}
 
 interface useCompareTaskOptions {
 	firstTask: Task;
@@ -74,11 +71,6 @@ interface useCompareTaskOptions {
 	firstTask: Task;
 	secondTask: Task;
 }
-interface usePostCommentOptions {
-	taskID: string;
-	comment: string;
-}
-
 export function useCompareTask({
 	firstTask,
 	secondTask,
