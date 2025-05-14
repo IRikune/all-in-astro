@@ -93,7 +93,7 @@ function SidebarProject() {
                 </div>
             </Modal>
 
-            <select class="[&::picker(select)]:rounded-2xl">
+            <select class="select-picker:rounded-2xl">
                 <optgroup class="" label="Group A">
                     <option>One</option>
                     <option>Two</option>

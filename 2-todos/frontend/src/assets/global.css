@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
-
+@custom-variant select-picker [&::picker(select)];
 @theme {
     --color-theme-red-100: #c0392b;
     ---color-theme-red-200: oklch(0.505 0.213 27.518) --color-theme-orange: #FF5733;
@@ -40,7 +40,7 @@ select {
   
   &::picker(select) {
     transition: 
-      display allow-discrete .5s, 
+      display allow-discrete .3s, 
       opacity 150ms,
       transform 150ms ease-in-out,
       overlay 150ms allow-discrete;
