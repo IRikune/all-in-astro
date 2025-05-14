@@ -17,7 +17,7 @@ const factory = createFactory();
 
 export const getManyProjectsHandlers = factory.createHandlers(
   validator("param", (value) => {
-    const parsed = userIDSchema.safeParse(value.projectID);
+    const parsed = userIDSchema.safeParse(value.userID);
     if (!parsed.success) {
       throw new HTTPException(400, { message: "Project ID is invalid" });
     }

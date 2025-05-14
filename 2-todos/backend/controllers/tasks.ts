@@ -46,7 +46,6 @@ export const getManyTasksHandlers = factory.createHandlers(
   }),
   async (c) => {
     const userID = c.req.valid("param");
-    console.log(userID);
     const tasks = await getManyTasks({ userID });
     return c.json(tasks);
   },
@@ -63,7 +62,6 @@ export const createTaskHandlers = factory.createHandlers(
   async (c) => {
     const task = c.req.valid("json");
     const creator = await getUserByID({ userID: task.creator });
-    console.log(creator);
     if (!creator.ok) {
       throw new HTTPException(400, { message: "Task creator not found" });
     }

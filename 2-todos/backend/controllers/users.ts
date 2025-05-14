@@ -23,13 +23,13 @@ export const getUserHandlers = factory.createHandlers(
   }),
   async (c) => {
     const userID = c.req.valid("param");
-    const { data } = await getUserByID({ userID });
-    if (!data) {
+    const user = await getUserByID({ userID });
+    if (!user.ok || !user.data) {
       throw new HTTPException(404, { message: "User not found" });
     }
-    const result = {
+    const result: Result<User> = {
       ok: true,
-      data: data,
+      data: user.data,
       message: "User found",
     };
     return c.json(result);
@@ -50,11 +50,11 @@ export const createUserHandlers = factory.createHandlers(
     if (!user.ok) {
       throw new HTTPException(400, { message: "User already exists" });
     }
-    const result = {
+    const result: Result<User["id"]> = {
       ok: user.ok,
       data: user.data,
       message: "User created",
-    } as Result<User["id"]>;
+    };
     return c.json(result);
   },
 );
@@ -69,7 +69,15 @@ export const deleteUserHandlers = factory.createHandlers(
   }),
   async (c) => {
     const userID = c.req.valid("param");
-    const result = await deleteUser({ userID });
+    const response = await deleteUser({ userID });
+    if (!response.ok || !response.data) {
+      throw new HTTPException(400, { message: "User not found" });
+    }
+    const result: Result<User["id"]> = {
+      ok: response.ok,
+      data: response.data,
+      message: "User deleted",
+    };
     return c.json(result);
   },
 );

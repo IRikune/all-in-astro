@@ -12,6 +12,7 @@ export async function getManyProjects(
   const iter = kv.list<Project>({ prefix: key });
   const projects: Project[] = [];
   for await (const project of iter) projects.push(project.value);
+  if (projects.length === 0) return { ok: false, data: null };
   return { data: projects, ok: true };
 }
 
@@ -25,6 +26,7 @@ export async function getProject({
   const key = ["projects", projectID];
   const entry = await kv.get<Project>(key);
   const project = entry?.value;
+  if (project === null) return { ok: false, data: null };
   return { ok: true, data: project };
 }
 
@@ -45,6 +47,7 @@ export async function createProject({
     .set(projectKey, project)
     .set(userProjectKey, project)
     .commit();
+  if (!res.ok) return { ok: false, data: null };
   return { data: projectID, ok: res.ok };
 }
 
@@ -61,6 +64,7 @@ export async function updateProject(
     .set(projectKey, project)
     .set(userProjectKey, project)
     .commit();
+  if (!res.ok) return { ok: false, data: null };
   return { data: project.id, ok: res.ok };
 }
 
@@ -76,6 +80,7 @@ export async function deleteUserProject(
   const res = await kv.atomic()
     .delete(userProjectKey)
     .commit();
+  if (!res.ok) return { ok: false, data: null };
   return { data: projectID, ok: res.ok };
 }
 
@@ -93,5 +98,6 @@ export async function deleteCompleteProject(
     .delete(userProjectKey)
     .delete(projectKey)
     .commit();
+  if (!res.ok) return { ok: false, data: null };
   return { data: projectID, ok: res.ok };
 }

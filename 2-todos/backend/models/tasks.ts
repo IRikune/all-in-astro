@@ -13,8 +13,11 @@ export async function getManyTasks({
   const iter = kv.list<Task>({ prefix: key });
   const tasks: Task[] = [];
   for await (const task of iter) tasks.push(task.value);
-  const result = { ok: true, data: tasks };
-  return result;
+  if (tasks.length === 0) return { ok: false, data: null };
+  return {
+    ok: true,
+    data: tasks,
+  };
 }
 
 interface CreateTaskOptions {
@@ -35,8 +38,11 @@ export async function createTask({
     .set(taskByCreator, newTask)
     .set(taskByID, newTask)
     .commit();
-  const result = { ok: res.ok, data: taskID };
-  return result;
+  if (!res.ok) return { ok: false, data: null };
+  return {
+    ok: res.ok,
+    data: taskID,
+  };
 }
 
 interface GetTaskOptions {
@@ -49,13 +55,8 @@ export async function getTask({
   const key = ["tasks", taskID];
   const entry = await kv.get<Task>(key);
   const task = entry?.value;
-  const result = { ok: true, data: task };
-  return result;
-}
-
-interface DeleteTaskOptions {
-  userID: User["id"];
-  taskID: Task["id"];
+  if (task === null) return { ok: false, data: null };
+  return { ok: true, data: task };
 }
 
 interface DeleteUserTaskOptions {
@@ -68,10 +69,14 @@ export async function deleteUserTask({
   userID,
 }: DeleteUserTaskOptions): Promise<KvResult<Task["id"]>> {
   const taskByCreatorKey = ["tasks", userID, taskID];
-  await kv.delete(taskByCreatorKey);
-  const result = { ok: true, data: taskID };
-  console.log(result);
-  return result;
+  const res = await kv.atomic()
+    .delete(taskByCreatorKey)
+    .commit();
+  if (!res.ok) return { ok: false, data: null };
+  return {
+    ok: res.ok,
+    data: taskID,
+  };
 }
 
 export async function deleteCompleteTask({
@@ -85,8 +90,11 @@ export async function deleteCompleteTask({
     .delete(taskByCreatorKey)
     .delete(taskByIDKey)
     .commit();
-  const result = { ok: res.ok, data: taskID };
-  return result;
+  if (!res.ok) return { ok: false, data: null };
+  return {
+    ok: res.ok,
+    data: taskID,
+  };
 }
 
 interface UpdateTaskOptions {
@@ -104,6 +112,8 @@ export async function updateTask({
     .set(creatorKey, task)
     .commit();
   if (!res.ok) return { ok: false, data: null };
-  const result = { ok: true, data: task.id };
-  return result;
+  return {
+    ok: res.ok,
+    data: task.id,
+  };
 }

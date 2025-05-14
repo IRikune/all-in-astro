@@ -12,12 +12,10 @@ export async function getUserByID({
   const key = ["users", userID];
   const user = await kv.get<User>(key);
   if (user.value === null) return { ok: false, data: user.value };
-  const result = {
+  return {
     ok: true,
     data: user.value,
-    versionstamp: user.versionstamp,
   };
-  return result;
 }
 
 export async function getUsers(): Promise<KvResult<User[]>> {
@@ -27,8 +25,7 @@ export async function getUsers(): Promise<KvResult<User[]>> {
     listUsers.push(user.value);
   }
   if (listUsers.length === 0) return { ok: false, data: null };
-  const result = { ok: true, data: listUsers };
-  return result;
+  return { ok: true, data: listUsers };
 }
 
 interface GetUserByEmailOptions {
@@ -41,8 +38,10 @@ export async function getUserByEmail({
   const key = ["users", email];
   const user = await kv.get<User>(key);
   if (user === null) return { ok: false, data: null };
-  const result = { ok: true, data: user.value, versionstamp: "" };
-  return result;
+  return {
+    ok: true,
+    data: user.value,
+  };
 }
 
 interface CreateUserOptions {
@@ -63,11 +62,11 @@ export async function createUser(
     .set(userKey, newUser)
     .set(emailKey, newUser)
     .commit();
-  const result = {
+  if (!res.ok) return { ok: false, data: null };
+  return {
     ok: res.ok,
     data: userID,
   };
-  return result;
 }
 
 interface UpdateUserOptions {
@@ -99,7 +98,7 @@ interface deleteUserOptions {
 
 export async function deleteUser({
   userID,
-}: deleteUserOptions): Promise<KvResult<User>> {
+}: deleteUserOptions): Promise<KvResult<User["id"]>> {
   const key = ["users", userID];
   const user = await kv.get<User>(key);
   if (user.value === null) return { ok: false, data: null };
@@ -107,6 +106,5 @@ export async function deleteUser({
     .check(user)
     .delete(key)
     .commit();
-  const result = { ok: res.ok, data: user.value };
-  return result;
+  return { data: userID, ok: res.ok };
 }
