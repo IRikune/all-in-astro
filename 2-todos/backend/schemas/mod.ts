@@ -21,7 +21,6 @@ export const newTaskSchema = z.object({
   title: z.string(),
   creator: userIDSchema,
   content: z.string().optional(),
-  completed: z.boolean(),
   comments: z.array(commentSchema).optional(),
   date: z.object({
     created: z.number(),
@@ -44,7 +43,7 @@ export const newProjectSchema = z.object({
   title: z.string(),
   description: z.string(),
   creator: userIDSchema,
-  tasks: taskSchema.array().optional(),
+  tasks: taskIDSchema.array().optional(),
 }).strict();
 
 export const projectSchema = newProjectSchema.extend({
@@ -58,11 +57,13 @@ export const newUserSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
   avatar: z.string(),
+  projects: projectSchema.array().optional(),
+  categories: z.string().array().optional(),
+  groups: z.string().array().optional(),
 });
 
 export const userSchema = newUserSchema.extend({
   id: z.string().ulid(),
-  projects: projectSchema.array().optional(),
 }).strict();
 
 //#region Misc Schemas

@@ -1,5 +1,4 @@
 import type { z } from "zod";
-import { kv } from "../main.ts";
 import type {
   commentSchema,
   newCommentSchema,
@@ -43,7 +42,3 @@ export type Result<T> =
 export type KvResult<T> =
   | { ok: boolean; data: T; versionstamp?: string }
   | { ok: boolean; data: null };
-
-const kvResult = await kv.atomic().commit();
-
-export type DenoKVCommit = typeof kvResult;

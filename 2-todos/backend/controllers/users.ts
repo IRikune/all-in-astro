@@ -8,7 +8,10 @@ import {
   getUserByID,
   updateUser,
 } from "../models/user.ts";
-import type { Result, User } from "../types/mod.ts";
+import type { NewProject, Project, Result, User } from "../types/mod.ts";
+import { createTask } from "../models/tasks.ts";
+import { getInitialTasks } from "../utils/mod.ts";
+import { createProject } from "../models/projects.ts";
 
 const factory = createFactory();
 
@@ -45,14 +48,53 @@ export const createUserHandlers = factory.createHandlers(
     return parsed.data;
   }),
   async (c) => {
-    const newUser = c.req.valid("json");
-    const user = await createUser({ user: newUser });
-    if (!user.ok) {
+    // Valid and create initial user
+    const validUser = c.req.valid("json");
+    const user = await createUser({ user: validUser });
+    if (!user.ok || !user.data) {
+      throw new HTTPException(400, { message: "User already exists" });
+    }
+    // Create initial tasks
+    const initialTasks = getInitialTasks({ userID: user.data });
+    const tasksPromises = initialTasks.map(async (task) => {
+      const res = await createTask({ task });
+      if (!res.ok || res.data === null) return "";
+      return res.data;
+    });
+    const createdTasks = await Promise.all(tasksPromises);
+    // Create initial project
+    const newProject: NewProject = {
+      title: "My space",
+      description: "This is your space to store your tasks",
+      creator: user.data,
+      tasks: createdTasks,
+    };
+    const res = await createProject({ newProject });
+    if (!res.ok || res.data === null) {
+      throw new HTTPException(400, { message: "Project already exists" });
+    }
+    const createdProject: Project = {
+      ...newProject,
+      id: res.data,
+    };
+    // updated final user
+    const initialUser: User = {
+      ...validUser,
+      id: user.data,
+      projects: [createdProject],
+      groups: ["Carnivores 🦖", "Herbivores 🦕"],
+      categories: ["food", "todos", "projects"],
+    };
+    const userResult = await updateUser({
+      userID: user.data,
+      newUser: initialUser,
+    });
+    if (!userResult.ok) {
       throw new HTTPException(400, { message: "User already exists" });
     }
     const result: Result<User["id"]> = {
       ok: user.ok,
-      data: user.data,
+      data: userResult.data,
       message: "User created",
     };
     return c.json(result);
