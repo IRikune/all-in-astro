@@ -31,6 +31,7 @@ export const newTaskSchema = z.object({
   priority: z.number().min(1).max(4),
   colaborators: userIDSchema.array().optional(),
   group: z.string().optional(),
+  project: projectIDSchema.optional(),
 }).strict();
 
 export const taskSchema = newTaskSchema.extend({

@@ -1,15 +1,15 @@
 ###
-GET http://localhost:8000/users/01JV6Z979B1WQZT3K2TYQ83YE6
+GET http://localhost:8000/users/01JV6ZJPKPT56V4R34J0NSGY04
 
 ### 
 POST http://localhost:8000/users/
 Content-Type: application/json
 
 {
-	"name": "Goku",
-    "email": "goku@gmail.com",
+	"name": "Vegeta",
+    "email": "Vegeta@gmail.com",
     "password": "password",
-    "avatar": "https://imgcdn.stablediffusionweb.com/2025/5/12/daccefb6-0c47-46ce-b875-b59138fd975d.jpg"
+    "avatar": "https://fwmedia.fandomwire.com/wp-content/uploads/2025/03/05060705/Dragonball-Z-Vegeta.jpg"
 }
 
 ### 

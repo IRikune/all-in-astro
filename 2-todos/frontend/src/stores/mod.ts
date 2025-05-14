@@ -3,7 +3,7 @@ import type { Task, User } from '../types/mod';
 
 export const isOpenNavbar = signal(false);
 
-export const userID = '01JV5MHNMBJW67FJYG5V4QVMAT';
+export const userID = '01JV6ZJPKPT56V4R34J0NSGY04';
 
 export const tasks = signal<Task[]>([]);
 
@@ -22,3 +22,5 @@ export const user = signal<User>({
 	password: '',
 	avatar: '',
 });
+
+export const projects = signal<string[]>([]);

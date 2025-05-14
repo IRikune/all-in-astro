@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
+
 @custom-variant select-picker [&::picker(select)];
 
 @custom-variant option-checkmark [&::checkmark];
@@ -65,9 +66,6 @@ select {
     &:not(:open)::picker(select) {
     opacity: 0;
     transform: scale(.95);
-  }
-    &:open > button svg {
-    transform: rotate(.5turn);
   }
     &::picker(select) {
     background: light-dark(white, var(--color-theme-gray-100));

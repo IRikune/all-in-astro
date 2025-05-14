@@ -8,7 +8,13 @@ import {
   getUserByID,
   updateUser,
 } from "../models/user.ts";
-import type { NewProject, Project, Result, User } from "../types/mod.ts";
+import type {
+  NewProject,
+  NewTask,
+  Project,
+  Result,
+  User,
+} from "../types/mod.ts";
 import { createTask } from "../models/tasks.ts";
 import { getInitialTasks } from "../utils/mod.ts";
 import { createProject } from "../models/projects.ts";
@@ -55,7 +61,7 @@ export const createUserHandlers = factory.createHandlers(
       throw new HTTPException(400, { message: "User already exists" });
     }
     // Create initial tasks
-    const initialTasks = getInitialTasks({ userID: user.data });
+    const initialTasks: Array<NewTask> = getInitialTasks({ userID: user.data });
     const tasksPromises = initialTasks.map(async (task) => {
       const res = await createTask({ task });
       if (!res.ok || res.data === null) return "";
@@ -83,14 +89,14 @@ export const createUserHandlers = factory.createHandlers(
       id: user.data,
       projects: [createdProject],
       groups: ["Carnivores 🦖", "Herbivores 🦕"],
-      categories: ["food", "todos", "projects"],
+      categories: ["Food", "Todos", "Projects", "Dreams"],
     };
     const userResult = await updateUser({
       userID: user.data,
       newUser: initialUser,
     });
     if (!userResult.ok) {
-      throw new HTTPException(400, { message: "User already exists" });
+      throw new HTTPException(400, { message: "Unable to update user" });
     }
     const result: Result<User["id"]> = {
       ok: user.ok,

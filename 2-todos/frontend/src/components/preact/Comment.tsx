@@ -25,7 +25,7 @@ export function Comment({ content, creator, createdAt, class: className }: Comme
         <article class={`flex flex-row mx-10 hover:*:opacity-100! hover:cursor-pointer ${className}`}>
             <aside>
                 <div class="size-8 rounded-full border border-neutral-100 overflow-hidden mr-2 flex items-center justify-center">
-                    <img src={user.peek()?.avatar} alt="user avatar" />
+                    <img src={user.value?.avatar} alt="user avatar" />
                 </div>
             </aside>
             <main class="w-full">
