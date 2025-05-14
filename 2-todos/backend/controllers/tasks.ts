@@ -17,7 +17,7 @@ import {
 } from "../schemas/tasks.ts";
 import { userIDSchema } from "../schemas/users.ts";
 import { monotonicUlid as ulid } from "@std/ulid";
-import type { Result, Task } from "../types/mod.ts";
+import type { Comment, Result, Task } from "../types/mod.ts";
 
 const factory = createFactory();
 
@@ -36,7 +36,7 @@ export const getTaskHandlers = factory.createHandlers(
   },
 );
 
-export const getManyTaskHandlers = factory.createHandlers(
+export const getManyTasksHandlers = factory.createHandlers(
   validator("param", (value) => {
     const parsed = userIDSchema.safeParse(value.userID);
     if (!parsed.success) {
@@ -71,11 +71,11 @@ export const createTaskHandlers = factory.createHandlers(
     if (!taskResult.ok) {
       throw new HTTPException(400, { message: "Task already exists" });
     }
-    const result = {
+    const result: Result<Task["id"]> = {
       ok: taskResult.ok,
       data: taskResult.data,
       message: "Task created succesfull",
-    } as Result<Task["id"]>;
+    };
     return c.json(result);
   },
 );
@@ -100,7 +100,7 @@ export const deleteTaskHandlers = factory.createHandlers(
     }
     if (task.data?.colaborators) {
       const res = await deleteUserTask({ taskID, userID });
-      const result = {
+      const result: Result<Task["id"]> = {
         ok: res.ok,
         data: res.data,
         message: "Task deleted from user",
@@ -108,7 +108,7 @@ export const deleteTaskHandlers = factory.createHandlers(
       return c.json(result);
     }
     const res = await deleteCompleteTask({ userID, taskID });
-    const result = {
+    const result: Result<Task["id"]> = {
       ok: res.ok,
       data: res.data,
       message: "Task deleted completely",
@@ -144,7 +144,7 @@ export const updateTaskHandlers = factory.createHandlers(
       ...validTask,
     };
     const updatedTask = await updateTask({ task: newTask });
-    const result = {
+    const result: Result<Task["id"]> = {
       ok: updatedTask.ok,
       data: updatedTask.data,
       message: "Task updated succesfully",
@@ -188,7 +188,7 @@ export const createCommentHandlers = factory.createHandlers(
       comments: [...currentComments, newComment],
     };
     const res = await updateTask({ task: postTask });
-    const result = {
+    const result: Result<Comment["id"]> = {
       ok: res.ok,
       data: newCommentID,
       message: "Comment created succesfully",

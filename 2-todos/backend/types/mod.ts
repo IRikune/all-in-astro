@@ -2,7 +2,6 @@ import type { z } from "zod";
 import { kv } from "../main.ts";
 import type {
   newUserSchema,
-  updateUserOptionsSchema,
   userIDSchema,
   userSchema,
 } from "../schemas/users.ts";
@@ -13,6 +12,7 @@ import type {
   taskIDSchema,
   taskSchema,
 } from "../schemas/tasks.ts";
+import type { newProjectSchema, projectSchema } from "../schemas/projects.ts";
 
 //#region task
 export type Comment = z.infer<typeof commentSchema>;
@@ -32,7 +32,10 @@ export enum Priority {
 export type User = z.infer<typeof userSchema>;
 export type NewUser = z.infer<typeof newUserSchema>;
 export type UserID = z.infer<typeof userIDSchema>;
-export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
+
+//#region projects
+export type Project = z.infer<typeof projectSchema>;
+export type NewProject = z.infer<typeof newProjectSchema>;
 
 export type Result<T> =
   | { ok: boolean; data: T; message: string; versionstamp?: string }

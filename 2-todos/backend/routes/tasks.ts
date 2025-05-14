@@ -3,7 +3,7 @@ import {
   createCommentHandlers,
   createTaskHandlers,
   deleteTaskHandlers,
-  getManyTaskHandlers,
+  getManyTasksHandlers,
   getTaskHandlers,
   updateTaskHandlers,
 } from "../controllers/tasks.ts";
@@ -17,7 +17,7 @@ tasks.get("/", (c) => {
 
 tasks.get("/:taskID", ...getTaskHandlers);
 
-tasks.get("/users/:userID", ...getManyTaskHandlers);
+tasks.get("/users/:userID", ...getManyTasksHandlers);
 
 tasks.post("/", ...createTaskHandlers);
 

@@ -96,7 +96,6 @@ interface UpdateTaskOptions {
 export async function updateTask({
   task,
 }: UpdateTaskOptions): Promise<KvResult<Task["id"]>> {
-  console.log({ task });
   const key = ["tasks", task.id];
   const creatorKey = ["tasks", task.creator, task.id];
   const res = await kv
@@ -106,20 +105,5 @@ export async function updateTask({
     .commit();
   if (!res.ok) return { ok: false, data: null };
   const result = { ok: true, data: task.id };
-  return result;
-}
-
-interface DeleteTasksOptions {
-  userID: User["id"];
-}
-
-export async function deleteTasks({
-  userID,
-}: DeleteTasksOptions): Promise<KvResult<User["id"]>> {
-  const listTasks = kv.list({ prefix: ["tasks", userID] });
-  for await (const task of listTasks) {
-    kv.delete(task.key);
-  }
-  const result = { ok: true, data: userID };
   return result;
 }

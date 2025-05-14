@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { projectSchema } from "./projects.ts";
 
 export const userIDSchema = z.string().ulid();
 
@@ -11,15 +12,7 @@ export const newUserSchema = z.object({
 
 export const userSchema = newUserSchema.extend({
   id: z.string().ulid(),
-});
-
-export const postUserSchema = userSchema.extend({
-  id: z.never().optional(),
+  projects: projectSchema.array().optional(),
 }).strict();
-
-export const updateUserOptionsSchema = z.object({
-  userID: z.string(),
-  User: userSchema,
-});
 
 export const emailSchema = z.string().email();

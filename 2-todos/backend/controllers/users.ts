@@ -1,6 +1,6 @@
 import { createFactory } from "hono/factory";
 import { validator } from "hono/validator";
-import { postUserSchema, userIDSchema } from "../schemas/users.ts";
+import { newUserSchema, userIDSchema } from "../schemas/users.ts";
 import { HTTPException } from "hono/http-exception";
 import {
   createUser,
@@ -38,7 +38,7 @@ export const getUserHandlers = factory.createHandlers(
 
 export const createUserHandlers = factory.createHandlers(
   validator("json", (value) => {
-    const parsed = postUserSchema.safeParse(value);
+    const parsed = newUserSchema.safeParse(value);
     if (!parsed.success) {
       throw new HTTPException(400, parsed.error);
     }
@@ -76,7 +76,7 @@ export const deleteUserHandlers = factory.createHandlers(
 
 export const updateUserHandlers = factory.createHandlers(
   validator("json", (value) => {
-    const parsed = postUserSchema.safeParse(value);
+    const parsed = newUserSchema.safeParse(value);
     if (!parsed.success) {
       throw new HTTPException(402, parsed.error);
     }
