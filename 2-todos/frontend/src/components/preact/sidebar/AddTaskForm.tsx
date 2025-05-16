@@ -1,24 +1,39 @@
-import { signal } from '@preact/signals';
+import { computed, signal } from '@preact/signals';
 import { PriorityIcon } from '../icons/PriorityIcon.tsx';
 import { ClockIcon } from '../icons/ClockIcon.tsx';
 import { BookMarkIcon } from '../icons/BookMarkIcon.tsx';
 import { InboxIcon } from '../icons/InboxIcon.tsx';
 import { ChevronIcon } from '../icons/ChevronIcon.tsx';
-import type { JSX } from 'preact/jsx-runtime';
-import { Priority, type NewTask, type Task } from '../../../types/mod';
+import {
+	Priority,
+	type NewTask,
+	type Project,
+	type Task,
+} from '../../../types/mod';
 import { useCreateTask } from '../../../hooks/tasks.ts';
-import { userID, tasks } from '../../../stores/mod.ts';
+import { userID, tasks, projects, user } from '../../../stores/mod.ts';
+import type { JSX } from 'preact/jsx-runtime';
 
+// single
 const title = signal<NewTask['title']>('');
 const description = signal<NewTask['content']>('');
 const expectedDate = signal<NewTask['date']['expected']>(0);
+// many
 const priority = signal<NewTask['priority']>(Priority.low);
-const labels = signal<NewTask['categories']>([]);
+const projectTitle = signal<Project['title']>('');
+const category = signal<string>('');
+
+const data = computed(() => {
+	return {
+		projectTitle: projectTitle.value,
+		category: category.value,
+		priority: priority.value,
+	};
+});
 
 async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
 	event.preventDefault();
-	const $modal = document.getElementById('add-task-modal') as
-		HTMLInputElement;
+	const $modal = document.getElementById('add-task-modal') as HTMLInputElement;
 	const currentTask = {
 		title: title.value,
 		creator: userID,
@@ -28,20 +43,19 @@ async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
 		},
 		priority: priority.value,
 		content: description.value,
-		completed: false,
-	}
+	};
 	const result = await useCreateTask({ newTask: currentTask });
 	const newTask: Task = {
 		...currentTask,
-		id: result.data || "",
-	}
+		id: result.data || '',
+	};
 	tasks.value = [...tasks.value, newTask];
 	$modal.checked = false;
 	title.value = '';
 	description.value = '';
 	expectedDate.value = 0;
 	priority.value = Priority.important;
-	labels.value = [];
+	projectTitle.value = '';
 }
 
 export function AddTaskForm({ close = 'add-task-modal', ...props }) {
@@ -71,32 +85,15 @@ export function AddTaskForm({ close = 'add-task-modal', ...props }) {
 				name="content"
 			/>
 			<section class="flex *:items-center *:cursor-pointer *:p-2 text-xs mt-2">
-				<label class="mr-1" for="add-task-date">
-					<input
-						type="datetime-local"
-						value={expectedDate.value}
-						class="appearance-none flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300"
-						name="data"
-					/>
-				</label>
-				<label class="mr-1" for="add-task-priority">
-					<div class="flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300">
-						<h2 class="">Priority</h2>
-						<PriorityIcon class="size-3" />
-					</div>
-				</label>
-				<label class="w-fit mr-1" for="add-task-reminder">
-					<div class="flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300">
-						<h2 class="mr-1">Reminders</h2>
-						<ClockIcon class="size-3" />
-					</div>
-				</label>
-				<label class="select-none" for="add-task-label">
-					<div class="flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300">
-						<h2 class="mr-1">Labels</h2>
-						<BookMarkIcon class="size-3" />
-					</div>
-				</label>
+				<input
+					type="datetime-local"
+					value={expectedDate.value}
+					class="appearance-none flex items-center border border-neutral-300 rounded-lg px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300"
+					name="data"
+				/>
+				<select class="select-picker:rounded select-picker:absolute active:scale-98 transition duration-200 rounded-lg px-1 text-xs items-center font-medium hover:bg-neutral-100 w-fit cursor-pointer relative border border-neutral-300">
+					<option value="">Category</option>
+				</select>
 			</section>
 			<hr class="text-neutral-300 my-2" />
 			<section class="flex justify-between items-center pt-2">
@@ -122,6 +119,7 @@ export function AddTaskForm({ close = 'add-task-modal', ...props }) {
 					</button>
 				</div>
 			</section>
+			<h2>{JSON.stringify(data.value)}</h2>
 		</form>
 	);
 }

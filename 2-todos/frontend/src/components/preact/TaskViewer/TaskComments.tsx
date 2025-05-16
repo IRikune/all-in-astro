@@ -36,7 +36,7 @@ export function TaskComments() {
 		}
 	};
 	return (
-		<section class="scroll-show-animation w-full has-open:h-[50cqh] flex flex-col overflow-x-hidden overflow-y-scroll transition-all">
+		<section class="w-full has-open:h-[50cqh] flex flex-col overflow-x-hidden overflow-y-scroll transition-all">
 			<main class="w-full has-open:h-[50cqh] flex justify-start overflow-x-hidden overflow-y-scroll mx-2">
 				<details
 					class="[&_summary::-webkit-details-marker]:hidden w-full group select-none"

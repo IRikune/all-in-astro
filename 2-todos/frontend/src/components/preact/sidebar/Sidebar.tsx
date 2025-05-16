@@ -54,8 +54,8 @@ export function Sidebar({ class: className, currentPage }: Props) {
 				</Button>
 			</section>
 			<Modal
-				animation='scale'
-				classBackdrop=''
+				animation="scale"
+				classBackdrop=""
 				class="fixed left-5/3 top-[16dvw] translate-x-1/2 translate-y-1/2 z-[100]"
 				id="add-task-modal"
 			>
