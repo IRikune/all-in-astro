@@ -1,4 +1,5 @@
 ---
+import { isThrowStatement } from "typescript";
 import "../assets/global.css";
 import "@fontsource-variable/montserrat";
 ---
@@ -12,7 +13,7 @@ import "@fontsource-variable/montserrat";
         <meta name="generator" content={Astro.generator} />
         <title>Todo App</title>
     </head>
-    <body>
+    <body class="grid relative ">
         <slot />
     </body>
 </html>
@@ -26,3 +27,4 @@ import "@fontsource-variable/montserrat";
         height: 100%;
     }
 </style>
+

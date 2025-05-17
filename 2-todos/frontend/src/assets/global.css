@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
     --color-theme-red-100: #c0392b;
@@ -29,5 +30,30 @@
         @starting-style {
             scale: 0;
         }
+    }
+}
+
+@utility border-after-and-before {
+    &::after {
+        content: "";
+        position: absolute;
+        top:2.8px;
+        right:10px;
+        height: 9px;
+        width: 9px;
+        background-color: transparent;
+        border-top-right-radius: 99%;
+        box-shadow:2px -4px 0 0 var(--color-gray-100)
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top:2.8px;
+        left:10px;
+        height: 9px;
+        width: 9px;
+        background-color: transparent;
+        border-top-left-radius: 99%;
+        box-shadow:0 -4px 0 0 var(--color-gray-100)
     }
 }

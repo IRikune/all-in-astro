@@ -61,7 +61,7 @@ export function Task({task}: PropsTask) {
 export function ViewTask() {
   return (
     <Modal
-      id="view-task-options"
+      id="view-task-option"
       onInput={() => {
         taskSignal.value = tasks[0];
       }}

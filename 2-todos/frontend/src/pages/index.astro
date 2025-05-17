@@ -1,6 +1,11 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
 import { Button } from "../components/preact/Button";
+import { FormLogin } from "../components/preact/FormLogin";
+import { Register } from "../components/preact/Register";
+import { Modal } from "../components/preact/Modal";
+import { ShowModal } from "../components/preact/ShowModal";
+import { FormRegister } from "../components/preact/FormRegister"
 ---
 
 
@@ -17,7 +22,7 @@ import { Button } from "../components/preact/Button";
 		>
 		</path>
 	</svg>
-	<section class="">
+	<section>
 		<div
 			class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"
 		>
@@ -33,18 +38,19 @@ import { Button } from "../components/preact/Button";
 					</strong>
 				</h1>
 				<div class="mt-8 flex flex-wrap justify-center gap-4">
-					<a
-						class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto"
-						href="/dashboard/today"
-					>
-						Get Started
-					</a>
-	
-					<Button class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto" to="/dashboard/login">login</Button>
-
-					<Button class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto" to="/dashboard/register">register</Button>
+					<ShowModal class="block w-full transition duration-500 rounded-sm bg-emerald-500 px-12 py-3 text-sm font-medium text-white hover:bg-emerald-700 active:bg-emerald-900 select-none shadow-sm hover:cursor-pointer focus:ring-3 focus:outline-hidden sm:w-auto" for="login-modal">Login</ShowModal>
+					<ShowModal class="block w-full transition duration-500 rounded-sm bg-emerald-500 px-12 py-3 text-sm font-medium text-white hover:bg-emerald-700 active:bg-emerald-900 select-none shadow-sm hover:cursor-pointer focus:ring-3 focus:outline-hidden sm:w-auto" for="register-modal">Register</ShowModal>
 				</div>
 			</div>
+			
 		</div>
 	</section>
+	<Modal animation="fade" id="login-modal" classBackdrop="bg-black/60" classFather="self-center place-self-center absolute  " >
+
+		<FormLogin />
+	</Modal>
+	<Modal animation="fade" id="register-modal" class={"w-[clamp(20rem,100%,60rem)] h-100"} classFather="self-center place-self-center absolute"  >
+
+		<FormRegister client:load/>
+	</Modal>
 </LandingLayout>

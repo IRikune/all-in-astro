@@ -9,6 +9,13 @@ export const tasks = signal<Task[]>([]);
 
 export const selectedTask = signal<Task>();
 
+export enum Theme {
+	LIGHT = "light",
+	DARK = "dark",
+}
+
+export const theme = signal(Theme.LIGHT);
+
 export enum Endpoints {
 	users = 'http://localhost:8000/users/',
 	tasks = 'http://localhost:8000/tasks/',

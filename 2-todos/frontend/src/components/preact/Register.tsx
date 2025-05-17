@@ -34,7 +34,7 @@ export function Register() {
   return (
     <div
       class="relative flex flex-col w-78 h-138 px-3 dark:text-white bg-white  text-slate-700  lg:py-4  dark:bg-gray-950
-         rounded-2xl gap-5 bg-clip-border"
+        rounded-2xl gap-5 bg-clip-border"
     >
       <header class="w-full h-21 grid items-center">
         <h1 class="text-center text-3xl font-medium bg-clip-text  ">
@@ -43,11 +43,7 @@ export function Register() {
       </header>
       <main class={"flex flex-col gap-3 justify-center items-center"}>
         <div class={"flex gap-3 justify-center items-center"}>
-          <div
-            class="flex justify-center items-center size-12 border 
-                    
-                     border-slate-100 dark:border-slate-600 rounded"
-          >
+          <div class="flex justify-center items-center size-12 border border-slate-100 dark:border-slate-600 rounded">
             <DiscordIcon class="size-8" />
           </div>
           <div

@@ -5,11 +5,14 @@ import { ListTask } from "../../components/preact/ListTask";
 import { TaskCreator } from "../../components/preact/TaskCreator";
 import { Modal } from "../../components/preact/Modal";
 import { ViewTask } from "../../components/preact/Task";
+import { TaskViewer } from "../../components/preact/TaskViewer/TaskViewer";
+import { ToggleTheme } from "../../components/preact/ToggleTheme";
 ---
 
 <Layout title="Today">
   <main class="flex flex-col items-left h-dvh w-[80%] mx-auto">
     <section class="relative text-grey-200">
+      
       <h1
         class="h-[5rem] font-bold text-3xl text-transparent bg-clip-text bg-gradient-to-br from-rose-900 to-rose-700"
       >
@@ -31,16 +34,14 @@ import { ViewTask } from "../../components/preact/Task";
     </Modal>
 
     <ListTask client:load />
-    <ViewTask client:load />
     <hr class="border-gray-200" />
-
+    
     <TaskCreator client:load />
+    <label id="Muestra-la-tarea" for="view-task-options">
+      <div class="rounded bg-emerald-300 cursor-pointer dark:bg-amber-950 hover:bg-emerald-600 w-20 p-3">
+        <h1>mostrar tarea</h1>
+      </div> 
+    </label>
+    
   </main>
 </Layout>
-<<<<<<< HEAD
-
-<script >
-  
-</script>
-=======
->>>>>>> Frontend-Issues

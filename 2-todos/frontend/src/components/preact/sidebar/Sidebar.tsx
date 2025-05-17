@@ -5,6 +5,7 @@ import {Modal} from "../Modal";
 import {AddTaskForm} from "./AddTaskForm";
 import {isOpenNavbar} from "../../../stores/mod";
 import {ToggleSidebar} from "./ToggleSidebar";
+import {ToggleTheme} from "../ToggleTheme";
 interface Props {
   class?: string;
   currentPage: string;
@@ -21,8 +22,10 @@ export function Sidebar({class: className, currentPage}: Props) {
     >
       <div class="flex items-center">
         <DropDown />
+
         <section class="flex h-8 items-center mx-10 justify-between">
           <ToggleSidebar />
+          <ToggleTheme />
         </section>
       </div>
       <AddButton />
@@ -59,16 +62,6 @@ export function Sidebar({class: className, currentPage}: Props) {
           Logout
         </Button>
       </section>
-      <Modal
-        animation="scale"
-        classBackdrop=""
-        class="fixed left-5/3 top-[16dvw] translate-x-1/2 translate-y-1/2 z-[100]"
-        id="add-task-modal"
-      >
-        <div class="bg-white w-xl text-center shadow-theme-2 rounded-lg p-2">
-          <AddTaskForm />
-        </div>
-      </Modal>
     </nav>
   );
 }
