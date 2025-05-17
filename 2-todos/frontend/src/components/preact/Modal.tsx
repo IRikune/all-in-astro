@@ -7,7 +7,6 @@ interface ModalProps extends JSX.HTMLAttributes<HTMLDivElement> {
   animation?: "scale" | "fade";
   classBackdrop?: string;
   oninput?: () => void;
-  classFather?: string;
 }
 
 export function Modal({
@@ -17,7 +16,6 @@ export function Modal({
   children,
   class: className,
   classBackdrop = "bg-black/20",
-  classFather,
 }: ModalProps) {
   const ANIMATIONS = {
     scale:
@@ -26,22 +24,16 @@ export function Modal({
   };
 
   return (
-    <div
-      class={`has-[>_input:checked]:*:block has-not-checked:*:hidden *:duration-300 *:transition-discrete ${classFather}`}
-    >
+    <div class="has-[>_input:checked]:*:block has-not-checked:*:hidden *:duration-300 *:transition-discrete">
       {backdropLabel && (
         <label for={id}>
           <div
-            class={`w-[120dvw] h-dvh fixed left-0 top-0 z-40 ${classBackdrop}`}
+            class={`w-[120dvw] h-dvh fixed left-0 top-0 z-[49] ${classBackdrop}`}
           />
         </label>
       )}
       <input type="checkbox" id={id} class="peer hidden!" />
-      <main
-        class={`${
-          animation && ANIMATIONS[animation]
-        } relative z-50 ${className}`}
-      >
+      <main class={`${animation && ANIMATIONS[animation]} ${className}`}>
         {children}
       </main>
     </div>

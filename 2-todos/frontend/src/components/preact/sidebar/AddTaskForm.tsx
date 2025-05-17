@@ -1,19 +1,45 @@
-import {signal} from "@preact/signals";
-import {PriorityIcon} from "../icons/PriorityIcon";
-import {ClockIcon} from "../icons/ClockIcon";
-import {BookMarkIcon} from "../icons/BookMarkIcon";
-import {InboxIcon} from "../icons/InboxIcon";
-import {ChevronIcon} from "../icons/ChevronIcon";
+import {computed, signal} from "@preact/signals";
+import {Select} from "../Select.tsx";
+import {InboxIcon} from "../icons/InboxIcon.tsx";
+import {ChevronIcon} from "../icons/ChevronIcon.tsx";
+import {PRIORITIES} from "../../../stores/mod.ts";
+import {Priority} from "../../../types/mod";
+import {useCreateTask} from "../../../hooks/tasks.ts";
+import {userID, tasks, user} from "../../../stores/mod.ts";
+import {PinIcon} from "../icons/PinIcon.tsx";
+import type {NewTask, Project, Task} from "../../../types/mod";
 import type {JSX} from "preact/jsx-runtime";
-import {Priority, type NewTask, type Task} from "../../../types/mod";
-import {useCreateTask} from "../../../hooks/tasks";
-import {userID, tasks} from "../../../stores/mod";
 
+// single
 const title = signal<NewTask["title"]>("");
 const description = signal<NewTask["content"]>("");
 const expectedDate = signal<NewTask["date"]["expected"]>(0);
-const priority = signal<NewTask["priority"]>(Priority.low);
-const labels = signal<NewTask["categories"]>([]);
+// many
+const prioritySelect = signal<string>("Priority");
+const priorityInput = signal<string>("");
+const projectSelect = signal<Project["title"]>("");
+const projectInput = signal<Project["title"]>("");
+const categorySelect = signal<string>("Category");
+const categoryInput = signal<string>("");
+
+const parsedPriority = computed(() => {
+  const PRIORITIES = {
+    P1: Priority.high,
+    P2: Priority.important,
+    P3: Priority.medium,
+    P4: Priority.low,
+  };
+  const value = priorityInput.value;
+  return PRIORITIES[value as keyof typeof PRIORITIES] || Priority.medium;
+});
+
+const data = computed(() => {
+  return {
+    project: projectSelect.value,
+    category: categorySelect.value,
+    priority: parsedPriority.value,
+  };
+});
 
 async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
   event.preventDefault();
@@ -25,9 +51,8 @@ async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
       created: Date.now(),
       expected: expectedDate.value,
     },
-    priority: priority.value,
+    priority: parsedPriority.value as Priority,
     content: description.value,
-    completed: false,
   };
   const result = await useCreateTask({newTask: currentTask});
   const newTask: Task = {
@@ -39,8 +64,8 @@ async function addTaskHandler(event: JSX.TargetedEvent<HTMLFormElement>) {
   title.value = "";
   description.value = "";
   expectedDate.value = 0;
-  priority.value = Priority.important;
-  labels.value = [];
+  prioritySelect.value = "Priority";
+  projectSelect.value = "Project";
 }
 
 export function AddTaskForm({close = "add-task-modal", ...props}) {
@@ -69,33 +94,33 @@ export function AddTaskForm({close = "add-task-modal", ...props}) {
         autocomplete="off"
         name="content"
       />
-      <section class="flex *:items-center *:cursor-pointer *:p-2 text-xs mt-2">
-        <label class="mr-1" for="add-task-date">
-          <input
-            type="datetime-local"
-            value={expectedDate.value}
-            class="appearance-none flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300"
-            name="data"
-          />
-        </label>
-        <label class="mr-1" for="add-task-priority">
-          <div class="flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300">
-            <h2 class="">Priority</h2>
-            <PriorityIcon class="size-3" />
-          </div>
-        </label>
-        <label class="w-fit mr-1" for="add-task-reminder">
-          <div class="flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300">
-            <h2 class="mr-1">Reminders</h2>
-            <ClockIcon class="size-3" />
-          </div>
-        </label>
-        <label class="select-none" for="add-task-label">
-          <div class="flex items-center border border-neutral-300 rounded-lg p-1 px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300">
-            <h2 class="mr-1">Labels</h2>
-            <BookMarkIcon class="size-3" />
-          </div>
-        </label>
+      <section class="flex *:items-center *:cursor-pointer *:p-2 text-xs mt-2 @container">
+        <input
+          type="datetime-local"
+          value={expectedDate.value}
+          class="appearance-none flex items-center border border-neutral-300 rounded-lg px-2 text-neutral-700 hover:bg-neutral-100 transition duration-300"
+          name="data"
+        />
+
+        <Select
+          class="w-fit! select-picker:absolute select-picker:left-[36cqw] border mx-2 border-neutral-300 rounded-lg"
+          selectSignal={categorySelect}
+          selectInputSignal={categoryInput}
+          options={user.value?.categories || []}
+        >
+          <PinIcon class="size-3" />
+        </Select>
+
+        {/* Priority */}
+
+        <Select
+          class="w-fit! select-picker:absolute select-picker:left-[36cqw] border mx-2 border-neutral-300 rounded-lg"
+          selectSignal={prioritySelect}
+          selectInputSignal={priorityInput}
+          options={PRIORITIES}
+        >
+          <PinIcon class="size-3" />
+        </Select>
       </section>
       <hr class="text-neutral-300 my-2" />
       <section class="flex justify-between items-center pt-2">
@@ -121,6 +146,7 @@ export function AddTaskForm({close = "add-task-modal", ...props}) {
           </button>
         </div>
       </section>
+      <h2>{JSON.stringify(data.value)}</h2>
     </form>
   );
 }

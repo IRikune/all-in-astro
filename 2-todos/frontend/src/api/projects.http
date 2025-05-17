@@ -1,0 +1,23 @@
+# Get all projects from a user
+# GET http://localhost:8000/users/{userID}/projects
+
+GET http://localhost:8000/users/01JV6ZJPKPT56V4R34J0NSGY04/projects
+
+###
+
+# Get project by id
+# GET http://localhost:8000/projects/{projectID}
+GET http://localhost:8000/projects/01JV6ZJPKPT56V4R34J0NSGY04
+
+###
+# Create a project
+# POST http://localhost:8000/projects/
+
+POST http://localhost:8000/projects/
+Content-Type: application/json
+
+{
+	"title": "Project 1",
+	"description": "This is a project description",
+	"creator": "01JV6ZJPKPT56V4R34J0NSGY04"
+}

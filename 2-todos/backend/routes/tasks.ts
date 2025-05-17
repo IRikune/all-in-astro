@@ -1,8 +1,9 @@
 import { Hono } from "hono";
 import {
+  createCommentHandlers,
   createTaskHandlers,
   deleteTaskHandlers,
-  getManyTaskHandlers,
+  getManyTasksHandlers,
   getTaskHandlers,
   updateTaskHandlers,
 } from "../controllers/tasks.ts";
@@ -16,10 +17,12 @@ tasks.get("/", (c) => {
 
 tasks.get("/:taskID", ...getTaskHandlers);
 
-tasks.get("/users/:userID", ...getManyTaskHandlers);
+tasks.get("/users/:userID", ...getManyTasksHandlers);
 
 tasks.post("/", ...createTaskHandlers);
 
 tasks.delete("/:taskID/:userID", ...deleteTaskHandlers);
 
 tasks.patch("/:taskID", ...updateTaskHandlers);
+
+tasks.post("/:taskID/comments/", ...createCommentHandlers);

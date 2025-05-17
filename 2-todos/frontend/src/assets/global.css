@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant select-picker [&::picker(select)];
+
+@custom-variant option-checkmark [&::checkmark];
+
+
 
 @theme {
     --color-theme-red-100: #c0392b;
@@ -33,27 +37,60 @@
     }
 }
 
-@utility border-after-and-before {
-    &::after {
-        content: "";
-        position: absolute;
-        top:2.8px;
-        right:10px;
-        height: 9px;
-        width: 9px;
-        background-color: transparent;
-        border-top-right-radius: 99%;
-        box-shadow:2px -4px 0 0 var(--color-gray-100)
+select {
+  &, &::picker(select) {
+    appearance: base-select;
+    @apply motion-ease-spring-smooth
+  }
+  
+  &::picker(select) {
+    transition: 
+      display allow-discrete .3s, 
+      opacity 150ms,
+      transform 150ms,
+      overlay 150ms allow-discrete;
+  }
+  
+  &:not(:open)::picker(select) {
+    opacity: 0;
+  }
+  
+  &:open::picker(select) {
+    opacity: 1;
+    @starting-style {
+      opacity: 0;
     }
-    &::before {
-        content: "";
-        position: absolute;
-        top:2.8px;
-        left:10px;
-        height: 9px;
-        width: 9px;
-        background-color: transparent;
-        border-top-left-radius: 99%;
-        box-shadow:0 -4px 0 0 var(--color-gray-100)
-    }
+  }
+    &::picker-icon {
+    display: none;
+  }
+    &:not(:open)::picker(select) {
+    opacity: 0;
+    transform: scale(.95);
+  }
+    &::picker(select) {
+    background: light-dark(white, var(--color-theme-gray-100));
+    padding: 0;
+    margin-block: 5px;
+    border: none;
+    box-shadow: var(--shadow-theme-1);
+  }
+}
+
+@keyframes scrollShowAnimate{
+  from{
+    opacity: 0; scale: 10%;
+  }
+  to{
+    opacity: 1; scale: 100%;
+  }
+}
+@utility scroll-show-animation {
+  view-timeline-name: --reveal;
+
+  animation-name: scrollShowAnimate;
+  animation-fill-mode: both;
+
+  animation-timeline: --reveal;
+  animation-range: entry 25% cover 50%
 }

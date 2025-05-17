@@ -6,7 +6,6 @@
     import { selectedTask } from "../../stores/mod";
     import { useFormatedDate } from "../../hooks/mod";
     import { Priority, type Task } from "../../types/mod";
-    import { useGetTask } from "../../hooks/tasks";
     const {
         task = {
             id: "jasdifgjasdoighais",

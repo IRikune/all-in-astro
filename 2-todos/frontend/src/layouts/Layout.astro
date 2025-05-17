@@ -11,7 +11,7 @@ import { ToggleTheme } from "../components/preact/ToggleTheme";
 const { pathname: currentPage } = Astro.url;
 ---
 
-<html lang="en" data-theme={theme.value}>
+<html class="antialiased" lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -58,11 +58,22 @@ const { pathname: currentPage } = Astro.url;
 
 <script>
 	import { useGetManyTasks } from "../hooks/tasks.ts";
-	import { tasks, userID } from "../stores/mod";
-	const res = await useGetManyTasks({ userID });
-	if (res.ok && res.data) {
-		tasks.value = res.data;
+	import { useGetManyProjects } from "../hooks/projects";
+	import { useGetUser } from "../hooks/users";
+	import { tasks, user, userID, projects } from "../stores/mod";
+	const projectsResult = await useGetManyProjects({ userID });
+	const tasksResult = await useGetManyTasks({ userID });
+	const userResult = await useGetUser({ userID });
+	if (tasksResult.ok && tasksResult.data) {
+		tasks.value = tasksResult.data;
 	}
+	if (userResult.ok && userResult.data) {
+		user.value = userResult.data;
+	}
+	if (projectsResult.ok && projectsResult.data) {
+		projects.value = projectsResult.data;
+	}
+	console.log({ projects: projects.value?.[0] });
 </script>
 
 <style>

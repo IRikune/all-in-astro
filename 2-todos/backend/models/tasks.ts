@@ -13,17 +13,20 @@ export async function getManyTasks({
   const iter = kv.list<Task>({ prefix: key });
   const tasks: Task[] = [];
   for await (const task of iter) tasks.push(task.value);
-  const result = { ok: true, data: tasks };
-  return result;
+  if (tasks.length === 0) return { ok: false, data: null };
+  return {
+    ok: true,
+    data: tasks,
+  };
 }
 
 interface CreateTaskOptions {
   task: NewTask;
 }
 
-export async function createTask(
-  { task }: CreateTaskOptions,
-): Promise<KvResult<Task["id"]>> {
+export async function createTask({
+  task,
+}: CreateTaskOptions): Promise<KvResult<Task["id"]>> {
   const taskID = ulid();
   const newTask = { ...task, id: taskID };
   const taskByCreator = ["tasks", task.creator, taskID];
@@ -35,8 +38,11 @@ export async function createTask(
     .set(taskByCreator, newTask)
     .set(taskByID, newTask)
     .commit();
-  const result = { ok: res.ok, data: taskID };
-  return result;
+  if (!res.ok) return { ok: false, data: null };
+  return {
+    ok: res.ok,
+    data: taskID,
+  };
 }
 
 interface GetTaskOptions {
@@ -49,13 +55,8 @@ export async function getTask({
   const key = ["tasks", taskID];
   const entry = await kv.get<Task>(key);
   const task = entry?.value;
-  const result = { ok: true, data: task };
-  return result;
-}
-
-interface DeleteTaskOptions {
-  userID: User["id"];
-  taskID: Task["id"];
+  if (task === null) return { ok: false, data: null };
+  return { ok: true, data: task };
 }
 
 interface DeleteUserTaskOptions {
@@ -68,59 +69,51 @@ export async function deleteUserTask({
   userID,
 }: DeleteUserTaskOptions): Promise<KvResult<Task["id"]>> {
   const taskByCreatorKey = ["tasks", userID, taskID];
-  await kv.delete(taskByCreatorKey);
-  const result = { ok: true, data: taskID };
-  console.log(result);
-  return result;
+  const res = await kv.atomic()
+    .delete(taskByCreatorKey)
+    .commit();
+  if (!res.ok) return { ok: false, data: null };
+  return {
+    ok: res.ok,
+    data: taskID,
+  };
 }
 
-type DeleteCompleteTaskResponse = Promise<KvResult<Record<Task["id"], Task>>>;
-
-export async function deleteCompleteTask(
-  { taskID, userID }: DeleteUserTaskOptions,
-): Promise<KvResult<Task["id"]>> {
+export async function deleteCompleteTask({
+  taskID,
+  userID,
+}: DeleteUserTaskOptions): Promise<KvResult<Task["id"]>> {
   const taskByIDKey = ["tasks", taskID];
   const taskByCreatorKey = ["tasks", userID, taskID];
-  const res = await kv.atomic()
+  const res = await kv
+    .atomic()
     .delete(taskByCreatorKey)
     .delete(taskByIDKey)
     .commit();
-  const result = { ok: res.ok, data: taskID };
-  return result;
+  if (!res.ok) return { ok: false, data: null };
+  return {
+    ok: res.ok,
+    data: taskID,
+  };
 }
 
 interface UpdateTaskOptions {
-  taskID: Task["id"];
-  newTask: NewTask;
+  task: Task;
 }
 
 export async function updateTask({
-  taskID,
-  newTask,
+  task,
 }: UpdateTaskOptions): Promise<KvResult<Task["id"]>> {
-  const key = ["tasks", taskID];
-  const creatorKey = ["tasks", newTask.creator, taskID];
+  const key = ["tasks", task.id];
+  const creatorKey = ["tasks", task.creator, task.id];
   const res = await kv
     .atomic()
-    .set(key, newTask)
-    .set(creatorKey, newTask)
+    .set(key, task)
+    .set(creatorKey, task)
     .commit();
   if (!res.ok) return { ok: false, data: null };
-  const result = { ok: true, data: taskID };
-  return result;
-}
-
-interface DeleteTasksOptions {
-  userID: User["id"];
-}
-
-export async function deleteTasks({
-  userID,
-}: DeleteTasksOptions): Promise<KvResult<User["id"]>> {
-  const listTasks = kv.list({ prefix: ["tasks", userID] });
-  for await (const task of listTasks) {
-    kv.delete(task.key);
-  }
-  const result = { ok: true, data: userID };
-  return result;
+  return {
+    ok: res.ok,
+    data: task.id,
+  };
 }

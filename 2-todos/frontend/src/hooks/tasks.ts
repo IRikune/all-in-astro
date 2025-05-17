@@ -1,6 +1,6 @@
 import { Endpoints } from '../stores/mod';
 import { normalizeObject } from '../utils/mod';
-import type { NewTask, Result, Task } from '../types/mod';
+import type { NewTask, Result, Task, NewComment, Comment } from '../types/mod';
 
 interface useGetTasksOptions {
 	userID: string;
@@ -61,9 +61,6 @@ export async function useUpdateTask({
 	const data = await response.json();
 	return data;
 }
-interface useDeleteTaskOptions {
-	id: string;
-}
 
 interface useCompareTaskOptions {
 	firstTask: Task;
@@ -74,7 +71,6 @@ interface useCompareTaskOptions {
 	firstTask: Task;
 	secondTask: Task;
 }
-
 export function useCompareTask({
 	firstTask,
 	secondTask,
@@ -83,4 +79,24 @@ export function useCompareTask({
 	const normalizedSecondTask = normalizeObject(secondTask);
 	const taskSet = new Set([normalizedFirstTask, normalizedSecondTask]);
 	return taskSet.size === 1;
+}
+interface useCreateCommentOptions {
+	taskID: Task['id'];
+	comment: NewComment;
+}
+
+export async function useCreateComment({
+	taskID,
+	comment,
+}: useCreateCommentOptions): Promise<Result<Comment['id']>> {
+	const ENDPOINT = `${Endpoints.tasks}${taskID}/comments/`;
+	const options = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(comment),
+	};
+	const response = await fetch(ENDPOINT, options);
+	const data = await response.json();
+	console.log({ data });
+	return data;
 }
