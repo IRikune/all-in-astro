@@ -24,3 +24,5 @@ export const user = signal<User>({
 });
 
 export const projects = signal<Project[]>([]);
+
+export const PRIORITIES = ['P1', 'P2', 'P3', 'P4'];

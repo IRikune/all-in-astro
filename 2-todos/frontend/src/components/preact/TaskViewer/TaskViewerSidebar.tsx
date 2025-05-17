@@ -96,8 +96,8 @@ function SidebarDate() {
 }
 
 function SidebarProject() {
-	if (!selectedTask.value) return <></>;
-	if (projects.value?.length === 0) return <></>;
+	if (!selectedTask.value) return;
+	if (projects.value?.length === 0) return;
 	const projectInput = useSignal('');
 	const currentSelectedProject = useSignal(
 		selectedTask.value?.project || user.value.projects?.[0].title,
@@ -122,7 +122,7 @@ function SidebarProject() {
 			>
 				<button type="button">
 					<InboxIcon />
-					<span>{currentSelectedProject.value}</span>
+					<span>{currentSelectedProject}</span>
 				</button>
 				<div class="p-1">
 					<input
