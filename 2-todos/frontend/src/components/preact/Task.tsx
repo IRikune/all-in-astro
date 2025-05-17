@@ -1,5 +1,5 @@
 import {signal} from "@preact/signals";
-import {Priority, type Task as TaskType} from "../../../../backend/types/mod";
+import {Priority, type Task as TaskType} from "../../types/mod";
 import {Button} from "./Button";
 import {Checker} from "./Checker";
 import {Icon} from "./icons/Icon";
@@ -60,7 +60,12 @@ export function Task({task}: PropsTask) {
 
 export function ViewTask() {
   return (
-    <Modal id="view-task-options">
+    <Modal
+      id="view-task-option"
+      onInput={() => {
+        taskSignal.value = tasks[0];
+      }}
+    >
       <div class="w-[62%] h-[85%] z-20 top-[7.5%] shadow-2xl left-[19%] fixed overflow-hidden rounded-2xl bg-white  ">
         <div
           class={

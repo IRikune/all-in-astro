@@ -1,7 +1,17 @@
 import { signal } from '@preact/signals';
 import { error } from '../components/preact/FormLogin';
 import type { Task as TaskType } from '../../../backend/types/mod';
+import { formatDistanceToNow } from "date-fns";
 
+interface useFormatedDateOptions {
+    date: number;
+}
+
+export const useFormatedDate = ({ date }: useFormatedDateOptions): string => {
+    const parsedDate = new Date(date);
+    const parsedDateString = formatDistanceToNow(parsedDate, {addSuffix: true});
+    return parsedDateString;
+}
 enum endPoints {
 	users = 'http://localhost:8000/users',
 	tasks = 'http://localhost:8000/tasks',

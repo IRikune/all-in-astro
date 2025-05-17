@@ -1,22 +1,23 @@
 @import "tailwindcss";
 @plugin "tailwindcss-motion";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
     --color-theme-red-100: #c0392b;
-    ---color-theme-red-200: oklch(0.505 0.213 27.518)
-    --color-theme-orange: #FF5733;
+    ---color-theme-red-200: oklch(0.505 0.213 27.518) --color-theme-orange: #FF5733;
     --color-theme-orange-100: #FF5733;
     --color-theme-orange-200: oklch(0.75 0.183 55.934);
-    --color-theme-yellow-100: #2980b9;
     --color-theme-blue: oklch(0.488 0.243 264.376);
-    --color-theme-green-100: #bdc3c7;
-    --color-theme-lime-100: #eafbcd;
-    --color-theme-sky-100: #08b3e3;
+    --color-theme-gray-100: #bdc3c7;
     --shadow-theme-1: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     --shadow-theme-2: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    --shadow-theme-3: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
+
 @utility content-visibility-auto {
     content-visibility: auto;
 }
+
 @utility motion-modal {
     transition: scale .3s ease, display .3s ease allow-discrete;
     scale: 0;
@@ -25,26 +26,34 @@
     &[checked] {
         scale: 1;
         transition: scale .3s ease-in-out, opacity .3s ease;
+
         @starting-style {
             scale: 0;
         }
     }
 }
 
-@utility neomorfismo{
-    &{
-        transition: scale .2s ease-in-out;
-    }    
-    &:hover{
-        scale:1.02;
-        box-shadow:0.625rem 0.625rem 0.875rem 0 rgb(225,226,228),-0.5rem -0.5rem 1.125rem 0 rgb(255,255,255)  ;
+@utility border-after-and-before {
+    &::after {
+        content: "";
+        position: absolute;
+        top:2.8px;
+        right:10px;
+        height: 9px;
+        width: 9px;
+        background-color: transparent;
+        border-top-right-radius: 99%;
+        box-shadow:2px -4px 0 0 var(--color-gray-100)
     }
-    &:active{
-        scale:0.98;
+    &::before {
+        content: "";
+        position: absolute;
+        top:2.8px;
+        left:10px;
+        height: 9px;
+        width: 9px;
+        background-color: transparent;
+        border-top-left-radius: 99%;
+        box-shadow:0 -4px 0 0 var(--color-gray-100)
     }
-    &:focus{
-        scale:1.02;
-        box-shadow:0.625rem 0.625rem 0.875rem 0 rgb(225,226,228),-0.5rem -0.5rem 1.125rem 0 rgb(255,255,255)
-    }
-
 }

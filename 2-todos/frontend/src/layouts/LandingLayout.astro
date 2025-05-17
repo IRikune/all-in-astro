@@ -1,7 +1,7 @@
 ---
+import { isThrowStatement } from "typescript";
 import "../assets/global.css";
 import "@fontsource-variable/montserrat";
-import SideBar from "../components/Astro/SideBar.astro";
 ---
 
 <!doctype html>
@@ -13,7 +13,7 @@ import SideBar from "../components/Astro/SideBar.astro";
         <meta name="generator" content={Astro.generator} />
         <title>Todo App</title>
     </head>
-    <body class="relative">
+    <body class="grid relative ">
         <slot />
     </body>
 </html>
@@ -27,3 +27,4 @@ import SideBar from "../components/Astro/SideBar.astro";
         height: 100%;
     }
 </style>
+
