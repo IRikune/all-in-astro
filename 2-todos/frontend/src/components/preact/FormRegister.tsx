@@ -1,6 +1,5 @@
 import {signal} from "@preact/signals";
 import {handleSubmit, useLogin} from "../../hooks/mod";
-import {ChevronIcon} from "./icons/ChevronIcon";
 import {
   pathNavBarIndicator,
   RegistrationNavBar,
@@ -227,7 +226,6 @@ function ValidatePassword() {
         <p class="peer-valid:visible invisible mx-auto mt-2 text-xs text-green-500">
           Great! Your password is valid.
         </p>
-        <p></p>
 
         <input
           type="radio"
@@ -252,7 +250,10 @@ function ValidatePassword() {
           class={"group-has-checked/password:grid hidden place-self-center "}
         >
           <label class={"select-none cursor-pointer w-18 h-10"}>
-            <button class="pointer-events-none w-full h-full text-shadow-lg border-b-[2px] text-neutral-200 font-medium border-emerald-700 bg-emerald-500 rounded hover:cursor-pointer select-none hover:shadow-lg hover:bg-emerald-700 active:bg-emerald-900 active:shadow-none transition duration-300  ">
+            <button
+              type={"button"}
+              class="pointer-events-none w-full h-full text-shadow-lg border-b-[2px] text-neutral-200 font-medium border-emerald-700 bg-emerald-500 rounded hover:cursor-pointer select-none hover:shadow-lg hover:bg-emerald-700 active:bg-emerald-900 active:shadow-none transition duration-300  "
+            >
               Join
             </button>
           </label>
