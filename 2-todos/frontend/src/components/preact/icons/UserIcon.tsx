@@ -13,7 +13,7 @@ export function UserIcon({class: className = "size-4", ...props}: Props) {
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     </>
   );

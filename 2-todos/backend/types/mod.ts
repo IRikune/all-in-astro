@@ -1,24 +1,27 @@
 import type { z } from "zod";
-import { kv } from "../main.ts";
-import type {
-  newUserSchema,
-  updateUserOptionsSchema,
-  userIDSchema,
-  userSchema,
-} from "../schemas/users.ts";
 import type {
   commentSchema,
+  newCommentSchema,
+  newProjectSchema,
   newTaskSchema,
+<<<<<<< HEAD
 <<<<<<< HEAD
   subTaskSchema,
 =======
 >>>>>>> Frontend-Issues
+=======
+  newUserSchema,
+  projectSchema,
+>>>>>>> origin/master
   taskIDSchema,
   taskSchema,
-} from "../schemas/tasks.ts";
+  userIDSchema,
+  userSchema,
+} from "../schemas/mod.ts";
 
 //#region task
 export type Comment = z.infer<typeof commentSchema>;
+export type NewComment = z.infer<typeof newCommentSchema>;
 export type Task = z.infer<typeof taskSchema>;
 <<<<<<< HEAD
 export type SubTask = z.infer<typeof subTaskSchema>;
@@ -38,7 +41,10 @@ export enum Priority {
 export type User = z.infer<typeof userSchema>;
 export type NewUser = z.infer<typeof newUserSchema>;
 export type UserID = z.infer<typeof userIDSchema>;
-export type updateUserOptions = z.infer<typeof updateUserOptionsSchema>;
+
+//#region projects
+export type Project = z.infer<typeof projectSchema>;
+export type NewProject = z.infer<typeof newProjectSchema>;
 
 export type Result<T> =
 <<<<<<< HEAD
@@ -51,8 +57,11 @@ export type Result<T> =
 export type KvResult<T> =
   | { ok: boolean; data: T; versionstamp?: string }
   | { ok: boolean; data: null };
+<<<<<<< HEAD
 >>>>>>> Frontend-Issues
 
 const kvResult = await kv.atomic().commit();
 
 export type DenoKVCommit = typeof kvResult;
+=======
+>>>>>>> origin/master

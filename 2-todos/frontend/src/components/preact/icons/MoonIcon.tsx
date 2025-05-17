@@ -18,7 +18,7 @@ export function MoonIcon({class: className = "size-4", ...props}: IconProps) {
         fill="currentColor"
         fill-rule="evenodd"
         clip-rule="evenodd"
-      ></path>
+      />
     </svg>
   );
 }
