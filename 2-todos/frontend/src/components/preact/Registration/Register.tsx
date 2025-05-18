@@ -221,7 +221,7 @@ function ValidatePassword() {
         <p class="peer-valid:visible invisible mt-2 text-xs text-green-500">
           Great! Your password is valid.
         </p>
-        <p></p>
+
         <input
           type="radio"
           id={"Password"}

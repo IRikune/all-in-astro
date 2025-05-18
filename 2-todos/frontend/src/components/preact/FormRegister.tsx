@@ -97,7 +97,7 @@ function ValidateName() {
 
         <input
           type="radio"
-          id={"Name"}
+          id={"name-Register"}
           name={"visualiza"}
           checked
           onInput={() => {
@@ -114,7 +114,7 @@ function ValidateName() {
       </label>
 
       <div
-        id={"Name-step-buttons"}
+        id={"name-step-buttons"}
         class={"peer-has-checked/name:grid hidden place-self-center "}
       >
         <label class={"select-none cursor-pointer w-18 h-10"} for="Email">
@@ -165,7 +165,7 @@ function ValidateEmail() {
         </p>
         <input
           type="radio"
-          id={"Email"}
+          id={"email-Register"}
           name={"visualiza"}
           class="hidden"
           onInput={() => {
@@ -229,7 +229,7 @@ function ValidatePassword() {
 
         <input
           type="radio"
-          id={"Password"}
+          id={"password-Register"}
           name={"visualiza"}
           class="hidden"
           onInput={() => {

@@ -18,7 +18,7 @@ export function FormLogin() {
         <h1 class={"my-2 text-2xl"}>Wellcome to Esmeralde</h1>
 
         <div class={"w-[50%] flex flex-row relative items-center "}>
-          <label class={" w-fit absolute -left-21 font-light"} for="email">
+          <label class={" w-fit absolute -left-21 font-light"} for="correo">
             Email:
           </label>
           <input
@@ -26,16 +26,16 @@ export function FormLogin() {
             class={
               "peer block w-full h-10 rounded-md text-[0.8rem] border border-esmerald-800 px-3 py-2 placeholder-gray-400 shadow-sm  invalid:border-red-500  focus:border-0 focus:invalid:border-red-500 dark:focus:shadow-white/20 focus:shadow-lg  "
             }
+            id="correo"
             type="email"
             name="email"
-            id={"email"}
             pattern=".+@gmail\.com"
             required={error.value !== ""}
           />
         </div>
 
         <div class={" flex flex-row relative w-[50%] items-center"}>
-          <label class={" w-fit absolute -left-21 font-light"} for="password">
+          <label class={" w-fit absolute -left-21 font-light"} for="contrasena">
             Password:
           </label>
 
@@ -45,7 +45,7 @@ export function FormLogin() {
 							peer block w-full h-10 rounded-md border border-esmerald-800 px-3 py-2 placeholder-gray-400 shadow-sm  invalid:border-red-500 text-[0.8rem] focus:text-white focus:border-0 focus:invalid:border-red-500 focus:shadow-white/20 focus:shadow-lg  valid:border-whitehover:shadow-lg"
             type="password"
             name="password"
-            id={"password"}
+            id="contrasena"
             minLength={8}
             required={error.value !== ""}
           />

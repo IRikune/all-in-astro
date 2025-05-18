@@ -1,11 +1,11 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
-import { Button } from "../components/preact/Button";
 import { FormLogin } from "../components/preact/FormLogin";
 import { Register } from "../components/preact/Register";
 import { Modal } from "../components/preact/Modal";
 import { ShowModal } from "../components/preact/ShowModal";
 import { FormRegister } from "../components/preact/FormRegister"
+import { LandingFooter } from "../components/preact/LandingFooter";
 ---
 
 
@@ -70,4 +70,5 @@ import { FormRegister } from "../components/preact/FormRegister"
 
 		<FormRegister client:load/>
 	</Modal>
+	<LandingFooter classFooter=""/>
 </LandingLayout>
