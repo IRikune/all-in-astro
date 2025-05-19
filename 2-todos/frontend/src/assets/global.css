@@ -5,6 +5,9 @@
 @custom-variant option-checkmark [&::checkmark];
 
 
+li{
+    @apply list-none;
+}
 
 @theme {
     --color-theme-red-100: #c0392b;
@@ -93,4 +96,22 @@ select {
 
   animation-timeline: --reveal;
   animation-range: entry 25% cover 50%
+}
+
+@keyframes slideAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  10%, 25% {
+    transform: translateX(-100dvw);
+  }
+  35%, 50% {
+    transform: translateX(-200dvw);
+  }
+  60%, 75% {
+    transform: translateX(-300dvw);
+  }
+  85%, 100% {
+    transform: translateX(0dvw);
+  }
 }

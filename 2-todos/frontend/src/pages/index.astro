@@ -1,11 +1,11 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
 import { Button } from "../components/preact/Button";
+import { Header } from "../components/preact/landing/Header";
 ---
 
-
 <LandingLayout title="Garnet">
-
+	<Header />
 	<svg
 		class="fixed top-0 left-0 -z-10 opacity-10"
 		viewBox="0 0 200 200"
@@ -40,10 +40,16 @@ import { Button } from "../components/preact/Button";
 					>
 						Get Started
 					</a>
-	
-					<Button class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto" to="/dashboard/login">login</Button>
 
-					<Button class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto" to="/dashboard/register">register</Button>
+					<Button
+						class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto"
+						to="/dashboard/login">login</Button
+					>
+
+					<Button
+						class="block w-full rounded-sm bg-red-600 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto"
+						to="/dashboard/register">register</Button
+					>
 				</div>
 			</div>
 		</div>
