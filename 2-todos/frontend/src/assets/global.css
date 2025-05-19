@@ -5,9 +5,9 @@
 @custom-variant option-checkmark [&::checkmark];
 
 
-
 @theme {
     --color-theme-red-100: #c0392b;
+    --color-theme-mint:rgb(112,255,175);
     ---color-theme-red-200: oklch(0.505 0.213 27.518) --color-theme-orange: #FF5733;
     --color-theme-orange-100: #FF5733;
     --color-theme-orange-200: oklch(0.75 0.183 55.934);
@@ -93,4 +93,41 @@ select {
 
   animation-timeline: --reveal;
   animation-range: entry 25% cover 50%
+}
+
+@utility scroll-infinite-for-layaout {
+  &{
+    
+    animation-name: scrollinfiniteRightToleft, Stop, scrollinfiniteStartToLeft;
+    animation-delay: calc(var(--position) * 3s),calc(var(--position) * 3s + 3s), calc(var(--position) * 3s + 3s  ) ;
+    animation-iteration-count: infinite;
+    animation-duration: 3s,6s, 3s;
+    animation-timing-function: ease-in-out,ease, ease-in-out;
+    animation-direction: initial;
+    
+  }
+}
+
+@keyframes scrollinfiniteRightToleft{
+  from{
+    transform: translateX(0);
+  }
+  
+  to{
+    transform: translateX(-100dvw);
+  }
+}
+@keyframes Stop{
+  0%{
+    transform: translate(-100dvw);
+  }
+}
+@keyframes scrollinfiniteStartToLeft{
+  
+  from{
+    transform: translateX(-100dvw);
+  }
+  to{
+    transform: translateX(-200dvw);
+  }
 }

@@ -32,12 +32,14 @@ export function Modal({
       {backdropLabel && (
         <label for={id}>
           <div
-            class={`w-[120dvw] h-dvh fixed left-0 top-0 z-[49] ${classBackdrop}`}
+            class={`w-[120dvw] h-dvh fixed left-0 top-0  ${classBackdrop}`}
           />
         </label>
       )}
       <input type="checkbox" id={id} class="peer hidden!" />
-      <main class={`${animation && ANIMATIONS[animation]} ${className}`}>
+      <main
+        class={`${animation && ANIMATIONS[animation]} relative ${className} `}
+      >
         {children}
       </main>
     </div>

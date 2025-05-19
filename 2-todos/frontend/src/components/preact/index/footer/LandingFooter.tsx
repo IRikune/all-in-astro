@@ -1,8 +1,8 @@
-import {DenoIcon} from "./icons/DenoIcon";
-import {DiscordIcon} from "./icons/DiscordIcon";
-import {GitHubIcon} from "./icons/GithubIcon";
-import {TwitterIcon} from "./icons/Twitter";
-import {YoutubeIcon} from "./icons/YoutubeIcon";
+import {DenoIcon} from "../../icons/DenoIcon";
+import {DiscordIcon} from "../../icons/DiscordIcon";
+import {GitHubIcon} from "../../icons/GithubIcon";
+import {TwitterIcon} from "../../icons/Twitter";
+import {YoutubeIcon} from "../../icons/YoutubeIcon";
 
 interface LandingFooterProps {
   classFooter?: string;
@@ -122,7 +122,11 @@ export function LandingFooter(props: LandingFooterProps) {
             }
           >
             <div class={"size-3 rounded-full bg-emerald-600"} />
-            <h1 class={"text-center font-bold"}>All system operations</h1>
+            <h1
+              class={"text-center font-bold text-[clamp(.8rem,1.5dvw,1rem)] "}
+            >
+              All system operations
+            </h1>
           </a>
         </div>
       </section>
