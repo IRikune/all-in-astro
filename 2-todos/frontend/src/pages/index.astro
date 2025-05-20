@@ -7,6 +7,8 @@ import { LandingFooter } from "../components/preact/index/footer/LandingFooter";
 import { SectionN8 } from "../components/preact/index/body/Section-N8";
 import { SectionN9 } from "../components/preact/index/body/Section-N9";
 import { MainHeaderSection } from "../components/preact/index/body/MainHeaderSection";
+import { NativeFeathureInfo } from "../components/preact/index/body/NativeFeathureInfo";
+import { InstallSection } from "../components/preact/index/body/InstallSection";
 ---
 
 
@@ -15,7 +17,7 @@ import { MainHeaderSection } from "../components/preact/index/body/MainHeaderSec
 	
 	
 	<MainHeaderSection/>
-	
+	<InstallSection client:load />
 		<Modal animation="fade" id="login-modal" classBackdrop="bg-black/60" classFather="self-center place-self-center absolute  " >
 
 		<FormLogin />
@@ -24,13 +26,13 @@ import { MainHeaderSection } from "../components/preact/index/body/MainHeaderSec
 
 		<FormRegister client:load/>
 	</Modal>
+	<NativeFeathureInfo />
 	<SectionN8 client:load/>
 	<SectionN9 />
 	<LandingFooter classFooter=""/>
 </LandingLayout>
 
 <script>
-	import { transition } from "../components/preact/index/body/Section-N8";
 	import { length } from "../components/preact/index/body/Section-N8";
 	//alert("hola aqui estoy")
      
