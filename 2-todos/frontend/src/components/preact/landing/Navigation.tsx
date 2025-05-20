@@ -6,7 +6,7 @@ import { Modal } from '../Modal';
 import { ShowModal } from '../ShowModal';
 import type { JSX } from 'preact/jsx-runtime';
 
-export function Header() {
+export function Navigation() {
 	return (
 		<nav class="flex justify-between min-w-120 w-[100dvw] h-20 py-5 px-8 shadow-sm bg-white/92 backdrop-blur-xs fixed top-0 z-1">
 			<div class="flex gap-3">
