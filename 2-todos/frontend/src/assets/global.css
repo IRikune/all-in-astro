@@ -10,6 +10,7 @@ li{
 }
 
 @theme {
+    --color-theme-mint-100: #70FFAF;s
     --color-theme-red-100: #c0392b;
     ---color-theme-red-200: oklch(0.505 0.213 27.518) --color-theme-orange: #FF5733;
     --color-theme-orange-100: #FF5733;
@@ -89,29 +90,34 @@ select {
   }
 }
 @utility scroll-show-animation {
-  view-timeline-name: --reveal;
-
-  animation-name: scrollShowAnimate;
-  animation-fill-mode: both;
-
-  animation-timeline: --reveal;
-  animation-range: entry 25% cover 50%
+  & {
+    view-timeline-name: --reveal;
+    animation-name: scrollShowAnimate;
+    animation-fill-mode: both;
+    animation-timeline: --reveal;
+    animation-range: entry 25% cover 50%
+  }
+}
+@utility slide-animation {
+  &{
+    animation-name: slideAnimation;
+    animation-duration: 12s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
 }
 
 @keyframes slideAnimation {
-  0% {
-    transform: translateX(0);
+  0%, 15% {
+    transform: translateX(0%);
   }
-  10%, 25% {
-    transform: translateX(-100dvw);
+  30%, 50% {
+    transform: translateX(-33.33%);
   }
-  35%, 50% {
-    transform: translateX(-200dvw);
+  65%, 85% {
+    transform: translateX(-66.66%);
   }
-  60%, 75% {
-    transform: translateX(-300dvw);
-  }
-  85%, 100% {
-    transform: translateX(0dvw);
+  90%, 100% {
+    transform: translateX(0%);
   }
 }

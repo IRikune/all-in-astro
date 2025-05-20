@@ -8,7 +8,7 @@ import type { JSX } from 'preact/jsx-runtime';
 
 export function Header() {
 	return (
-		<nav class="flex justify-between min-w-120 w-[100dvw] h-20 py-5 px-8 shadow-sm bg-white/92 backdrop-blur-xs fixed top-0">
+		<nav class="flex justify-between min-w-120 w-[100dvw] h-20 py-5 px-8 shadow-sm bg-white/92 backdrop-blur-xs fixed top-0 z-1">
 			<div class="flex gap-3">
 				<div class="w-16 -mt-7">
 					<img src="/images/denosaurLogo.png" alt="Deno logo" class="" />
