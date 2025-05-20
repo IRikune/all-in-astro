@@ -9,8 +9,6 @@ export function ImageDenoWithPalmIcon({
   return (
     <>
       <svg
-        width="100%"
-        height="100%"
         viewBox="0 0 793 927"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

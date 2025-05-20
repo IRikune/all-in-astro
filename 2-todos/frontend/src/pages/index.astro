@@ -1,15 +1,12 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
 import { FormLogin } from "../components/preact/FormLogin";
-import { Register } from "../components/preact/Register";
 import { Modal } from "../components/preact/Modal";
-import { ShowModal } from "../components/preact/ShowModal";
 import { FormRegister } from "../components/preact/FormRegister"
 import { LandingFooter } from "../components/preact/index/footer/LandingFooter";
 import { SectionN8 } from "../components/preact/index/body/Section-N8";
 import { SectionN9 } from "../components/preact/index/body/Section-N9";
-import { ImageDenoWithPalmIcon } from "../components/preact/icons/ImageDenoWithPalm";
-import { ChevronIcon } from "../components/preact/icons/ChevronIcon";
+import { MainHeaderSection } from "../components/preact/index/body/MainHeaderSection";
 ---
 
 
@@ -17,37 +14,8 @@ import { ChevronIcon } from "../components/preact/icons/ChevronIcon";
 	
 	
 	
-	<div class="w-full h-150 grid grid-cols-[2fr_1fr] sm:grid-cols-1">
-		<section
-      class=" flex flex-col items-center justify-center gap-5 py-25 sm:py-50 px-10 sm:px-20 lg:px-30 text-center"
-    >
-      <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold w-full ">
-        Ready to get started with Deno?
-      </h1>
-
-      <div class="flex flex-col items-center gap-4 sm:flex-row">
-        <a
-          href="/install/"
-          class={
-            "flex  items-center h-14  gap-2  font-medium  bg-theme-mint hover:border-black border-2 w-fit transition duration-300 ease-in-out hover: border-theme-mint  rounded-full px-5 py-2"
-          }
-        >
-          <span>Install Deno</span>
-          <ChevronIcon class="size-6 -rotate-90" />
-        </a>
-        <a
-          href="/docs/"
-          class={
-            "flex items-center h-14  gap-2  font-medium bg-neutral-900 hover:border-black border-2 w-fit transition duration-300 ease-in-out hover: border-neutral-900  rounded-full px-5 py-2"
-          }
-        >
-          <span class={"text-white"}>Read the docs</span>
-          <ChevronIcon class="size-6 -rotate-90 text-white" />
-        </a>
-      </div>
-    </section>
-		<ImageDenoWithPalmIcon/>
-	</div>
+	<MainHeaderSection/>
+	
 		<Modal animation="fade" id="login-modal" classBackdrop="bg-black/60" classFather="self-center place-self-center absolute  " >
 
 		<FormLogin />
@@ -64,12 +32,8 @@ import { ChevronIcon } from "../components/preact/icons/ChevronIcon";
 <script>
 	import { transition } from "../components/preact/index/body/Section-N8";
 	import { length } from "../components/preact/index/body/Section-N8";
-	alert("hola aqui estoy")
-      for (let i = 3; i > 0; i--) {
-        setTimeout(() => {
-          transition.value = `transform: translateX(-${i / 100}%);`;
-        }, 3000);
-      }
+	//alert("hola aqui estoy")
+     
 	/*
 	<svg
 		class="fixed top-0 left-0 -z-10 opacity-10"

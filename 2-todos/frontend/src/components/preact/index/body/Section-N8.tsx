@@ -2,8 +2,6 @@ import {useEffect, useState} from "preact/hooks";
 import {NeckAndHeadOfDenoIcon} from "../../icons/NeckAndHeadOfDeno";
 import {signal, useSignal} from "@preact/signals";
 
-export const transition = signal("transform: translateX(-0%);");
-
 const list = [
   {
     description:
@@ -13,12 +11,12 @@ const list = [
   {
     description:
       '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."',
-    name: "John Doe",
+    name: "Doe",
   },
   {
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud .",
-    name: "John Doe",
+    name: "John",
   },
 ];
 export function SectionN8() {
@@ -31,7 +29,7 @@ export function SectionN8() {
         >
           <h1>Our vibrant community</h1>
         </div>
-        <ScrollToLeft list={list} class="max-h-100" />
+        <ScrollToRight list={list} class="max-h-100" />
       </div>
       <NeckAndHeadOfDenoIcon class=" absolute size-40 place-self-end pl-12" />
     </section>
@@ -50,6 +48,7 @@ interface ScrollToLeftProps {
 
 function ScrollToLeft({class: className, list}: ScrollToLeftProps) {
   const length = list?.length;
+  const transition = signal("transform: translateX(-0%);");
 
   return (
     <div
@@ -71,14 +70,13 @@ function ScrollToLeft({class: className, list}: ScrollToLeftProps) {
     </div>
   );
 }
-/*
-function ScrollToLeft({class: className, list}: ScrollToLeftProps) {
+function ScrollToRight({class: className, list}: ScrollToLeftProps) {
   return (
     <div class={`h-80 relative grid items-center gap-4 md:h-130 ${className}`}>
       {list?.map((item, index) => (
         <div
           key={item.name}
-          class="bg-white gap-2 absolute left-[100dvw] w-full h-full  transition-transform duration-700 ease-in-out scroll-infinite-for-layaout"
+          class="bg-white gap-2 absolute left-[100dvw] w-full h-full  animation-scroll-infinite-for-layaout"
           style={`--position: ${index}; z-index: --position;`}
         >
           <p
@@ -94,4 +92,3 @@ function ScrollToLeft({class: className, list}: ScrollToLeftProps) {
     </div>
   );
 }
-*/
