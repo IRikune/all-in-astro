@@ -11,6 +11,8 @@ import { MainHeaderSection } from "../components/preact/index/body/MainHeaderSec
 import { NativeFeathureInfo } from "../components/preact/index/body/NativeFeathureInfo";
 import { InstallSection } from "../components/preact/index/body/InstallSection";
 import { SectionN6 } from "../components/preact/index/body/Section-N6";
+import { Comments } from "../components/preact/landing/Comments";
+import { HitPerformanceSection } from "../components/preact/index/body/HitPerformanceSection";
 ---
 
 <LandingLayout title="Garnet">
@@ -33,9 +35,11 @@ import { SectionN6 } from "../components/preact/index/body/Section-N6";
 		<FormRegister client:load />
 	</Modal>
 	<NativeFeathureInfo />
+
+	<HitPerformanceSection />
 	<SectionN6 />
 	<SectionN7 />
-	<SectionN8 client:load />
+	<Comments />
 	<SectionN9 />
 	<LandingFooter classFooter="" />
 </LandingLayout>
