@@ -1,54 +1,41 @@
-import { ChevronDownIcon } from '../icons/ChevronDownIcon';
-import { DiscordIcon } from '../icons/DiscordIcon';
-import { GitHubIcon } from '../icons/GitHubIcon';
-import { TwitterIcon } from '../icons/TwitterIcon';
-import { Modal } from '../Modal';
-import { ShowModal } from '../ShowModal';
 import type { JSX } from 'preact/jsx-runtime';
+import { ChevronDownIcon } from '../../icons/ChevronDownIcon';
+import { ShowModal } from '../../ShowModal';
+import { Modal } from '../../Modal';
+import { DiscordIcon } from '../../icons/DiscordIcon';
+import { TwitterIcon } from '../../icons/TwitterIcon';
+import { GitHubIcon } from '../../icons/GitHubIcon';
 
-export function Navigation() {
+export function NavigationButtons() {
 	return (
-		<nav class="flex justify-between min-w-120 w-[100dvw] h-20 py-5 px-8 shadow-sm bg-white/92 backdrop-blur-xs fixed top-0 z-1">
-			<div class="flex gap-3">
-				<div class="w-16 -mt-7">
-					<img src="/images/denosaurLogo.png" alt="Deno logo" class="" />
-				</div>
-				<div>
-					<NavButtonDropdown for="product-modal" title="Products">
-						<ChevronDownIcon class="size-6" />
-					</NavButtonDropdown>
-					<DropdownOfProducts />
-				</div>
+		<ul class="gap-3 hidden lg:flex w-full">
+			<li>
+				<NavButtonDropdown for="product-modal" title="Products">
+					<ChevronDownIcon class="size-6" />
+				</NavButtonDropdown>
+				<DropdownOfProducts />
+			</li>
+			<li>
 				<NavButton href="/docs/" title="Docs" />
-				<div>
-					<NavButtonDropdown for="modules-modal" title="Modules">
-						<ChevronDownIcon class="size-6" />
-					</NavButtonDropdown>
-					<DropdownOfModules />
-				</div>
-				<div>
-					<NavButtonDropdown for="community-modal" title="Community">
-						<ChevronDownIcon class="size-6" />
-					</NavButtonDropdown>
-					<DropdownOfCommunity />
-				</div>
+			</li>
+			<li>
+				<NavButtonDropdown for="modules-modal" title="Modules">
+					<ChevronDownIcon class="size-6" />
+				</NavButtonDropdown>
+				<DropdownOfModules />
+			</li>
+			<li>
+				<NavButtonDropdown for="community-modal" title="Community">
+					<ChevronDownIcon class="size-6" />
+				</NavButtonDropdown>
+				<DropdownOfCommunity />
+			</li>
+			<li>
 				<NavButton href="/blog/" title="Blog" />
-			</div>
-			<div>
-				<input
-					type="text"
-					placeholder="Search..."
-					pattern="[a-zA-Z0-9]"
-					class="hidden sm:block h-8 overflow-hidden placeholder:bg-gray-100  placeholder:py-3 placeholder:px-3 rounded"
-				/>
-				<select name="" id="" class="sm:hidden">
-					<option value="3">3</option>
-				</select>
-			</div>
-		</nav>
+			</li>
+		</ul>
 	);
 }
-
 interface NavButtonDropdownProps {
 	title: string;
 	children: JSX.Element;

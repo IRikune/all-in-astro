@@ -1,7 +1,7 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
 import { Button } from "../components/preact/Button";
-import { Navigation } from "../components/preact/landing/Navigation";
+import { Navigation } from "../components/preact/landing/Navigation/Navigation";
 import { Comments } from "../components/preact/landing/Comments";
 import { MacWindow } from "../components/preact/landing/MacWindow";
 ---
@@ -10,7 +10,6 @@ import { MacWindow } from "../components/preact/landing/MacWindow";
 	<Navigation />
 
 	<section class="pt-20">
-		<MacWindow />
 		<Comments />
 	</section>
 </LandingLayout>
