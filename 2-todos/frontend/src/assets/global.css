@@ -123,3 +123,10 @@ select {
     transform: translateX(0%);
   }
 }
+@utility bg-double-radial-gradient {
+  &{
+    --from: var(--runtime);
+    --to: var(--runtime-dark);
+    background-image: conic-gradient(from -60deg, var(--from), var(--to) 20%, var(--to) 45%, var(--from) 55%, var(--to) 70%, var(--to) 95%, var(--from) 100%);
+  }
+}
