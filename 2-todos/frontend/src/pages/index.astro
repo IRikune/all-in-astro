@@ -2,7 +2,7 @@
 import LandingLayout from "../layouts/LandingLayout.astro";
 import { FormLogin } from "../components/preact/FormLogin";
 import { Modal } from "../components/preact/Modal";
-import { FormRegister } from "../components/preact/FormRegister"
+import { FormRegister } from "../components/preact/FormRegister";
 import { LandingFooter } from "../components/preact/index/footer/LandingFooter";
 import { SectionN7 } from "../components/preact/index/body/Section-N7";
 import { SectionN8 } from "../components/preact/index/body/Section-N8";
@@ -13,33 +13,37 @@ import { InstallSection } from "../components/preact/index/body/InstallSection";
 import { SectionN6 } from "../components/preact/index/body/Section-N6";
 ---
 
-
 <LandingLayout title="Garnet">
-	
-	
-	
-	<MainHeaderSection/>
+	<MainHeaderSection />
 	<InstallSection client:load />
-		<Modal animation="fade" id="login-modal" classBackdrop="bg-black/60" classFather="self-center place-self-center absolute  " >
-
+	<Modal
+		animation="fade"
+		id="login-modal"
+		classBackdrop="bg-black/60"
+		classFather="self-center place-self-center absolute  "
+	>
 		<FormLogin />
 	</Modal>
-	<Modal animation="fade" id="register-modal" class={"w-[clamp(20rem,100%,60rem)] h-100"} classFather="self-center place-self-center absolute"  >
-
-		<FormRegister client:load/>
+	<Modal
+		animation="fade"
+		id="register-modal"
+		class={"w-[clamp(20rem,100%,60rem)] h-100"}
+		classFather="self-center place-self-center absolute"
+	>
+		<FormRegister client:load />
 	</Modal>
 	<NativeFeathureInfo />
-	<SectionN6/>
+	<SectionN6 />
 	<SectionN7 />
-	<SectionN8 client:load/>
+	<SectionN8 client:load />
 	<SectionN9 />
-	<LandingFooter classFooter=""/>
+	<LandingFooter classFooter="" />
 </LandingLayout>
 
 <script>
 	import { length } from "../components/preact/index/body/Section-N8";
 	//alert("hola aqui estoy")
-     
+
 	/*
 	<svg
 		class="fixed top-0 left-0 -z-10 opacity-10"

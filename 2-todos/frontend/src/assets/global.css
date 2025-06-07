@@ -5,7 +5,12 @@
 @custom-variant option-checkmark [&::checkmark];
 
 
+li{
+    @apply list-none;
+}
+
 @theme {
+    --color-theme-mint-100: #70FFAF;
     --color-theme-red-100: #c0392b;
     --color-theme-mint:rgb(112,255,175);
     ---color-theme-red-200: oklch(0.505 0.213 27.518) --color-theme-orange: #FF5733;
@@ -87,54 +92,34 @@ select {
   }
 }
 @utility scroll-show-animation {
-  view-timeline-name: --reveal;
-
-  animation-name: scrollShowAnimate;
-  animation-fill-mode: both;
-
-  animation-timeline: --reveal;
-  animation-range: entry 25% cover 50%
+  & {
+    view-timeline-name: --reveal;
+    animation-name: scrollShowAnimate;
+    animation-fill-mode: both;
+    animation-timeline: --reveal;
+    animation-range: entry 25% cover 50%
+  }
 }
-
-
-@utility animation-scroll-infinite-for-layaout {
+@utility slide-animation {
   &{
-    animation-name: scrollInfiniteRightToleft;
-    animation-delay: calc(var(--position) * 10s);
-    animation-iteration-count: infinite;
-    animation-duration: 10s;
+    animation-name: slideAnimation;
+    animation-duration: 12s;
     animation-timing-function: ease-in-out;
-    
-  }
-}
-@keyframes scrollInfiniteRightToleft {
-  0% ,10%{
-    left: 100dvw;
-  }
-  10%, 20%{
-    left: 0dvw;
-  }
-  20%, 35%{
-    left: 0dvw;
-  }
-  40%, 55%{
-    left: 0dvw;
-  }
-  60%, 75%{
-    left: 0dvw;
-  }
-  80%, 95%{
-    left: 0dvw;
-  }
-  100%{
-    left: -100dvw;
+    animation-iteration-count: infinite;
   }
 }
 
-@utility bg-double-radial-gradient {
-  &{
-    --from: var(--runtime);
-    --to: var(--runtime-dark);
-    background-image: conic-gradient(from -60deg, var(--from), var(--to) 20%, var(--to) 45%, var(--from) 55%, var(--to) 70%, var(--to) 95%, var(--from) 100%);
+@keyframes slideAnimation {
+  0%, 15% {
+    transform: translateX(0%);
+  }
+  30%, 50% {
+    transform: translateX(-33.33%);
+  }
+  65%, 85% {
+    transform: translateX(-66.66%);
+  }
+  90%, 100% {
+    transform: translateX(0%);
   }
 }
