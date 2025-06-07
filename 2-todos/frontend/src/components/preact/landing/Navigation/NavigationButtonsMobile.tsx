@@ -4,7 +4,7 @@ import { ShowModal } from '../../ShowModal';
 
 export function NavigationButtonsMobile() {
 	return (
-		<ul class="hidden peer-has-checked:flex lg:hidden flex-col h-fit w-full">
+		<ul class="hidden peer-has-checked:flex lg:peer-has-checked:hidden lg:hidden flex-col h-fit w-full">
 			<li>
 				<ButtonHamburgerDropdown for="product-modal" title="Products">
 					<ChevronDownIcon class="size-6" />

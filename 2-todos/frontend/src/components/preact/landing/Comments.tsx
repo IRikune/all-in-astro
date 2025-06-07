@@ -74,3 +74,28 @@ function CommentsItem({ author, content, avatar }: CommentsItemProps) {
 		</>
 	);
 }
+
+/*
+function ScrollToLeft({class: className, list}: ScrollToLeftProps) {
+  return (
+    <div class={`h-80 relative grid items-center gap-4 md:h-130 ${className}`}>
+      {list?.map((item, index) => (
+        <div
+          key={item.name}
+          class="bg-white gap-2 absolute left-[100dvw] w-full h-full  transition-transform duration-700 ease-in-out scroll-infinite-for-layaout"
+          style={`--position: ${index}; z-index: --position;`}
+        >
+          <p
+            class={
+              "max-h-45 md:max-h-none overflow-scroll md:overflow-visible text-3xl sm:text-4xl md:text-5xl  font-bold"
+            }
+          >
+            {item.description}
+          </p>
+          <h1 class={" text-gray-500 mt-8"}>{item.name}</h1>
+        </div>
+      ))}
+    </div>
+  );
+}
+*/

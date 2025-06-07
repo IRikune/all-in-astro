@@ -3,6 +3,11 @@ import "../assets/global.css";
 import "@fontsource-variable/montserrat";
 import { Sidebar } from "../components/preact/sidebar/Sidebar";
 import { ToggleSidebar } from "../components/preact/sidebar/ToggleSidebar";
+import { TaskViewer } from "../components/preact/TaskViewer/TaskViewer";
+import { Modal } from "../components/preact/Modal";
+import { AddTaskForm } from "../components/preact/sidebar/AddTaskForm";
+import { theme } from "../stores/mod";
+import { ToggleTheme } from "../components/preact/ToggleTheme";
 const { pathname: currentPage } = Astro.url;
 ---
 
@@ -15,19 +20,39 @@ const { pathname: currentPage } = Astro.url;
 		<title>Todo App</title>
 	</head>
 	<body
-		class="w-dvw h-dvh grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)] overflow-hidden"
+		class="w-dvw h-dvh grid  overflow-hidden relative"
 	>
-		<Sidebar currentPage={currentPage} client:load />
-		<section>
-			<header class="flex justify-end items-center h-16">
-				<slot name="header" />
-				<ToggleSidebar client:idle class=`absolute top-10 left-10` />
-			</header>
-			<main class="flex flex-col overflow-scroll h-[80dvh] px-10 rounded">
-				<slot />
-			</main>
-			<footer class="bg-white w-full h-full"></footer>
-		</section>
+		<div class="grid grid-cols-[minmax(0,1fr)_minmax(25rem,5fr)]">
+			
+
+			<Sidebar currentPage={currentPage} client:load />
+			<section>
+				
+				<header class="flex justify-end items-center h-16">
+					<slot name="header" />
+					<ToggleSidebar client:idle class=`absolute top-10 left-10` />
+					<ToggleTheme className="absolute top-10 left-20" client:load/>
+				
+					
+				</header>
+				<main class="flex flex-col overflow-scroll h-[80dvh] px-10 rounded">
+					<slot />
+				</main>
+				<footer class="bg-white w-full h-full"></footer>
+			</section>
+		</div>
+		<TaskViewer/>
+		<Modal
+		animation="scale"
+		classBackdrop=""
+		classFather="fixed self-center place-self-center  z-100"
+		class={"min"}
+		id="add-task-modal"
+		>
+			<div class="bg-white w-xl text-center shadow-theme-2 rounded-lg p-2">
+				<AddTaskForm />
+			</div>
+		</Modal>
 	</body>
 </html>
 

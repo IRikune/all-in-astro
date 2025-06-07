@@ -1,15 +1,28 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
-import { Button } from "../components/preact/Button";
-import { Navigation } from "../components/preact/landing/Navigation/Navigation";
+import { LandingFooter } from "../components/preact/index/footer/LandingFooter";
+import { NewProductSection } from "../components/preact/index/body/NewProductSection";
+import { CallToActionSection } from "../components/preact/index/body/CallToActionSection";
+import { MainHeaderSection } from "../components/preact/index/body/MainHeaderSection";
+import { NativeFeathureInfo } from "../components/preact/index/body/NativeFeathureInfo";
+import { InstallSection } from "../components/preact/index/body/InstallSection";
+import { ProductsSection } from "../components/preact/index/body/ProductsSection";
 import { Comments } from "../components/preact/landing/Comments";
-import { MacWindow } from "../components/preact/landing/MacWindow";
+import { HighPerformanceSection } from "../components/preact/index/body/HighPerformanceSection";
+import { Navigation } from "../components/preact/landing/Navigation/Navigation";
 ---
 
 <LandingLayout title="Garnet">
 	<Navigation />
-
-	<section class="pt-20">
-		<Comments />
-	</section>
+	<MainHeaderSection />
+	<InstallSection client:load />
+	<NativeFeathureInfo />
+	<HighPerformanceSection />
+	<ProductsSection />
+	<NewProductSection />
+	<Comments />
+	<CallToActionSection />
+	<LandingFooter classFooter="" />
 </LandingLayout>
+
+<script></script>
