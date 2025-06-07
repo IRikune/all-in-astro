@@ -8,14 +8,14 @@ export function Comments() {
 				<header class={'overflow-hidden h-fit'}>
 					<div
 						key="title"
-						class={'h-fit px-2 py-1 rounded bg-[rgb(112,255,175)] w-fit mb-10'}
+						class="h-fit px-2 py-1 rounded bg-[rgb(112,255,175)] w-fit mb-10"
 					>
 						<h1>Our vibrant community</h1>
 					</div>
 					<ScrollToLeft list={COMMENTS} class="max-h-100" />
 				</header>
 
-				<main></main>
+				<main> </main>
 				<DenoNeckIcon class="absolute size-40 place-self-end pl-12" />
 			</section>
 		</>
@@ -74,27 +74,3 @@ function CommentsItem({ author, content, avatar }: CommentsItemProps) {
 		</>
 	);
 }
-/*
-function ScrollToLeft({class: className, list}: ScrollToLeftProps) {
-  return (
-    <div class={`h-80 relative grid items-center gap-4 md:h-130 ${className}`}>
-      {list?.map((item, index) => (
-        <div
-          key={item.name}
-          class="bg-white gap-2 absolute left-[100dvw] w-full h-full  transition-transform duration-700 ease-in-out scroll-infinite-for-layaout"
-          style={`--position: ${index}; z-index: --position;`}
-        >
-          <p
-            class={
-              "max-h-45 md:max-h-none overflow-scroll md:overflow-visible text-3xl sm:text-4xl md:text-5xl  font-bold"
-            }
-          >
-            {item.description}
-          </p>
-          <h1 class={" text-gray-500 mt-8"}>{item.name}</h1>
-        </div>
-      ))}
-    </div>
-  );
-}
-*/
