@@ -1,65 +1,28 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
-import { FormLogin } from "../components/preact/FormLogin";
-import { Modal } from "../components/preact/Modal";
-import { FormRegister } from "../components/preact/FormRegister";
 import { LandingFooter } from "../components/preact/index/footer/LandingFooter";
-import { SectionN7 } from "../components/preact/index/body/Section-N7";
-import { SectionN8 } from "../components/preact/index/body/Section-N8";
-import { SectionN9 } from "../components/preact/index/body/Section-N9";
+import { NewProductSection } from "../components/preact/index/body/NewProductSection";
+import { CallToActionSection } from "../components/preact/index/body/CallToActionSection";
 import { MainHeaderSection } from "../components/preact/index/body/MainHeaderSection";
 import { NativeFeathureInfo } from "../components/preact/index/body/NativeFeathureInfo";
 import { InstallSection } from "../components/preact/index/body/InstallSection";
-import { SectionN6 } from "../components/preact/index/body/Section-N6";
+import { ProductsSection } from "../components/preact/index/body/ProductsSection";
 import { Comments } from "../components/preact/landing/Comments";
 import { HitPerformanceSection } from "../components/preact/index/body/HitPerformanceSection";
+import { Navigation } from "../components/preact/landing/Navigation/Navigation";
 ---
 
 <LandingLayout title="Garnet">
+	<Navigation />
 	<MainHeaderSection />
 	<InstallSection client:load />
-	<Modal
-		animation="fade"
-		id="login-modal"
-		classBackdrop="bg-black/60"
-		classFather="self-center place-self-center absolute  "
-	>
-		<FormLogin />
-	</Modal>
-	<Modal
-		animation="fade"
-		id="register-modal"
-		class={"w-[clamp(20rem,100%,60rem)] h-100"}
-		classFather="self-center place-self-center absolute"
-	>
-		<FormRegister client:load />
-	</Modal>
 	<NativeFeathureInfo />
-
 	<HitPerformanceSection />
-	<SectionN6 />
-	<SectionN7 />
+	<ProductsSection />
+	<NewProductSection />
 	<Comments />
-	<SectionN9 />
+	<CallToActionSection />
 	<LandingFooter classFooter="" />
 </LandingLayout>
 
-<script>
-	import { length } from "../components/preact/index/body/Section-N8";
-	//alert("hola aqui estoy")
-
-	/*
-	<svg
-		class="fixed top-0 left-0 -z-10 opacity-10"
-		viewBox="0 0 200 200"
-	
-	>
-		<path
-			fill="oklch(69.6% 0.17 162.48)"
-			d="M47.6,-63.7C62.5,-54.7,76,-41.9,81.1,-26.4C86.1,-10.8,82.7,7.5,76,23.6C69.3,39.8,59.3,53.9,46.1,60.9C32.9,67.9,16.5,67.9,-0.3,68.3C-17,68.6,-33.9,69.3,-46.3,62C-58.7,54.7,-66.4,39.4,-72.8,22.9C-79.2,6.4,-84.1,-11.3,-78.9,-25.1C-73.7,-38.9,-58.2,-48.9,-43.4,-57.9C-28.5,-67,-14.3,-75.1,1,-76.6C16.3,-78,32.7,-72.7,47.6,-63.7Z"
-			transform="translate(100 100)"
-		>
-		</path>
-	</svg>
-	*/
-</script>
+<script></script>
