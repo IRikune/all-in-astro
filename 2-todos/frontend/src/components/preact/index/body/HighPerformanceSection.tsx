@@ -1,6 +1,6 @@
 import { ChevronIcon } from '../../icons/ChevronIcon';
 
-export function HitPerformanceSection() {
+export function HighPerformanceSection() {
 	return (
 		<section class="relative py-16 w-full px-10 sm:px-20 lg:px-15 h-[90vh] flex-col lg:flex-row flex gap-2">
 			<div class="text-gray-600 size-full flex flex-col gap-4">

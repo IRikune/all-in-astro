@@ -3,10 +3,9 @@
 @custom-variant select-picker [&::picker(select)];
 
 @custom-variant option-checkmark [&::checkmark];
-
-
 li{
     @apply list-none;
+    var(--color-neutral-700)
 }
 
 @theme {
