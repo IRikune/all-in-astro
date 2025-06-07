@@ -81,7 +81,7 @@ function ScrollToRight({class: className, list}: ScrollToLeftProps) {
         >
           <p
             class={
-              "max-h-45 md:max-h-none overflow-scroll md:overflow-visible text-3xl sm:text-4xl md:text-5xl  font-bold"
+              "max-h-45 md:max-h-none overflow-scroll md:overflow-visible text-3xl sm:text-4xl md:text-5xl  font-bold text-balance"
             }
           >
             {item.description}
