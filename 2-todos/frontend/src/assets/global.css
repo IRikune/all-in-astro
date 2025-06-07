@@ -10,7 +10,7 @@ li{
 }
 
 @theme {
-    --color-theme-mint-100: #70FFAF;s
+    --color-theme-mint-100: #70FFAF;
     --color-theme-red-100: #c0392b;
     ---color-theme-red-200: oklch(0.505 0.213 27.518) --color-theme-orange: #FF5733;
     --color-theme-orange-100: #FF5733;
