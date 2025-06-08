@@ -6,22 +6,22 @@ export function InstallSection() {
   return (
     <section
       class={
-        " w-dvw h-fit grid grid-cols-1 gap-10 bg-gray-100 justify-center items-center"
+        " w-dvw h-fit grid grid-cols-1 gap-10 justify-center items-center"
       }
     >
       <hr />
       <div
         class={
-          " w-full h-full bg-gray-300 flex flex-col justify-between items-center gap-10 py-10"
+          " w-full h-full flex flex-col justify-between items-center gap-10 py-10"
         }
       >
         <h1 class={" text-gray-900 font-semibold text-[2rem] font-arial"}>
           Install Detask V0.03
         </h1>
-        <div class={"p-1 size-fit bg-white rounded-full"}>
+        <div class={"p-1 size-fit bg-white rounded-full shadow-2xl"}>
           <div
             id="buttons"
-            class="relative w-60 h-14 flex flex-row justify-between items-center bg-white rounded-[2rem] px-6 overflow-hidden"
+            class="relative w-60 h-14 flex flex-row justify-between items-center  rounded-[2rem]  px-6 overflow-hidden"
           >
             <div
               id="switch"
